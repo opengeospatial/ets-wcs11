@@ -4,7 +4,6 @@
 		<ctl:param name="url"/>
 		<ctl:return>Returns the response from a WCS GetCapabilities request with the AcceptVersions parameter having a value of 1.1.1 </ctl:return>
 		<ctl:code>
-			<xsl:message>URL is <xsl:value-of select="$url"/></xsl:message>
 			<ctl:request>
 				<ctl:url>
 					<xsl:value-of select="$url"/>
@@ -69,7 +68,9 @@
 		<ctl:code/>
 	</ctl:function>
 	<ctl:suite name="wcs:suite">
-		<ctl:title>Executable Test Suite for Annex A - Abstract Test Suite for WCS 1.1.1</ctl:title>
+		<ctl:title>Web Coverage Service (WCS) 1.1.1</ctl:title>
+		<ctl:description>Validates that a WCS server meets the requirements in the specification.</ctl:description>
+		<ctl:link>docs/wcs/1.1.1/</ctl:link>
 		<ctl:starting-test>wcs:Main</ctl:starting-test>
 	</ctl:suite>
 	<ctl:test name="wcs:Main">
@@ -84,7 +85,7 @@
 							<tr>
 								<td align="center">URL of WCS for http GET encoding of GetCapabilities</td>
 								<td align="center">
-									<input id="url" type="text" name="url" size="100" value="http://ogcdemo.pcigeomatics.com:8181/swe/wcs?"/>
+									<input id="url" type="text" name="url" size="100" value="http://mercedes:8080/wcsgenx/wcs?"/>
 								</td>
 							</tr>
 						</table>
@@ -208,7 +209,7 @@
 				<ctl:message select="concat('xml-supported: ', $xml-supported, '.')"/>
 				<ctl:message select="concat('soap-supported: ', $soap-supported, '.')"/>
 				<xsl:if test="$soap-supported = 'true'">
-					<ctl:message>No tests using SOAP encoding will be performed. SOAP encoding is not implemented.</ctl:message>
+					<ctl:message>No tests using SOAP encoding will be performed. The tests for SOAP encoding are not implemented.</ctl:message>
 				</xsl:if>
 				<ctl:message select="concat('store-supported: ', $store-supported, '.')"/>
 				<ctl:message select="concat('identifier1: ', $identifier1, '.')"/>
@@ -935,17 +936,6 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_ServiceIdentification', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_ServiceIdentification">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_ServiceIdentification', ' with POST XML skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_ServiceProvider', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -958,17 +948,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_ServiceProvider', ' with GET skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_ServiceProvider">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_ServiceProvider', ' with POST XML skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
@@ -985,17 +964,6 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata', ' with POST XML skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Required_Attributes', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1008,17 +976,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Required_Attributes', ' with GET skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Required_Attributes">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Required_Attributes', ' with POST XML skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
@@ -1035,17 +992,6 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Post_Encoding', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Post_Encoding">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Post_Encoding', ' with POST XML skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Post_Multiple_Connect_Points', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1058,17 +1004,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Post_Multiple_Connect_Points', ' with GET skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Post_Multiple_Connect_Points">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Post_Multiple_Connect_Points', ' with POST XML skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
@@ -1085,17 +1020,6 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Store_Parameter', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Store_Parameter">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Store_Parameter', ' with POST XML skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1108,17 +1032,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents', ' with GET skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents', ' with POST XML skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
@@ -1135,17 +1048,6 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary', ' with POST XML skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_SupportedCRS', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1158,17 +1060,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_SupportedCRS', ' with GET skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_SupportedCRS">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_SupportedCRS', ' with POST XML skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
@@ -1185,17 +1076,6 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_SupportedFormat', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_SupportedFormat">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_SupportedFormat', ' with POST XML skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Title', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1208,17 +1088,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Title', ' with GET skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Title">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Title', ' with POST XML skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
@@ -1235,17 +1104,6 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Abstract', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Abstract">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Abstract', ' with POST XML skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1258,17 +1116,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat', ' with GET skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat', ' with POST XML skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
@@ -1285,17 +1132,6 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_SupportedCRS', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_SupportedCRS">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_SupportedCRS', ' with POST XML skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Identifier', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1308,17 +1144,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Identifier', ' with GET skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Identifier">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Identifier', ' with POST XML skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
@@ -1335,17 +1160,6 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Identifier_XML', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Identifier_XML">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Identifier_XML', ' with POST XML skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat_XML', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1360,17 +1174,6 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat_XML', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat_XML">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat_XML', ' with POST XML skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Identifier_Unique', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1383,17 +1186,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Identifier_Unique', ' with GET skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Identifier_Unique">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Identifier_Unique', ' with POST XML skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</ctl:code>
@@ -2439,7 +2231,7 @@
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_ServiceIdentification">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains a ServiceIdentification section that validates          against the OWS Common 1.1.0 ServiceIdentification schema.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains a ServiceIdentification section that validates against the           OWS Common 1.1.0 ServiceIdentification schema.          </ctl:assertion>
 			<ctl:comment xmlns="">Table 21. GetCapabilities Response ServiceIdentification</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.1.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclauses 7.4.4 and 7.4.9.">./ats.html#OGC-06-121r3</ctl:link>
@@ -2454,7 +2246,7 @@
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_ServiceProvider">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains a ServiceProvider section that validates          against the OWS Common 1.1.0 ServiceProvider schema.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains a ServiceProvider section that validates against the OWS           Common 1.1.0 ServiceProvider schema.          </ctl:assertion>
 			<ctl:comment xmlns="">Table 22. GetCapabilities Response ServiceProvider</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.1.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclauses 7.4.5 and 7.4.9.">./ats.html#OGC-06-121r3</ctl:link>
@@ -2469,7 +2261,7 @@
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section that validates          against the OWS Common 1.1.0 OperationsMetadata schema.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that validates against the OWS           Common 1.1.0 OperationsMetadata schema.          </ctl:assertion>
 			<ctl:comment xmlns="">Table 23. GetCapabilities Response OperationsMetadata</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 8.3.1 and 8.3.2.1.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclauses 7.4.6, 7.4.7 and 7.4.9.">./ats.html#OGC-06-121r3</ctl:link>
@@ -2484,7 +2276,7 @@
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Required_Attributes">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section that has the three          mandatory values of the XML attributes.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that has the three mandatory           values of the XML attributes.</ctl:assertion>
 			<ctl:comment xmlns="">Table 24. GetCapabilities Response OperationsMetadata Required Attributes</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.2.1.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 7.4.7.">./ats.html#OGC-06-121r3</ctl:link>
@@ -2494,27 +2286,33 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<xsl:if test="string-length($get-result/.) = 0 or $get-result/. = 'false'">
-					<ctl:message>Test failed because a response-extract is not satisfied.</ctl:message>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']"/></ctl:message>
 					<ctl:fail/>
 				</xsl:if>
-				<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']"/></ctl:message>
-				<xsl:if test="string-length($get-result/.) = 0 or $get-result/. = 'false'">
-					<ctl:message>Test failed because a response-extract is not satisfied.</ctl:message>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='DescribeCoverage'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='DescribeCoverage']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='DescribeCoverage']"/></ctl:message>
 					<ctl:fail/>
 				</xsl:if>
-				<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='DescribeCoverage']"/></ctl:message>
-				<xsl:if test="string-length($get-result/.) = 0 or $get-result/. = 'false'">
-					<ctl:message>Test failed because a response-extract is not satisfied.</ctl:message>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCoverage'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCoverage']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCoverage']"/></ctl:message>
 					<ctl:fail/>
 				</xsl:if>
-				<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCoverage']"/></ctl:message>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Post_Encoding">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          for DCP HTTP Post transfers, the PostEncoding constraint is specified.           </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section for DCP HTTP Post transfers,           the PostEncoding constraint is specified.</ctl:assertion>
 			<ctl:comment xmlns="">Table 25. GetCapabilities Response OperationsMetadata Post Encoding</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.2.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2523,27 +2321,30 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<xsl:if test="string-length($get-result/.) = 0 or $get-result/. = 'false'">
-					<ctl:message>Test failed because a response-extract is not satisfied.</ctl:message>
-					<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding'])">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']"/></ctl:message>
 				</xsl:if>
-				<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']"/></ctl:message>
-				<xsl:if test="string-length($get-result/.) = 0 or $get-result/. = 'false'">
-					<ctl:message>Test failed because a response-extract is not satisfied.</ctl:message>
-					<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP')">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP'</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP'"/></ctl:message>
 				</xsl:if>
-				<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP'"/></ctl:message>
-				<xsl:if test="string-length($get-result/.) = 0 or $get-result/. = 'false'">
-					<ctl:message>Test failed because a response-extract is not satisfied.</ctl:message>
-					<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML')">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/></ctl:message>
 				</xsl:if>
-				<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/></ctl:message>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Post_Multiple_Connect_Points">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          for DCP HTTP Post transfers, that multiple encoding constraints with multiple connect point URLs is valid.           </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section for DCP HTTP Post transfers,           that multiple encoding constraints with multiple connect           point URLs is valid.</ctl:assertion>
 			<ctl:comment xmlns="">Table 26. GetCapabilities Response OperationsMetadata Post Multiple Connect Points</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.2.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2552,14 +2353,26 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/@xlink:href)">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/@xlink:href</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/@xlink:href"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Store_Parameter">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that indicates whether the store parameter is implemented in GetCoverage requests.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that indicates whether the           store parameter is implemented in GetCoverage requests.</ctl:assertion>
 			<ctl:comment xmlns="">Table 27. GetCapabilities Response OperationsMetadata Store Parameter</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.2.3.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2568,14 +2381,26 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='false')">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='false'</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='false'"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents section.</ctl:assertion>
 			<ctl:comment xmlns="">Table 28. GetCapabilities Response OperationsMetadata Contents</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.3.1.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2584,14 +2409,19 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section with a CoverageSummary.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section with a CoverageSummary.</ctl:assertion>
 			<ctl:comment xmlns="">Table 29. GetCapabilities Response OperationsMetadata Contents CoverageSummary</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 8.3.3.1 and 8.3.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2600,14 +2430,31 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'])">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='OtherSource'])">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='OtherSource']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='OtherSource']"/></ctl:message>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_SupportedCRS">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section with SupportedCRS that is a union of the nested CoverageSummaries.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section with SupportedCRS that is a union           of the nested CoverageSummaries.</ctl:assertion>
 			<ctl:comment xmlns="">Table 30. GetCapabilities Response OperationsMetadata Contents SupportedCRS</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.3.1.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2616,14 +2463,25 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='SupportedCRS'])">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='SupportedCRS']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='SupportedCRS']"/></ctl:message>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_SupportedFormat">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section with SupportedFormat that is a union of the nested CoverageSummaries.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section with SupportedFormat that is a union of           the nested CoverageSummaries.</ctl:assertion>
 			<ctl:comment xmlns="">Table 31. GetCapabilities Response OperationsMetadata Contents SupportedFormat</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.3.1.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2632,14 +2490,18 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='SupportedFormat'])">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='SupportedFormat']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='SupportedFormat']"/></ctl:message>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Title">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section. If there are CoverageSummaries then each one has a title.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section. If there are CoverageSummaries then each one has a title.</ctl:assertion>
 			<ctl:comment xmlns="">Table 32. GetCapabilities Response OperationsMetadata Contents CoverageSummary Title</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 10.6.1 Figure 12.">./ats.html#OGC-06-121r3</ctl:link>
@@ -2649,14 +2511,26 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
+				<xsl:if test="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[1][local-name()!='Title']">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[1][local-name()!='Title']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[1][local-name()!='Title']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Abstract">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section. If there are CoverageSummaries then each one has an abstract.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section. If there are CoverageSummaries then each one has an abstract.</ctl:assertion>
 			<ctl:comment xmlns="">Table 33. GetCapabilities Response OperationsMetadata Contents CoverageSummary Abstract</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 10.6.1 Figure 12.">./ats.html#OGC-06-121r3</ctl:link>
@@ -2666,14 +2540,26 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Abstract'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Abstract']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Abstract']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section. If there are CoverageSummaries then each one has at least one supportedFormat listed or inherited.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section. If there are CoverageSummaries then each one has at           least one supportedFormat listed or inherited.</ctl:assertion>
 			<ctl:comment xmlns="">Table 34. GetCapabilities Response OperationsMetadata Contents CoverageSummary SupportedFormat</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.3.2 Table 5.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2682,14 +2568,25 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='SupportedFormat'])">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='SupportedFormat']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='SupportedFormat']"/></ctl:message>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_SupportedCRS">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section. If there are CoverageSummaries then each one has at least one supportedCRS listed or inherited.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section. If there are CoverageSummaries then each one has at least           one supportedCRS listed or inherited.</ctl:assertion>
 			<ctl:comment xmlns="">Table 35. GetCapabilities Response OperationsMetadata Contents CoverageSummary SupportedCRS</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.3.2 Table 5.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2698,14 +2595,25 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='SupportedCRS'])">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='SupportedCRS']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='SupportedCRS']"/></ctl:message>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Identifier">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section. If there are CoverageSummaries then each one has either an identifier or a subsidiary CoverageSummary.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section. If there are CoverageSummaries then each one has either an           identifier or a subsidiary CoverageSummary.</ctl:assertion>
 			<ctl:comment xmlns="">Table 36. GetCapabilities Response OperationsMetadata Contents CoverageSummary Identifier</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.3.2 Table 5.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2714,14 +2622,32 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Identifier'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Identifier']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Identifier']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']//*[local-name()='CoverageSummary'])">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']//*[local-name()='CoverageSummary']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']//*[local-name()='CoverageSummary']"/></ctl:message>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Identifier_XML">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section. If there are CoverageSummaries then each identifier must conform to XML syntax.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section. If there are CoverageSummaries then each identifier must           conform to XML syntax.</ctl:assertion>
 			<ctl:comment xmlns="">Table 37. GetCapabilities Response OperationsMetadata Contents CoverageSummary Identifier XML</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 8.3.3.3 and 7.4.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">./ats.html#OGC-06-121r3</ctl:link>
@@ -2731,14 +2657,19 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat_XML">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section. If there are CoverageSummaries then each SupportedFormat must conform to XML syntax.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section. If there are CoverageSummaries then each SupportedFormat           must conform to XML syntax.</ctl:assertion>
 			<ctl:comment xmlns="">Table 38. GetCapabilities Response OperationsMetadata Contents CoverageSummary SupportedFormat XML</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 8.3.3.3 and 7.4.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">./ats.html#OGC-06-121r3</ctl:link>
@@ -2748,14 +2679,19 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Identifier_Unique">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that contains an OperationsMetadata section          that contains a Contents section. If there are CoverageSummaries then each identifier must be unique for this server.          </ctl:assertion>
+			<ctl:assertion xmlns="">Verify that the service metadata document is valid XML that           contains an OperationsMetadata section that contains a Contents           section. If there are CoverageSummaries then each identifier           must be unique for this server.</ctl:assertion>
 			<ctl:comment xmlns="">Table 39. GetCapabilities Response OperationsMetadata Contents CoverageSummary Identifier Unique</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.3.4.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -2764,8 +2700,13 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<ctl:message>Test failed because there is no validator schema and no response-extract in the pass condition.</ctl:message>
-				<ctl:fail/>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'])">
+					<ctl:message/>
+					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
+					<ctl:fail/>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 	</ctl:package>
@@ -2841,7 +2782,7 @@
 				<ctl:message select="concat('xml-supported: ', $xml-supported, '.')"/>
 				<ctl:message select="concat('soap-supported: ', $soap-supported, '.')"/>
 				<xsl:if test="$soap-supported = 'true'">
-					<ctl:message>No tests using SOAP encoding will be performed. SOAP encoding is not implemented.</ctl:message>
+					<ctl:message>No tests using SOAP encoding will be performed. The tests for SOAP encoding are not implemented.</ctl:message>
 				</xsl:if>
 				<ctl:message select="concat('store-supported: ', $store-supported, '.')"/>
 				<ctl:message select="concat('identifier1: ', $identifier1, '.')"/>
@@ -2897,20 +2838,6 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MissingVersion', ' with GET skipped.')"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
-						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_MissingVersion">
-							<ctl:with-param name="url" select="$url-xml"/>
-							<ctl:with-param name="http-method" select="$http-xml"/>
-							<ctl:with-param name="identifier1" select="$identifier1"/>
-							<ctl:with-param name="identifier2" select="$identifier2"/>
-							<ctl:with-param name="identifier3" select="$identifier3"/>
-						</ctl:call-test>
-					</xsl:when>
-					<xsl:otherwise>
-						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MissingVersion', ' with POST XML skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
@@ -3293,7 +3220,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with only mandatory parameters is submitted, the response          is valid XML that validates against the WCS 1.1.1 DescribeCoverage schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with only mandatory           parameters is submitted, the response is valid XML that validates           against the WCS 1.1.1 DescribeCoverage schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 40. DescribeCoverage Minimal Request</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 9.2.1">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -3343,7 +3270,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a missing version parameter is submitted, the response          is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a missing version           parameter is submitted, the response is valid XML that validates           against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 41. DescribeCoverage Missing Version</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -3392,7 +3319,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a missing identifier parameter is submitted, the response          is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a missing           identifier parameter is submitted, the response is valid XML that           validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 42. DescribeCoverage Missing Identifer</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -3439,7 +3366,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with multiple identifier parameters is submitted, the response          is valid XML that validates against the WCS 1.1.1 DescribeCoverage schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with multiple           identifier parameters is submitted, the response is valid XML that           validates against the WCS 1.1.1 DescribeCoverage schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 43. DescribeCoverage Multiple Identifiers</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 9.2.1">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -3489,7 +3416,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with an empty identifier parameter is submitted, the response          is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with an empty           identifier parameter is submitted, the response is valid XML that           validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 44. DescribeCoverage Empty Identifier</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -3537,7 +3464,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a bogus identifier parameter is submitted, the response          is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a bogus identifier           parameter is submitted, the response is valid XML that validates           against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 45. DescribeCoverage Bogus Identifier</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -3585,7 +3512,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a valid identifier and a bogus identifier parameter is submitted, the response          is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a valid identifier           and a bogus identifier parameter is submitted, the response is valid           XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 46. DescribeCoverage Bogus With Valid Identifiers</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -3635,7 +3562,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers is submitted, the response          is valid XML that validates against the WCS 1.1.1 DescribeCoverage schema. The methods listed          in the InterpolationMethods must be entries in the InterpolationMethods dictionary.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers           is submitted, the response is valid XML that validates against the           WCS 1.1.1 DescribeCoverage schema. The methods listed in the           InterpolationMethods must be entries in the InterpolationMethods           dictionary.</ctl:assertion>
 			<ctl:comment xmlns="">Table 47. DescribeCoverage Response InterpolationMethods</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.1.3 Table 17 and H.3.1">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -3657,7 +3584,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers is submitted, the response          is valid XML that validates against the WCS 1.1.1 DescribeCoverage schema. The identifier in          the CoverageDescription must be usable literally as-is.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers           is submitted, the response is valid XML that validates against the WCS           1.1.1 DescribeCoverage schema. The identifier in the           CoverageDescription must be usable literally as-is.</ctl:assertion>
 			<ctl:comment xmlns="">Table 48. DescribeCoverage Response Identifier XML</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 a) and 7.4">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">./ats.html#OGC-06-121r3</ctl:link>
@@ -3680,7 +3607,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers is submitted, the response          is valid XML that validates against the WCS 1.1.1 DescribeCoverage schema. The supportedFormat in          the CoverageDescription must be usable literally as-is.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers           is submitted, the response is valid XML that validates against the           WCS 1.1.1 DescribeCoverage schema. The supportedFormat in the           CoverageDescription must be usable literally as-is.</ctl:assertion>
 			<ctl:comment xmlns="">Table 49. DescribeCoverage Response SupportedFormat XML</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 b) and 7.4">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">./ats.html#OGC-06-121r3</ctl:link>
@@ -3703,7 +3630,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers is submitted, the response          is valid XML that validates against the WCS 1.1.1 DescribeCoverage schema. The identifier in the Field section          of the Range section in the CoverageDescription must be usable literally as-is.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers           is submitted, the response is valid XML that validates against the WCS           1.1.1 DescribeCoverage schema. The identifier in the Field section of           the Range section in the CoverageDescription           must be usable literally as-is.</ctl:assertion>
 			<ctl:comment xmlns="">Table 50. DescribeCoverage Response FieldIdentifier XML</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 c) and 7.4">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">./ats.html#OGC-06-121r3</ctl:link>
@@ -3726,7 +3653,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers is submitted, the response          is valid XML that validates against the WCS 1.1.1 DescribeCoverage schema. The interpolationMethod in the           InterpolationMethods section of the Field section          of the Range section in the CoverageDescription must be usable literally as-is.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers           is submitted, the response is valid XML that validates against the WCS           1.1.1 DescribeCoverage schema. The interpolationMethod in the           InterpolationMethods section of the Field section of the Range section           in the CoverageDescription must be usable literally as-is.</ctl:assertion>
 			<ctl:comment xmlns="">Table 51. DescribeCoverage Response InterpolationMethod XML</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 d) and 7.4">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">./ats.html#OGC-06-121r3</ctl:link>
@@ -3749,7 +3676,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers is submitted, the response          is valid XML that validates against the WCS 1.1.1 DescribeCoverage schema. The identifier in the Axis section          of the Range section in the CoverageDescription must be usable literally as-is.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers           is submitted, the response is valid XML that validates against the WCS           1.1.1 DescribeCoverage schema. The identifier in the Axis section of           the Range section in the CoverageDescription           must be usable literally as-is.</ctl:assertion>
 			<ctl:comment xmlns="">Table 52. DescribeCoverage Response AxisIdentifier XML</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 e) and 7.4">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">./ats.html#OGC-06-121r3</ctl:link>
@@ -3772,7 +3699,7 @@
 			<ctl:param name="identifier1"/>
 			<ctl:param name="identifier2"/>
 			<ctl:param name="identifier3"/>
-			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers is submitted, the response          is valid XML that validates against the WCS 1.1.1 DescribeCoverage schema. The key in the Axis section          of the Range section in the CoverageDescription must be usable literally as-is.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers           is submitted, the response is valid XML that validates against the WCS           1.1.1 DescribeCoverage schema. The key in the Axis section of the Range           section in the CoverageDescription must be usable literally as-is.</ctl:assertion>
 			<ctl:comment xmlns="">Table 53. DescribeCoverage Response AxisKey XML</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 f) and 7.4">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">./ats.html#OGC-06-121r3</ctl:link>
@@ -3862,7 +3789,7 @@
 				<ctl:message select="concat('xml-supported: ', $xml-supported, '.')"/>
 				<ctl:message select="concat('soap-supported: ', $soap-supported, '.')"/>
 				<xsl:if test="$soap-supported = 'true'">
-					<ctl:message>No tests using SOAP encoding will be performed. SOAP encoding is not implemented.</ctl:message>
+					<ctl:message>No tests using SOAP encoding will be performed. The tests for SOAP encoding are not implemented.</ctl:message>
 				</xsl:if>
 				<ctl:message select="concat('store-supported: ', $store-supported, '.')"/>
 				<ctl:message select="concat('identifier1: ', $identifier1, '.')"/>
@@ -5052,7 +4979,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_MinimalRequest">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with only mandatory parameters is submitted, the response          is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with only mandatory           parameters is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 54. GetCoverage Minimal Request</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 10.2.1.1 Tables 21, 22 and 23.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5068,7 +4995,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_MissingIdentifier">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing identifier parameter is submitted, the response          is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing identifier           parameter is submitted, the response is valid XML that validates           against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 55. GetCoverage Missing Identifier</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22  and 23 and 10.3.2 Table 28.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5084,7 +5011,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_EmptyIdentifier">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an empty identifier parameter is submitted, the response          is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an empty identifier           parameter is submitted, the response is valid XML that validates           against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 56. GetCoverage Empty Identifier</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23 and 10.3.2 Table 28.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5100,7 +5027,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_BogusIdentifier">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus identifier parameter is submitted, the response          is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus identifier           parameter is submitted, the response is valid XML that validates           against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 57. GetCoverage Bogus Identifier</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23 and 10.3.2 Table 28.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5116,7 +5043,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_MissingBoundingBox">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing BoundingBox parameter is submitted, the response          is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing BoundingBox           parameter is submitted, the response is valid XML that validates           against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
 			<ctl:comment xmlns="">Table 58. GetCoverage Missing BoundingBox</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23 and 10.3.2 Table 28.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5132,7 +5059,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_SurroundingBoundingBox">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox parameter which totally surrounds the          CoverageDescription BoundingBox is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox parameter           which totally surrounds the CoverageDescription BoundingBox is           submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 59. GetCoverage Surrounding BoundingBox</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23 and 10.3.6.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 10.2">./ats.html#OGC-06-121r3</ctl:link>
@@ -5149,7 +5076,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_InsideBoundingBox">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox parameter which is totally inside          the CoverageDescription BoundingBox is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox           parameter which is totally inside the CoverageDescription BoundingBox           is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 60. GetCoverage Inside BoundingBox</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23 and 10.3.6.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 10.2">./ats.html#OGC-06-121r3</ctl:link>
@@ -5166,7 +5093,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_OverlappingBoundingBox">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox parameter which overlaps          the CoverageDescription BoundingBox is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox           parameter which overlaps the CoverageDescription BoundingBox is           submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 61. GetCoverage Overlapping BoundingBox</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23 and 10.3.6.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 10.2">./ats.html#OGC-06-121r3</ctl:link>
@@ -5183,7 +5110,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_BoundingBox_OutOfRangeCoordinates">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox parameter with coordinate          values which are out of range is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox           parameter with coordinate values which are out of range is submitted,           the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 62. GetCoverage BoundingBox Out Of Range Coordinates</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 7.6, 10.2.1.1 Tables 21, 22 and 23 and 10.3.6.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 10.2">./ats.html#OGC-06-121r3</ctl:link>
@@ -5200,7 +5127,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_OutsideBoundingBox">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox parameter which is totally outside          and not overlapping the CoverageDescription BoundingBox is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox           parameter which is totally outside and not overlapping the           CoverageDescription BoundingBox is submitted, the response is           not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 63. GetCoverage Outside BoundingBox</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 7.6, 10.2.1.1 Tables 21, 22 and 23 and 10.3.6.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 10.2">./ats.html#OGC-06-121r3</ctl:link>
@@ -5217,7 +5144,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_AntimeridianBoundingBox">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox parameter with coordinate          values which span the antimeridian is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox           parameter with coordinate values which span the antimeridian is           submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 64. GetCoverage Antimeridian BoundingBox</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 7.6.2, 10.2.1.1 Tables 21, 22 and 23 and 10.3.6.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 10.2">./ats.html#OGC-06-121r3</ctl:link>
@@ -5234,7 +5161,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePosition">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePosition parameter from the CoverageDescription            is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePosition           parameter from the CoverageDescription is submitted,           the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 65. GetCoverage TemporalSubset TimePosition</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses10.2.1.1 Tables 21, 22 and 23; 9.3.1.2 Tables 13 and  14; and 9.3.2.4.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5250,7 +5177,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePosition_Early">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an early TimePosition parameter           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an early TimePosition           parameter is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 66. GetCoverage TemporalSubset TimePosition Early</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses10.2.1.1 Tables 21, 22 and 23; 9.3.1.2 Tables 13 and  14; and 9.3.2.4.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5266,7 +5193,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePosition_Late">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a late TimePosition parameter           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a late TimePosition           parameter is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 67. GetCoverage TemporalSubset TimePosition Late</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                       Subclauses10.2.1.1 Tables 21, 22 and 23; 9.3.1.2 Tables 13 and  14; and 9.3.2.4.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5282,7 +5209,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePeriod">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with TimePeriod BeginTime and EndTime parameters           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with TimePeriod BeginTime           and EndTime parameters is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 68. GetCoverage TemporalSubset TimePeriod</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 9.3.1.2 Tables 13,  14 and 15; and 9.3.2.4.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5298,7 +5225,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePeriod_With_Resolution">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod with resolution           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod with           resolution is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 69. GetCoverage TemporalSubset TimePeriod With Resolution</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                    Subclauses10.2.1.1 Tables 21, 22 and 23; 9.3.1.2 Tables 13,  14 and 15; and 9.3.2.4.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5314,7 +5241,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePeriod_With_Resolution_And_Frame">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod with resolution and frame           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod with           resolution and frame is submitted, the response           is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 70. GetCoverage TemporalSubset TimePeriod With Resolution And Frame</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                    Subclauses10.2.1.1 Tables 21, 22 and 23; 9.3.1.2 Tables 13,  14 and 15; and 9.3.2.4.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5330,7 +5257,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePeriod_BeginTime_Only">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod but just a BeginTime           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod but just           a BeginTime is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 71. GetCoverage TemporalSubset TimePeriod BeginTime Only</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 9.3.1.2 Tables 13,  14 and 15; 9.3.2.4; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5346,7 +5273,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePeriod_EndTime_Only">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod but just an EndTime           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod but           just an EndTime is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 72. GetCoverage TemporalSubset TimePeriod EndTime Only</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 9.3.1.2 Tables 13,  14 and 15; 9.3.2.4; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5362,7 +5289,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_Identifier">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a RangeSubset Identifier           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a RangeSubset           Identifier is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 73. GetCoverage RangeSubset Identifier</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24 and 25; and 9.3.1.3 Tables 16 and 17.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5378,7 +5305,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_Multiple_Identifiers">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with RangeSubset Identifiers           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with RangeSubset           Identifiers is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 74. GetCoverage RangeSubset Multiple Identifiers</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24 and 25; and 9.3.1.3 Tables 16 and 17.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5394,7 +5321,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_Repeated_Identifiers">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a repeated RangeSubset Identifier           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a repeated RangeSubset           Identifier is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 75. GetCoverage RangeSubset Repeated Identifiers</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24 and 25; 9.3.1.3 Tables 16 and 17; 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5410,7 +5337,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_Bogus_Identifier">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus RangeSubset Identifier           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus RangeSubset           Identifier is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 76. GetCoverage RangeSubset Bogus Identifier</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24 and 25; 9.3.1.3 Tables 16 and 17; 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5426,7 +5353,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_Valid_With_Bogus_Identifiers">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with one valid RangeSubset Identifier and one bogus Identifier           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with one valid RangeSubset           Identifier and one bogus Identifier is submitted,           the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 77. GetCoverage RangeSubset Valid With Bogus Identifiers</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24 and 25; 9.3.1.3 Tables 16 and 17; 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5458,7 +5385,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_InterpolationMethod_Missing">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing InterpolationMethod           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing           InterpolationMethod is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 79. GetCoverage RangeSubset InterpolationMethod Missing</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24 and 25; 9.3.1.3 Tables 16 and 17; H.3.1; 10.3.2">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5474,7 +5401,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_InterpolationMethod_Bogus">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus InterpolationMethod           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus           InterpolationMethod is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 80. GetCoverage RangeSubset InterpolationMethod Bogus</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24 and 25; 9.3.1.3 Tables 16 and 17; H.3.1; 10.3.2">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5490,7 +5417,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_Axis_Identifier_One_Key">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and one Axis Key           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and           one Axis Key is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 81. GetCoverage RangeSubset Axis Identifier One Key</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; and 9.3.1.3 Tables 16, 17, 18 and 19">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5506,7 +5433,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_Axis_Identifier_Some_Keys">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and some Axis Keys           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and           some Axis Keys is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 82. GetCoverage RangeSubset Axis Identifier Some Keys</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; and 9.3.1.3 Tables 16, 17, 18 and 19">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5522,7 +5449,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_Axis_Identifier_All_Keys">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and all its Axis Keys           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and           all its Axis Keys is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 83. GetCoverage RangeSubset Axis Identifier All Keys</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; and 9.3.1.3 Tables 16, 17, 18 and 19">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5538,7 +5465,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_Axis_Identifier_No_Key">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifierand no Axis Key           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and           no Axis Key is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 84. GetCoverage RangeSubset Axis Identifier No Key</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; 9.3.1.3 Tables 16, 17, 18 and 19; 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5554,7 +5481,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_Axis_Identifier_Bogus_Key">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and a bogus Axis Key           is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and           a bogus Axis Key is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 85. GetCoverage RangeSubset Axis Identifier Bogus Key</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; 9.3.1.3 Tables 16, 17, 18 and 19; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5570,7 +5497,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Colon_Between_Field_Identifiers">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a colon between Field Identifiers           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a colon           between Field Identifiers is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 86. GetCoverage RangeSubset KVP Syntax Colon Between Field Identifiers</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; 10.2.2.2; 9.3.1.3 Tables 16, 17, 18 and 19; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5586,7 +5513,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Comma_Between_Field_Identifiers">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a comma between Field Identifiers           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a comma           between Field Identifiers is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 87. GetCoverage RangeSubset KVP Syntax Comma Between Field Identifiers</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; 10.2.2.2; 9.3.1.3 Tables 16, 17, 18 and 19; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5602,7 +5529,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Semicolon_Between_Field_Identifier_And_InterpolationMethod">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a semicolon between Field Identifier And InterpolationMethod           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a semicolon           between Field Identifier And InterpolationMethod is submitted,           the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 88. GetCoverage RangeSubset KVP Syntax Semicolon Between Field Identifier And InterpolationMethod</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; 10.2.2.2; 9.3.1.3 Tables 16, 17, 18 and 19; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5618,7 +5545,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Semicolon_Between_Axis_Identifiers">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a semicolon between Axis Identifiers           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a semicolon           between Axis Identifiers is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 89. GetCoverage RangeSubset KVP Syntax Semicolon Between Axis Identifiers</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; 10.2.2.2; 9.3.1.3 Tables 16, 17, 18 and 19; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5634,7 +5561,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Semicolon_Between_Axis_Keys">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a semicolon between Axis Keys           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a semicolon           between Axis Keys is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 90. GetCoverage RangeSubset KVP Syntax Semicolon Between Axis Keys</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; 10.2.2.2; 9.3.1.3 Tables 16, 17, 18 and 19; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5650,7 +5577,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Missing_Opening_Square_Bracket_Before_Axis_Identifier">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a missing opening square bracket before the axis identifier           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a missing           opening square bracket before the axis identifier is submitted,           the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 91. GetCoverage RangeSubset KVP Syntax Missing  Opening Square Bracket Before Axis Identifier</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; 10.2.2.2; 9.3.1.3 Tables 16, 17, 18 and 19; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5666,7 +5593,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Missing_Opening_Square_Bracket_Before_Axis_Key">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a missing opening square bracket before the axis key           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a missing           opening square bracket before the axis key is submitted,           the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 92. GetCoverage RangeSubset KVP Syntax Missing  Opening Square Bracket Before Axis Key</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; 10.2.2.2; 9.3.1.3 Tables 16, 17, 18 and 19; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5682,7 +5609,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Missing_Closing_Square_Bracket">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a missing closing square bracket           is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a missing           closing square bracket is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 93. GetCoverage RangeSubset KVP Syntax Missing Closing Square Bracket</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2&#xA;                  Subclauses10.2.1.1 Tables 21, 22 and 23; 10.2.1.2 Tables 24, 25 and 26; 10.2.2.2; 9.3.1.3 Tables 16, 17, 18 and 19; and 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5698,7 +5625,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_Formats">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a format          is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a format           is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 94. GetCoverage Formats</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 10.2.1.1 Tables 21, 22 and 23.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5714,7 +5641,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_Bogus_Format">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus format          is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus format           is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 95. GetCoverage Bogus Format</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23; 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5730,7 +5657,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_Empty_Format">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an empty string for the format          is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with an empty string for           the format is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 96. GetCoverage Empty Format</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23; 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5746,7 +5673,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_Missing_Format">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with the format missing          is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with the format missing           is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 97. GetCoverage Missing Format</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23; 10.3.2.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5762,7 +5689,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_Store_True">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a store parameter set to true          is submitted, the response is an exception or not depending on the capabilities.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a store parameter set           to true is submitted, the response is an exception or not depending           on the capabilities.</ctl:assertion>
 			<ctl:comment xmlns="">Table 98. GetCoverage Store True</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23; 10.2.1.3; 8.3.2.3.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5778,7 +5705,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_Store_False">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a store parameter set to false          is submitted, the response is not an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a store parameter           set to false is submitted, the response is not an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 99. GetCoverage Store False</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23; and 10.2.1.3.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
@@ -5794,7 +5721,7 @@
 		<ctl:test xmlns="" name="wcs:GetCoverage_Store_Bogus">
 			<ctl:param name="url"/>
 			<ctl:param name="http-method"/>
-			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a store parameter set to a bogus value          is submitted, the response is an exception.</ctl:assertion>
+			<ctl:assertion xmlns="">Verify that when a GetCoverage request with a store parameter           set to a bogus value is submitted, the response is an exception.</ctl:assertion>
 			<ctl:comment xmlns="">Table 100. GetCoverage Store Bogus</ctl:comment>
 			<ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22 and 23; and 10.2.1.3.">./ats.html#OGC-07-067r2</ctl:link>
 			<ctl:code>
