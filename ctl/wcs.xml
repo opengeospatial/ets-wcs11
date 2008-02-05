@@ -188,11 +188,14 @@
 				<xsl:variable name="xml-supported">
 					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/>
 				</xsl:variable>
+				<xsl:variable name="xml-supported-alternate">
+					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/>
+				</xsl:variable>
 				<xsl:variable name="soap-supported">
 					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP'"/>
 				</xsl:variable>
 				<xsl:variable name="store-supported">
-					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='true'"/>
+					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='True'"/>
 				</xsl:variable>
 				<xsl:variable name="identifier1">
 					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'][1]/*[local-name()='Identifier']"/>
@@ -207,6 +210,7 @@
 				<ctl:message select="concat('url-get: ', $url-get, '.')"/>
 				<ctl:message select="concat('url-xml: ', $url-xml, '.')"/>
 				<ctl:message select="concat('xml-supported: ', $xml-supported, '.')"/>
+				<ctl:message select="concat('xml-supported-alternate: ', $xml-supported-alternate, '.')"/>
 				<ctl:message select="concat('soap-supported: ', $soap-supported, '.')"/>
 				<xsl:if test="$soap-supported = 'true'">
 					<ctl:message>No tests using SOAP encoding will be performed. The tests for SOAP encoding are not implemented.</ctl:message>
@@ -280,8 +284,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'MinimalRequest', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MinimalRequest', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_MinimalRequest">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -313,8 +320,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Sections_ServiceIdentification', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Sections_ServiceIdentification', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Sections_ServiceIdentification">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -346,8 +356,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Sections_ServiceProvider', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Sections_ServiceProvider', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Sections_ServiceProvider">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -379,8 +392,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Sections_OperationsMetadata', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Sections_OperationsMetadata', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Sections_OperationsMetadata">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -412,8 +428,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Sections_Contents', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Sections_Contents', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Sections_Contents">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -445,8 +464,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Sections_All', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Sections_All', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Sections_All">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -478,8 +500,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Sections_Two_Values', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Sections_Two_Values', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Sections_Two_Values">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -511,8 +536,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Sections_Multiple_Values', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Sections_Multiple_Values', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Sections_Multiple_Values">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -544,8 +572,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Sections_Bogus', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Sections_Bogus', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_Sections_Bogus">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -577,8 +608,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'AcceptVersions_1.1.1', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('AcceptVersions_1.1.1', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_AcceptVersions_1.1.1">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -610,8 +644,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'AcceptVersions_0.0.0', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('AcceptVersions_0.0.0', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_AcceptVersions_0.0.0">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -643,8 +680,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'AcceptVersions_99.99.99', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('AcceptVersions_99.99.99', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_AcceptVersions_99.99.99">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -676,8 +716,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'AcceptVersions_Multiple', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('AcceptVersions_Multiple', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_AcceptVersions_Multiple">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -709,8 +752,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'UpdateSequence_No_Value', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('UpdateSequence_No_Value', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_UpdateSequence_No_Value">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -742,8 +788,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'UpdateSequence_Equal_Value', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('UpdateSequence_Equal_Value', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_UpdateSequence_Equal_Value">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -775,8 +824,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'UpdateSequence_Bogus_Value', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('UpdateSequence_Bogus_Value', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_UpdateSequence_Bogus_Value">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -808,8 +860,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'UpdateSequence_Lowest_Value', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('UpdateSequence_Lowest_Value', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_UpdateSequence_Lowest_Value">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -841,8 +896,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'UpdateSequence_Highest_Value', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('UpdateSequence_Highest_Value', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_UpdateSequence_Highest_Value">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -874,8 +932,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'AcceptFormats_TextXML', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('AcceptFormats_TextXML', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_AcceptFormats_TextXML">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -907,8 +968,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'AcceptFormats_TextBogus', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('AcceptFormats_TextBogus', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCapabilities_AcceptFormats_TextBogus">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -937,6 +1001,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_ServiceIdentification', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_ServiceProvider', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -950,6 +1017,9 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_ServiceProvider', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_ServiceProvider', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -965,6 +1035,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Required_Attributes', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -978,6 +1051,9 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Required_Attributes', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Required_Attributes', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Post_Encoding', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -993,6 +1069,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Post_Encoding', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Post_Multiple_Connect_Points', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -1006,6 +1085,9 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Post_Multiple_Connect_Points', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Post_Multiple_Connect_Points', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Store_Parameter', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1021,6 +1103,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Store_Parameter', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -1034,6 +1119,9 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1049,6 +1137,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_SupportedCRS', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -1062,6 +1153,9 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_SupportedCRS', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_SupportedCRS', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_SupportedFormat', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1077,6 +1171,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_SupportedFormat', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Title', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -1090,6 +1187,9 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Title', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Title', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Abstract', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1105,6 +1205,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Abstract', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -1118,6 +1221,9 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_SupportedCRS', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1133,6 +1239,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_SupportedCRS', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Identifier', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -1146,6 +1255,9 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Identifier', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Identifier', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Identifier_XML', 'UpdateSequence'))"/>
 				</xsl:variable>
@@ -1161,6 +1273,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Identifier_XML', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat_XML', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -1175,6 +1290,9 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat_XML', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Identifier_Unique', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -1188,6 +1306,9 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Identifier_Unique', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_Identifier_Unique', 'UpdateSequence'))"/>
+				</xsl:variable>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_MinimalRequest">
@@ -1220,7 +1341,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                               </GetCapabilities>
                             </ctl:body>
 						</xsl:if>
@@ -1269,7 +1390,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:Sections>
                                   <ows:Section>ServiceIdentification</ows:Section>                              
                                 </ows:Sections>
@@ -1321,7 +1442,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:Sections>
                                   <ows:Section>ServiceProvider</ows:Section>                              
                                 </ows:Sections>
@@ -1373,7 +1494,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:Sections>
                                   <ows:Section>OperationsMetadata</ows:Section>                              
                                 </ows:Sections>
@@ -1425,7 +1546,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:Sections>
                                   <ows:Section>Contents</ows:Section>                              
                                 </ows:Sections>
@@ -1477,7 +1598,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:Sections>
                                   <ows:Section>All</ows:Section>                              
                                 </ows:Sections>
@@ -1529,7 +1650,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:Sections>
                                   <ows:Section>ServiceIdentification</ows:Section>
                                   <ows:Section>ServiceProvider</ows:Section>                              
@@ -1582,7 +1703,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:Sections>
                                   <ows:Section>ServiceIdentification</ows:Section>
                                   <ows:Section>ServiceProvider</ows:Section>
@@ -1637,7 +1758,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:Sections>
                                   <ows:Section>Bogus</ows:Section>                              
                                 </ows:Sections>
@@ -1689,7 +1810,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:AcceptVersions>
                                   <ows:Version>1.1.1</ows:Version>                              
                                 </ows:AcceptVersions>
@@ -1741,7 +1862,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:AcceptVersions>
                                   <ows:Version>0.0.0</ows:Version>                              
                                 </ows:AcceptVersions>
@@ -1793,7 +1914,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:AcceptVersions>
                                   <ows:Version>99.99.99</ows:Version>                              
                                 </ows:AcceptVersions>
@@ -1845,7 +1966,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:AcceptVersions>
                                   <ows:Version>0.0.0</ows:Version>
                                   <ows:Version>1.1.1</ows:Version>                              
@@ -1898,7 +2019,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" updateSequence ="">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" updateSequence ="">
                               </GetCapabilities>
                             </ctl:body>
 						</xsl:if>
@@ -1950,7 +2071,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" updateSequence ="{$EqualUpdateSequenceValue}">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" updateSequence ="{$EqualUpdateSequenceValue}">
                               </GetCapabilities>
                             </ctl:body>
 						</xsl:if>
@@ -2002,7 +2123,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" updateSequence ="{$BogusUpdateSequenceValue}">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" updateSequence ="{$BogusUpdateSequenceValue}">
                               </GetCapabilities>
                             </ctl:body>
 						</xsl:if>
@@ -2054,7 +2175,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" updateSequence ="{$MinimalUpdateSequenceValue}">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" updateSequence ="{$MinimalUpdateSequenceValue}">
                               </GetCapabilities>
                             </ctl:body>
 						</xsl:if>
@@ -2106,7 +2227,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" updateSequence ="{$MaximalUpdateSequenceValue}">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" updateSequence ="{$MaximalUpdateSequenceValue}">
                               </GetCapabilities>
                             </ctl:body>
 						</xsl:if>
@@ -2155,7 +2276,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:AcceptFormats>
                                   <ows:OutputFormat>text/xml</ows:OutputFormat>                              
                                 </ows:AcceptFormats>
@@ -2207,7 +2328,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS">
+                              <GetCapabilities xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS">
                                 <ows:AcceptFormats>
                                   <ows:OutputFormat>text/bogus</ows:OutputFormat>                              
                                 </ows:AcceptFormats>
@@ -2339,6 +2460,18 @@
 					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'</ctl:message>
 					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/></ctl:message>
 				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP')">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP'</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP'"/></ctl:message>
+				</xsl:if>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML')">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/></ctl:message>
+				</xsl:if>
 			</ctl:code>
 		</ctl:test>
 		<ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Post_Multiple_Connect_Points">
@@ -2353,12 +2486,17 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding'])">
+					<ctl:message/>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']"/></ctl:message>
+				</xsl:if>
 				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding'])">
 					<ctl:message/>
-					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
+					<ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
 					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']</ctl:message>
 					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']"/></ctl:message>
-					<ctl:fail/>
 				</xsl:if>
 				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/@xlink:href)">
 					<ctl:message/>
@@ -2381,18 +2519,18 @@
 						<ctl:with-param name="url" select="$url"/>
 					</ctl:call-function>
 				</xsl:variable>
-				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store'])">
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCoverage']/*[local-name()='Parameter'][@name='store'])">
 					<ctl:message/>
 					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
-					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']</ctl:message>
-					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']"/></ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCoverage']/*[local-name()='Parameter'][@name='store']</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCoverage']/*[local-name()='Parameter'][@name='store']"/></ctl:message>
 					<ctl:fail/>
 				</xsl:if>
-				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='false')">
+				<xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='False')">
 					<ctl:message/>
 					<ctl:message>Test failed because an element is missing from the response.</ctl:message>
-					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='false'</ctl:message>
-					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='false'"/></ctl:message>
+					<ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='False'</ctl:message>
+					<ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='False'"/></ctl:message>
 					<ctl:fail/>
 				</xsl:if>
 			</ctl:code>
@@ -2761,11 +2899,14 @@
 				<xsl:variable name="xml-supported">
 					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='DescribeCoverage']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/>
 				</xsl:variable>
+				<xsl:variable name="xml-supported-alternate">
+					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/>
+				</xsl:variable>
 				<xsl:variable name="soap-supported">
 					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='DescribeCoverage']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP'"/>
 				</xsl:variable>
 				<xsl:variable name="store-supported">
-					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='true'"/>
+					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='True'"/>
 				</xsl:variable>
 				<xsl:variable name="identifier1">
 					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'][1]/*[local-name()='Identifier']"/>
@@ -2780,6 +2921,7 @@
 				<ctl:message select="concat('url-get: ', $url-get, '.')"/>
 				<ctl:message select="concat('url-xml: ', $url-xml, '.')"/>
 				<ctl:message select="concat('xml-supported: ', $xml-supported, '.')"/>
+				<ctl:message select="concat('xml-supported-alternate: ', $xml-supported-alternate, '.')"/>
 				<ctl:message select="concat('soap-supported: ', $soap-supported, '.')"/>
 				<xsl:if test="$soap-supported = 'true'">
 					<ctl:message>No tests using SOAP encoding will be performed. The tests for SOAP encoding are not implemented.</ctl:message>
@@ -2809,8 +2951,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MinimalRequest', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MinimalRequest', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_MinimalRequest">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -2841,6 +2986,23 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MissingVersion', 'UpdateSequence'))"/>
+				</xsl:variable>
+				<xsl:choose>
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
+						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_MissingVersion">
+							<ctl:with-param name="url" select="$url-xml"/>
+							<ctl:with-param name="http-method" select="$http-xml"/>
+							<ctl:with-param name="identifier1" select="$identifier1"/>
+							<ctl:with-param name="identifier2" select="$identifier2"/>
+							<ctl:with-param name="identifier3" select="$identifier3"/>
+						</ctl:call-test>
+					</xsl:when>
+					<xsl:otherwise>
+						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MissingVersion', ' with POST XML skipped.')"/>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
 					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MissingIdentifier', 'UpdateSequence'))"/>
 				</xsl:variable>
 				<xsl:choose>
@@ -2857,8 +3019,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MissingIdentifier', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MissingIdentifier', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_MissingIdentifier">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -2888,8 +3053,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MultipleIdentifiers', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MultipleIdentifiers', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_MultipleIdentifiers">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -2919,8 +3087,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'EmptyIdentifier', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('EmptyIdentifier', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_EmptyIdentifier">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -2950,8 +3121,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'BogusIdentifier', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('BogusIdentifier', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_BogusIdentifier">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -2981,8 +3155,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'ValidWithBogusIdentifiers', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('ValidWithBogusIdentifiers', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_ValidWithBogusIdentifiers">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3012,8 +3189,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_InterpolationMethods', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_InterpolationMethods', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_InterpolationMethods">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3043,8 +3223,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_Identifier_XML', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_Identifier_XML', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_Identifier_XML">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3074,8 +3257,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_SupportedFormat_XML', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_SupportedFormat_XML', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_SupportedFormat_XML">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3105,8 +3291,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_FieldIdentifier_XML', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_FieldIdentifier_XML', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_FieldIdentifier_XML">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3136,8 +3325,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_InterpolationMethod_XML', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_InterpolationMethod_XML', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_InterpolationMethod_XML">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3167,8 +3359,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_AxisIdentifier_XML', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_AxisIdentifier_XML', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_AxisIdentifier_XML">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3198,8 +3393,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_AxisKey_XML', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_AxisKey_XML', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_AxisKey_XML">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3246,7 +3444,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>"{$identifier1}"</Identifier>
+                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>{$identifier1}</Identifier>
                               </DescribeCoverage>
                             </ctl:body>
 						</xsl:if>
@@ -3295,7 +3493,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>"{$identifier1}"</Identifier>
+                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>{$identifier1}</Identifier>
                               </DescribeCoverage>
                             </ctl:body>
 						</xsl:if>
@@ -3342,7 +3540,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>""</Identifier>
+                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1">
                               </DescribeCoverage>
                             </ctl:body>
 						</xsl:if>
@@ -3387,12 +3585,12 @@
 							<ctl:param name="request">DescribeCoverage</ctl:param>
 							<ctl:param name="version">1.1.1</ctl:param>
 							<ctl:param name="identifiers">
-								<xsl:value-of select="$identifier1, $identifier2, $identifier3"/>
+								<xsl:value-of select="$identifier1,$identifier2,$identifier3"/>
 							</ctl:param>
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>"{$identifier1, $i}"</Identifier>
+                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>{$identifier1}</Identifier><Identifier>{$identifier2}</Identifier><Identifier>{$identifier3}</Identifier>
                               </DescribeCoverage>
                             </ctl:body>
 						</xsl:if>
@@ -3440,7 +3638,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>""</Identifier>
+                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier></Identifier>
                               </DescribeCoverage>
                             </ctl:body>
 						</xsl:if>
@@ -3488,7 +3686,7 @@
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>"Bogus"</Identifier>
+                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>Bogus</Identifier>
                               </DescribeCoverage>
                             </ctl:body>
 						</xsl:if>
@@ -3533,12 +3731,12 @@
 							<ctl:param name="request">DescribeCoverage</ctl:param>
 							<ctl:param name="version">1.1.1</ctl:param>
 							<ctl:param name="identifiers">
-								<xsl:value-of select="$identifier1"/>
+								<xsl:value-of select="concat('Bogus,', $identifier1)"/>
 							</ctl:param>
 						</xsl:if>
 						<xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
 							<ctl:body>
-                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 ./resources/xsd/ogc/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>"Bogus, Variable: Identifier"</Identifier>
+                              <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>Bogus</Identifier><Identifier>{$identifier1}</Identifier>
                               </DescribeCoverage>
                             </ctl:body>
 						</xsl:if>
@@ -3768,11 +3966,14 @@
 				<xsl:variable name="xml-supported">
 					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/>
 				</xsl:variable>
+				<xsl:variable name="xml-supported-alternate">
+					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/>
+				</xsl:variable>
 				<xsl:variable name="soap-supported">
 					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP'"/>
 				</xsl:variable>
 				<xsl:variable name="store-supported">
-					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='true'"/>
+					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='True'"/>
 				</xsl:variable>
 				<xsl:variable name="identifier1">
 					<xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'][1]/*[local-name()='Identifier']"/>
@@ -3787,6 +3988,7 @@
 				<ctl:message select="concat('url-get: ', $url-get, '.')"/>
 				<ctl:message select="concat('url-xml: ', $url-xml, '.')"/>
 				<ctl:message select="concat('xml-supported: ', $xml-supported, '.')"/>
+				<ctl:message select="concat('xml-supported-alternate: ', $xml-supported-alternate, '.')"/>
 				<ctl:message select="concat('soap-supported: ', $soap-supported, '.')"/>
 				<xsl:if test="$soap-supported = 'true'">
 					<ctl:message>No tests using SOAP encoding will be performed. The tests for SOAP encoding are not implemented.</ctl:message>
@@ -3813,8 +4015,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'MinimalRequest', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MinimalRequest', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_MinimalRequest">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3838,8 +4043,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'MissingIdentifier', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MissingIdentifier', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_MissingIdentifier">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3863,8 +4071,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'EmptyIdentifier', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('EmptyIdentifier', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_EmptyIdentifier">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3888,8 +4099,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'BogusIdentifier', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('BogusIdentifier', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_BogusIdentifier">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3913,8 +4127,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'MissingBoundingBox', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MissingBoundingBox', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_MissingBoundingBox">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3938,8 +4155,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'SurroundingBoundingBox', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('SurroundingBoundingBox', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_SurroundingBoundingBox">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3963,8 +4183,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'InsideBoundingBox', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('InsideBoundingBox', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_InsideBoundingBox">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -3988,8 +4211,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'OverlappingBoundingBox', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('OverlappingBoundingBox', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_OverlappingBoundingBox">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4013,8 +4239,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'BoundingBox_OutOfRangeCoordinates', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('BoundingBox_OutOfRangeCoordinates', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_BoundingBox_OutOfRangeCoordinates">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4038,8 +4267,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'OutsideBoundingBox', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('OutsideBoundingBox', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_OutsideBoundingBox">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4063,8 +4295,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'AntimeridianBoundingBox', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('AntimeridianBoundingBox', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_AntimeridianBoundingBox">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4088,8 +4323,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'TemporalSubset_TimePosition', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('TemporalSubset_TimePosition', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePosition">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4113,8 +4351,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'TemporalSubset_TimePosition_Early', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('TemporalSubset_TimePosition_Early', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePosition_Early">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4138,8 +4379,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'TemporalSubset_TimePosition_Late', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('TemporalSubset_TimePosition_Late', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePosition_Late">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4163,8 +4407,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'TemporalSubset_TimePeriod', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('TemporalSubset_TimePeriod', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePeriod">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4188,8 +4435,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'TemporalSubset_TimePeriod_With_Resolution', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('TemporalSubset_TimePeriod_With_Resolution', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePeriod_With_Resolution">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4213,8 +4463,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'TemporalSubset_TimePeriod_With_Resolution_And_Frame', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('TemporalSubset_TimePeriod_With_Resolution_And_Frame', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePeriod_With_Resolution_And_Frame">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4238,8 +4491,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'TemporalSubset_TimePeriod_BeginTime_Only', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('TemporalSubset_TimePeriod_BeginTime_Only', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePeriod_BeginTime_Only">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4263,8 +4519,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'TemporalSubset_TimePeriod_EndTime_Only', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('TemporalSubset_TimePeriod_EndTime_Only', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_TemporalSubset_TimePeriod_EndTime_Only">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4288,8 +4547,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_Identifier', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_Identifier', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_Identifier">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4313,8 +4575,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_Multiple_Identifiers', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_Multiple_Identifiers', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_Multiple_Identifiers">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4338,8 +4603,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_Repeated_Identifiers', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_Repeated_Identifiers', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_Repeated_Identifiers">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4363,8 +4631,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_Bogus_Identifier', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_Bogus_Identifier', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_Bogus_Identifier">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4388,8 +4659,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_Valid_With_Bogus_Identifiers', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_Valid_With_Bogus_Identifiers', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_Valid_With_Bogus_Identifiers">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4413,8 +4687,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_InterpolationMethod', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_InterpolationMethod', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_InterpolationMethod">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4438,8 +4715,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_InterpolationMethod_Missing', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_InterpolationMethod_Missing', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_InterpolationMethod_Missing">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4463,8 +4743,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_InterpolationMethod_Bogus', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_InterpolationMethod_Bogus', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_InterpolationMethod_Bogus">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4488,8 +4771,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_Axis_Identifier_One_Key', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_Axis_Identifier_One_Key', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_Axis_Identifier_One_Key">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4513,8 +4799,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_Axis_Identifier_Some_Keys', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_Axis_Identifier_Some_Keys', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_Axis_Identifier_Some_Keys">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4538,8 +4827,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_Axis_Identifier_All_Keys', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_Axis_Identifier_All_Keys', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_Axis_Identifier_All_Keys">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4563,8 +4855,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_Axis_Identifier_No_Key', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_Axis_Identifier_No_Key', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_Axis_Identifier_No_Key">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4588,8 +4883,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_Axis_Identifier_Bogus_Key', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_Axis_Identifier_Bogus_Key', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_Axis_Identifier_Bogus_Key">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4613,8 +4911,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_KVP_Syntax_Colon_Between_Field_Identifiers', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_KVP_Syntax_Colon_Between_Field_Identifiers', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Colon_Between_Field_Identifiers">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4638,8 +4939,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_KVP_Syntax_Comma_Between_Field_Identifiers', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_KVP_Syntax_Comma_Between_Field_Identifiers', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Comma_Between_Field_Identifiers">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4663,8 +4967,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_KVP_Syntax_Semicolon_Between_Field_Identifier_And_InterpolationMethod', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_KVP_Syntax_Semicolon_Between_Field_Identifier_And_InterpolationMethod', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Semicolon_Between_Field_Identifier_And_InterpolationMethod">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4688,8 +4995,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_KVP_Syntax_Semicolon_Between_Axis_Identifiers', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_KVP_Syntax_Semicolon_Between_Axis_Identifiers', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Semicolon_Between_Axis_Identifiers">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4713,8 +5023,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_KVP_Syntax_Semicolon_Between_Axis_Keys', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_KVP_Syntax_Semicolon_Between_Axis_Keys', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Semicolon_Between_Axis_Keys">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4738,8 +5051,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_KVP_Syntax_Missing_Opening_Square_Bracket_Before_Axis_Identifier', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_KVP_Syntax_Missing_Opening_Square_Bracket_Before_Axis_Identifier', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Missing_Opening_Square_Bracket_Before_Axis_Identifier">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4763,8 +5079,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_KVP_Syntax_Missing_Opening_Square_Bracket_Before_Axis_Key', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_KVP_Syntax_Missing_Opening_Square_Bracket_Before_Axis_Key', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Missing_Opening_Square_Bracket_Before_Axis_Key">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4788,8 +5107,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'RangeSubset_KVP_Syntax_Missing_Closing_Square_Bracket', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('RangeSubset_KVP_Syntax_Missing_Closing_Square_Bracket', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_RangeSubset_KVP_Syntax_Missing_Closing_Square_Bracket">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4813,8 +5135,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'Formats', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Formats', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_Formats">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4838,8 +5163,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'Bogus_Format', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Bogus_Format', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_Bogus_Format">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4863,8 +5191,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'Empty_Format', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Empty_Format', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_Empty_Format">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4888,8 +5219,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'Missing_Format', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Missing_Format', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_Missing_Format">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4913,8 +5247,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'Store_True', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Store_True', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_Store_True">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4938,8 +5275,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'Store_False', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Store_False', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_Store_False">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
@@ -4963,8 +5303,11 @@
 						<ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'Store_Bogus', ' with GET skipped.')"/>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:variable name="UpdateSequenceOk">
+					<xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Store_Bogus', 'UpdateSequence'))"/>
+				</xsl:variable>
 				<xsl:choose>
-					<xsl:when test="$xml-supported = 'true'">
+					<xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true'">
 						<ctl:call-test xmlns="" name="wcs:GetCoverage_Store_Bogus">
 							<ctl:with-param name="url" select="$url-xml"/>
 							<ctl:with-param name="http-method" select="$http-xml"/>
