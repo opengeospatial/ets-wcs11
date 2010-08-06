@@ -1,0 +1,4 @@
+WCS 1.1.1 Test Suite Release Notes
+
+Changes included in latest revision:
+
