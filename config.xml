@@ -6,7 +6,7 @@
 		<name>WCS</name>
 	</standard>
 	<version>
-		<name>1.1.0</name>
+		<name>1.1.1</name>
 	</version>
 	<suite>
 		<namespace-uri>http://schemas.opengis.net/wcs/1.1.1</namespace-uri>
