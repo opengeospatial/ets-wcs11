@@ -2,6 +2,12 @@ WCS 1.1.1 Test Suite Release Notes
 
 Changes included in latest revision:
 
+Changes in r1 (2013-02-08)
+--------------------------
+- [config.xml]: Updated for TEAM-Engine v4
+- [GetCoverage_MinimalRequest,GetCoverage_MissingIdentifier]: Fixed xpath errors 
+  "Arithmetic operator is not defined for arguments of types (xs:string, xs:string)"
+
 
 === Changes included in r0 ===
 
