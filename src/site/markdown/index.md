@@ -1,47 +1,9 @@
-# OGC Web Coverage Service Executable Test Suite
+# Overview
 
-## Overview
+This executable test suite is based on the following OGC specifications:
 
-This test suite is based on the following OGC specifications:
-
-- OGC XYZ Specification - 2.0.1 [OGC 0000](http://portal.opengeospatial.org/files/?artifact_id=00000) 
-- ...
-
-## What is tested
-
-- GetCapabilitiesXYZ, GET method
-- ....
-
-## What is not tested
-
-- GetCapabilities with DFT
-
-
-##  Test data
-
-the....
-
-##  Contributors
-
-- Luis Bermudez
-- ...
-
-##  License
-
-[Apache License, Version 2.0](http://opensource.org/licenses/Apache-2.0 "Apache License")
-
-## Bugs
-
-Issue tracker is available at [github](https://github.com/opengeospatial/ets-wcs11/issues)
-
-## Mailing Lists
-
-The [cite-forum](http://cite.opengeospatial.org/forum) is where software developers discuss issues and solutions related to OGC tests. 
-
-
-##  Release Notes
-
-### r34 (2014-04-11)
-
-- CITE-901: amended describeRecord schemalocation check in Capabilities.sch
+  * [ OGC Web Coverage Service (WCS) Implementation Specification Corrigendum 1 (1.1.1 c1)](http://www.opengeospatial.org/standards/wcs) (OGC 07-067r2)
+  * [ OGC Web Service Common Implementation Specification](http://www.opengeospatial.org/standards/common) (OGC 06-121r3)
+  * [ GML 3.1.1 common CRSs profile ](http://www.opengeospatial.org/standards/requests/24)(05-095r1)
+  * [ GML 3.1.1 grid CRSs profile ](http://www.opengeospatial.org/standards/requests/25) (05-096r1)
 
