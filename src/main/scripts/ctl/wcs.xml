@@ -6816,7 +6816,7 @@
             <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
-            <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
+            <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat'][1]"/></xsl:variable>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
             <xsl:variable name="GridOffsets" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridOffsets']"/>
             <xsl:variable name="get-coverage-result">
