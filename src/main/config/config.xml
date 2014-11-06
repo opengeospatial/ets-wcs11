@@ -14,12 +14,12 @@
         <description>Checks WCS implementations for conformance to OGC 07-067r2.</description>
       </suite>
       <revision>
-        <name>r2</name>
+        <name>${project.version}</name>
         <sources>
-          <source>wcs/1.1.1/ctl</source>
+          <source>wcs/${spec-version}/ctl</source>
         </sources>
-        <resources>wcs/1.1.1/resources</resources>
-        <webdir>wcs/1.1.1/web</webdir>
+        <resources>wcs/${spec-version}/resources</resources>
+        <webdir>wcs/${spec-version}/site</webdir>
       </revision>
     </version>
   </standard>
