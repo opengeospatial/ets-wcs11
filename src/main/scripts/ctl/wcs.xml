@@ -6749,7 +6749,7 @@
       <ctl:param name="identifier1"/>
       <ctl:param name="identifier2"/>
       <ctl:param name="identifier3"/>
-      <ctl:assertion xmlns="">Verify that when a GetCoverage request with only mandatory           parameters is submitted, the response is not an exception.</ctl:assertion>
+      <ctl:assertion xmlns="">Verify that when a GetCoverage request with only mandatory parameters is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 54. GetCoverage Minimal Request</ctl:comment>
       <ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 10.2.1.1 Tables 21, 22 and 23.">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
       <ctl:code>
@@ -6782,29 +6782,29 @@
           <xsl:otherwise>
             <xsl:variable name="BoundingBoxCRS">
               <xsl:choose>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']">
-                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']/@crs"/>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]">
+                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]/@crs"/>
                 </xsl:when>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox']">urn:ogc:def:crs:OGC:2:84</xsl:when>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox'][1]">urn:ogc:def:crs:OGC:2:84</xsl:when>
               </xsl:choose>
             </xsl:variable>
             <xsl:variable name="BoundingBoxLowerCorner">
               <xsl:choose>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']">
-                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']//*[local-name()='LowerCorner']"/>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]">
+                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]//*[local-name()='LowerCorner']"/>
                 </xsl:when>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox']">
-                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox']/*[local-name()='LowerCorner']"/>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox'][1]">
+                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox'][1]/*[local-name()='LowerCorner']"/>
                 </xsl:when>
               </xsl:choose>
             </xsl:variable>
             <xsl:variable name="BoundingBoxUpperCorner">
               <xsl:choose>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']">
-                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']/*[local-name()='UpperCorner']"/>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]">
+                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]/*[local-name()='UpperCorner']"/>
                 </xsl:when>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox']">
-                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox']/*[local-name()='UpperCorner']"/>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox'][1]">
+                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox'][1]/*[local-name()='UpperCorner']"/>
                 </xsl:when>
               </xsl:choose>
             </xsl:variable>
@@ -6901,7 +6901,7 @@
       <ctl:param name="identifier1"/>
       <ctl:param name="identifier2"/>
       <ctl:param name="identifier3"/>
-      <ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing identifier           parameter is submitted, the response is valid XML that validates           against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+      <ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing identifier parameter is submitted, the response is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
       <ctl:comment xmlns="">Table 55. GetCoverage Missing Identifier</ctl:comment>
       <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22  and 23 and 10.3.2 Table 28.">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
       <ctl:code>
@@ -6934,29 +6934,29 @@
           <xsl:otherwise>
             <xsl:variable name="BoundingBoxCRS">
               <xsl:choose>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']">
-                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']/@crs"/>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]">
+                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]/@crs"/>
                 </xsl:when>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox']">urn:ogc:def:crs:OGC:2:84</xsl:when>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox'][1]">urn:ogc:def:crs:OGC:2:84</xsl:when>
               </xsl:choose>
             </xsl:variable>
             <xsl:variable name="BoundingBoxLowerCorner">
               <xsl:choose>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']">
-                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']//*[local-name()='LowerCorner']"/>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]">
+                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]//*[local-name()='LowerCorner']"/>
                 </xsl:when>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox']">
-                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox']/*[local-name()='LowerCorner']"/>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox'][1]">
+                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox'][1]/*[local-name()='LowerCorner']"/>
                 </xsl:when>
               </xsl:choose>
             </xsl:variable>
             <xsl:variable name="BoundingBoxUpperCorner">
               <xsl:choose>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']">
-                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox']/*[local-name()='UpperCorner']"/>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]">
+                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='BoundingBox'][1]/*[local-name()='UpperCorner']"/>
                 </xsl:when>
-                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox']">
-                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox']/*[local-name()='UpperCorner']"/>
+                <xsl:when test="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox'][1]">
+                  <xsl:value-of select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='WGS84BoundingBox'][1]/*[local-name()='UpperCorner']"/>
                 </xsl:when>
               </xsl:choose>
             </xsl:variable>
@@ -7012,7 +7012,8 @@
               </ctl:request>
             </xsl:variable>
             <xsl:if test="not(contains(' Identifier',$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator))">
-              <ctl:message>Error: Expected an exception with locator  Identifier but found                                  <xsl:value-of select="$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator"/></ctl:message>
+              <ctl:message>Error: Expected an exception with locator  Identifier but found
+                                  <xsl:value-of select="$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator"/></ctl:message>
               <ctl:fail/>
             </xsl:if>
           </xsl:otherwise>
