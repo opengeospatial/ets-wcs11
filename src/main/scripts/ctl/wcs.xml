@@ -201,7 +201,7 @@
             <ctl:param name="service">WCS</ctl:param>
             <ctl:param name="request">GetCapabilities</ctl:param>
             <ctl:param name="sections">OperationsMetadata,Contents</ctl:param>
-            <ctl:param name="ACCEPT_VERSIONS">1.1.1</ctl:param>
+            <ctl:param name="acceptversions">1.1.1</ctl:param>
             <ctlp:XMLValidatingParser>
               <ctlp:schemas>
                 <ctlp:schema type="resource">xsd/ogc/wcs/1.1.1/wcsGetCapabilities.xsd</ctlp:schema>
