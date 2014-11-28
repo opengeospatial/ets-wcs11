@@ -11,6 +11,7 @@
         <ctl:method>GET</ctl:method>
         <ctl:param name="service">WCS</ctl:param>
         <ctl:param name="request">GetCapabilities</ctl:param>
+	<ctl:param name="version">1.1.1</ctl:param>
         <ctl:param name="acceptversions">1.1.1</ctl:param>
         <ctlp:XMLValidatingParser>
           <ctlp:schemas>
@@ -164,6 +165,7 @@
           <ctl:method>GET</ctl:method>
           <ctl:param name="service">WCS</ctl:param>
           <ctl:param name="request">GetCapabilities</ctl:param>
+	  <ctl:param name="version">1.1.1</ctl:param>
         </ctl:request>
       </xsl:variable>
       <xsl:if test="string-length($result)=0">
@@ -200,6 +202,7 @@
             <ctl:method>GET</ctl:method>
             <ctl:param name="service">WCS</ctl:param>
             <ctl:param name="request">GetCapabilities</ctl:param>
+	    <ctl:param name="version">1.1.1</ctl:param>
             <ctl:param name="sections">OperationsMetadata,Contents</ctl:param>
             <ctl:param name="acceptversions">1.1.1</ctl:param>
             <ctlp:XMLValidatingParser>
@@ -1605,6 +1608,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
               <ctl:body>
@@ -1665,6 +1669,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="sections">ServiceIdentification</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -1729,6 +1734,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="sections">ServiceProvider</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -1793,6 +1799,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="sections">OperationsMetadata</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -1857,6 +1864,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="sections">Contents</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -1921,6 +1929,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="sections">All</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -1985,6 +1994,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="sections">ServiceIdentification,ServiceProvider</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -2050,6 +2060,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="sections">ServiceIdentification,ServiceProvider,OperationsMetadata,Contents</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -2117,6 +2128,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="sections">Bogus</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -2181,6 +2193,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="acceptversions">1.1.1</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -2245,6 +2258,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="acceptversions">0.0.0</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -2309,6 +2323,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="acceptversions">99.99.99</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -2373,6 +2388,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="acceptversions">0.0.0,1.1.1</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -2438,6 +2454,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="updateSequence"/>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -2500,6 +2517,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="updateSequence">
                 <xsl:value-of select="$EqualUpdateSequenceValue"/>
               </ctl:param>
@@ -2564,6 +2582,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="updateSequence">
                 <xsl:value-of select="$BogusUpdateSequenceValue"/>
               </ctl:param>
@@ -2628,6 +2647,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="updateSequence">
                 <xsl:value-of select="$MinimalUpdateSequenceValue"/>
               </ctl:param>
@@ -2692,6 +2712,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="updateSequence">
                 <xsl:value-of select="$MaximalUpdateSequenceValue"/>
               </ctl:param>
@@ -2755,6 +2776,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="acceptformats">text/xml</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -2819,6 +2841,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">GetCapabilities</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="acceptformats">text/bogus</ctl:param>
             </xsl:if>
             <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
@@ -3434,6 +3457,7 @@
             <ctl:method>GET</ctl:method>
             <ctl:param name="service">WCS</ctl:param>
             <ctl:param name="request">GetCapabilities</ctl:param>
+	    <ctl:param name="version">1.1.1</ctl:param>
             <ctl:param name="sections">OperationsMetadata,Contents</ctl:param>
             <ctlp:XMLValidatingParser>
               <ctlp:schemas>
@@ -4164,6 +4188,7 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">DescribeCoverage</ctl:param>
+	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="identifiers">
                 <xsl:value-of select="$identifier1"/>
               </ctl:param>
@@ -4717,6 +4742,7 @@
             <ctl:method>GET</ctl:method>
             <ctl:param name="service">WCS</ctl:param>
             <ctl:param name="request">GetCapabilities</ctl:param>
+	    <ctl:param name="version">1.1.1</ctl:param>
             <ctl:param name="sections">OperationsMetadata,Contents</ctl:param>
             <ctlp:XMLValidatingParser>
               <ctlp:schemas>
