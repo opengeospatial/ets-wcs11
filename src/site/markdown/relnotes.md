@@ -1,5 +1,9 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## r2 (2014-12)
+
+* [#3](https://github.com/opengeospatial/ets-wcs11/issues/3) - Invalid parameter value for Format
+* [#1](https://github.com/opengeospatial/ets-wcs11/issues/1) - cannot convert string to xs:decimal
 
 ## r1 (2013-02-08)
 
