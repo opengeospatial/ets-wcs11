@@ -7,7 +7,7 @@ The OGC Web Coverage Service 1.1.1 Test-Suite provides the Executable Test Scrip
   * GML 3.1.1 common CRSs profile [05-095r1](http://www.opengeospatial.org/standards/requests/24)
   * GML 3.1.1 grid CRSs profile [05-096r1](http://www.opengeospatial.org/standards/requests/25) 
 
-Detailed information about this test suite is available [here]( http://htmlpreview.github.com/?https://github.com/opengeospatial/ets-wcs11/blob/master/src/main/web/index.html).
+Detailed information about this test suite is available [here](http://opengeospatial.github.io/ets-wcs11).
 
 ## License
 
