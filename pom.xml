@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ets-wcs11</artifactId>
   <groupId>org.opengis.cite</groupId>
-  <version>r3-SNAPSHOT</version>
+  <version>r3</version>
 
   <name>OGC Web Coverage Service 1.1.0 - Executable Test Suite</name>
   <description>
