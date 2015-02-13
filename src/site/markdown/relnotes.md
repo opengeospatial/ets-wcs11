@@ -1,9 +1,10 @@
 # WCS 1.1.1 Test Suite Release Notes
 
-## r2 (2014-12)
+## r2 (2015-02)
 
 * [#3](https://github.com/opengeospatial/ets-wcs11/issues/3) - Invalid parameter value for Format
-* [#1](https://github.com/opengeospatial/ets-wcs11/issues/1) - cannot convert string to xs:decimal
+* [#1](https://github.com/opengeospatial/ets-wcs11/issues/1) - Cannot convert string to xs:decimal
+* [#7](https://github.com/opengeospatial/ets-wcs11/issues/7) - Cannot find declaration of element Capabilities 
 
 ## r1 (2013-02-08)
 
