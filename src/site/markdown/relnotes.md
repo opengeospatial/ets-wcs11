@@ -1,5 +1,9 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.4 (2015-03-04)
+
+* [11](https://github.com/opengeospatial/ets-wcs11/issues/11) - Change versioning scheme 
+
 ## r3 (2015-02)
 
 * [9](https://github.com/opengeospatial/ets-wcs11/issues/9) - Fix link to GitHub page
