@@ -4,11 +4,11 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ets-wcs11</artifactId>
   <groupId>org.opengis.cite</groupId>
-  <version>1.5-SNAPSHOT</version>
+  <version>1.4-SNAPSHOT</version>
 
-  <name>OGC Web Coverage Service 1.1.0 - Executable Test Suite</name>
+  <name>OGC Web Coverage Service 1.1.1 - Executable Test Suite</name>
   <description>
-  Verifies conformance of implementations to OGC Web Coverage Service 1.1.0.
+  Verifies conformance of implementations to OGC Web Coverage Service 1.1.1
   </description>
   <url>https://github.com/opengeospatial/ets-wcs11</url>
   <licenses>
@@ -32,7 +32,7 @@
   </issueManagement>
   <properties>
     <ets-code>wcs</ets-code>
-    <spec-version>1.1.0</spec-version>
+    <spec-version>1.1.1</spec-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <teamengine.version>4.0.5</teamengine.version>
   </properties>  
@@ -102,7 +102,7 @@
             <id>site-package</id>
             <phase>prepare-package</phase>
             <goals>
-              <goal>site</goal>
+              <goal>jar</goal>
             </goals>
           </execution>
         </executions>
