@@ -1,5 +1,8 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.5 (2015-07-30)
+- Update pom.xml to build with Maven 2 
+
 ## 1.4 (2015-03-04)
 
 * [11](https://github.com/opengeospatial/ets-wcs11/issues/11) - Change versioning scheme 
