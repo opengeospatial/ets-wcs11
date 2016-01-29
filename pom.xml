@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ets-wcs11</artifactId>
   <groupId>org.opengis.cite</groupId>
-  <version>1.6</version>
+  <version>1.7-SNAPSHOT</version>
 
   <name>OGC Web Coverage Service 1.1.1 - Executable Test Suite</name>
   <description>
@@ -111,7 +111,7 @@
           <dependency>
             <groupId>org.apache.maven.doxia</groupId>
             <artifactId>doxia-module-markdown</artifactId>
-            <version>1.6</version>
+            <version>1.7-SNAPSHOT</version>
           </dependency>
         </dependencies>
       </plugin>
