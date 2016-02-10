@@ -7290,8 +7290,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -7418,8 +7418,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -7636,8 +7636,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -7792,8 +7792,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -7948,8 +7948,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -8104,8 +8104,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -8257,8 +8257,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -8397,8 +8397,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -8530,8 +8530,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -8692,8 +8692,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -8849,8 +8849,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -9006,8 +9006,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -9172,8 +9172,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -9331,8 +9331,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -9489,8 +9489,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -9624,8 +9624,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -9759,8 +9759,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -9913,8 +9913,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -10075,8 +10075,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -10209,8 +10209,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -10338,8 +10338,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -10470,8 +10470,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="FieldIdentifier"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Range']/*[local-name()='Field']/*[local-name()='Identifier']"/></xsl:variable>
@@ -10628,8 +10628,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -10761,8 +10761,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -10894,8 +10894,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -11058,8 +11058,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -11226,8 +11226,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -11398,8 +11398,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -11536,8 +11536,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -11675,8 +11675,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -11793,8 +11793,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -11912,8 +11912,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -12028,8 +12028,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -12147,8 +12147,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -12266,8 +12266,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -12384,8 +12384,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -12501,8 +12501,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -12618,8 +12618,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -12772,8 +12772,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
@@ -12900,8 +12900,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
@@ -13028,8 +13028,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
@@ -13159,8 +13159,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -13315,8 +13315,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
@@ -13470,8 +13470,8 @@
             <xsl:variable name="LowerCornerY" select="substring-after($BoundingBoxLowerCorner, ' ')"/>
             <xsl:variable name="UpperCornerX" select="substring-before($BoundingBoxUpperCorner, ' ')"/>
             <xsl:variable name="UpperCornerY" select="substring-after($BoundingBoxUpperCorner, ' ')"/>
-            <xsl:variable name="LengthX" select="$UpperCornerX - $LowerCornerX"/>
-            <xsl:variable name="LengthY" select="$UpperCornerY - $LowerCornerY"/>
+            <xsl:variable name="LengthX" select="xs:decimal($UpperCornerX) - xs:decimal($LowerCornerX)"/>
+            <xsl:variable name="LengthY" select="xs:decimal($UpperCornerY) - xs:decimal($LowerCornerY)"/>
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']"/></xsl:variable>
