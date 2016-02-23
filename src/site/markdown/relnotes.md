@@ -1,5 +1,9 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.7 (2016-02-23)
+* [#4](https://github.com/opengeospatial/ets-wcs11/issues/4) - Using more than one ows:BoundingBox in coverage description breaks GetCoverage tests
+* [#2](https://github.com/opengeospatial/ets-wcs11/issues/2) - Arithmetic operator is not defined for arguments of types (xs:string, xs:string)
+
 ## 1.6 (2016-01-29)
 * [#7](https://github.com/opengeospatial/ets-wcs11/issues/7) - Error - cannot find declaration of element Capabilities
 
