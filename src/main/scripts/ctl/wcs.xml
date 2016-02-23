@@ -134,6 +134,11 @@
         <ctl:form>
           <h3>Web Coverage Service 1.1.1</h3>
           <p>This executable test suite tests the conformance of a WCS 1.1.1 server to the specification  OGC 07-067r2 which includes corrigendum 1.</p>
+         <p>
+              More information about this test suite can be found <a href="index.html" target="_blank">here</a>.
+              </p>
+         
+         <p>To start the test, provide the URL of the WCS GetCapabilities document.</p>
           <blockquote>
             <table border="0" cellpadding="5">
               <tr>
@@ -143,20 +148,18 @@
                 </td>
               </tr>
             </table>
-            <p>The URL of the WCS for HTTP GET (KVP) encoding of GetCapabilities.</p>
+            
           </blockquote>
           <blockquote>
             <table border="0" cellpadding="5">
               <tr>
                 <td align="center">
-                  <input type="submit" value="Next"/>
+                  <input type="submit" value="Start Testing"/>
                 </td>
               </tr>
             </table>
           </blockquote>
-          <p>
-            <font size="1">ETS revision 12 (Feb 29, 2008)</font>
-          </p>
+          
         </ctl:form>
       </xsl:variable>
       <xsl:variable name="url">
