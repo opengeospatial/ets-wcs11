@@ -3,6 +3,7 @@
 ## 1.7 (2016-02-23)
 * [#4](https://github.com/opengeospatial/ets-wcs11/issues/4) - Using more than one ows:BoundingBox in coverage description breaks GetCoverage tests
 * [#2](https://github.com/opengeospatial/ets-wcs11/issues/2) - Arithmetic operator is not defined for arguments of types (xs:string, xs:string)
+* [#13](https://github.com/opengeospatial/ets-wcs11/issues/13) - Master is not building due to wrong version of dependency
 
 ## 1.6 (2016-01-29)
 * [#7](https://github.com/opengeospatial/ets-wcs11/issues/7) - Error - cannot find declaration of element Capabilities
