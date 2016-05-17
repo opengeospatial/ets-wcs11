@@ -4326,7 +4326,6 @@
             <xsl:if test="$http-method = 'GET'">
               <ctl:param name="service">WCS</ctl:param>
               <ctl:param name="request">DescribeCoverage</ctl:param>
-	      <ctl:param name="version">1.1.1</ctl:param>
               <ctl:param name="identifiers">
                 <xsl:value-of select="$identifier1"/>
               </ctl:param>
