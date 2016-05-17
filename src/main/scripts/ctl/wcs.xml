@@ -3140,10 +3140,9 @@
         </xsl:if>
         <xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/@xlink:href)">
           <ctl:message/>
-          <ctl:message>Test failed because an element is missing from the response.</ctl:message>
+          <ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
           <ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/@xlink:href</ctl:message>
           <ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Operation'][@name='GetCapabilities']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/@xlink:href"/></ctl:message>
-          <ctl:fail/>
         </xsl:if>
       </ctl:code>
     </ctl:test>
