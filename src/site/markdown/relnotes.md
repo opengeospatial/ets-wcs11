@@ -1,5 +1,9 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.8 (2016-06-02)
+* [#15](https://github.com/opengeospatial/ets-wcs11/issues/15) - mistaken assumption that HTTP POST endpoints are required
+* [#16](https://github.com/opengeospatial/ets-wcs11/issues/16) - The wcs:DescribeCoverage_MissingVersion test have a version parameter
+
 ## 1.7 (2016-02-23)
 * [#4](https://github.com/opengeospatial/ets-wcs11/issues/4) - Using more than one ows:BoundingBox in coverage description breaks GetCoverage tests
 * [#2](https://github.com/opengeospatial/ets-wcs11/issues/2) - Arithmetic operator is not defined for arguments of types (xs:string, xs:string)
