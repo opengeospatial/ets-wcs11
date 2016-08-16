@@ -3470,19 +3470,24 @@
           <ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
           <ctl:fail/>
         </xsl:if>
-        <xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Identifier'])">
-          <ctl:message/>
-          <ctl:message>Test failed because an element is missing from the response.</ctl:message>
-          <ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Identifier']</ctl:message>
-          <ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Identifier']"/></ctl:message>
-          <ctl:fail/>
-        </xsl:if>
+        <xsl:for-each select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']//*[local-name()='CoverageSummary']">
+          <xsl:if test="not(./*[local-name()='Identifier']) and not(./*[local-name()='CoverageSummary'])">
+            <ctl:message/>
+            <ctl:message>Test failed because an element is missing from the response.</ctl:message>
+            <ctl:message>extraction is ./*[local-name()='Identifier'] and ./*[local-name()='CoverageSummary']</ctl:message>
+            <ctl:message>for each $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']//*[local-name()='CoverageSummary'] </ctl:message>
+            <ctl:message>response-extract is <xsl:value-of select="./*[local-name()='Identifier']"/> and ./*[local-name()='CoverageSummary']</ctl:message>
+            <ctl:fail/>
+          </xsl:if>
+        </xsl:for-each>
+        <!--
         <xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']//*[local-name()='CoverageSummary'])">
           <ctl:message/>
           <ctl:message>Could not extract an element from the response, but this is not a failure.</ctl:message>
           <ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']//*[local-name()='CoverageSummary']</ctl:message>
           <ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']//*[local-name()='CoverageSummary']"/></ctl:message>
         </xsl:if>
+        -->
       </ctl:code>
     </ctl:test>
     <ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Identifier_XML">
