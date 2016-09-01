@@ -1,5 +1,9 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.9 (2016-09-01)
+* [#19](https://github.com/opengeospatial/ets-wcs11/issues/19) - xml:lang attribute not accepted in ExceptionReport element
+* [#21](https://github.com/opengeospatial/ets-wcs11/issues/21) - fails if first coverage has no Identifier
+
 ## 1.8 (2016-06-02)
 * [#15](https://github.com/opengeospatial/ets-wcs11/issues/15) - mistaken assumption that HTTP POST endpoints are required
 * [#16](https://github.com/opengeospatial/ets-wcs11/issues/16) - The wcs:DescribeCoverage_MissingVersion test have a version parameter
