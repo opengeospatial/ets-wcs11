@@ -49,8 +49,6 @@ http://schemas.opengis.net/wcs/1.1.1
 
 ## Schemas
 The schemas for ows can be found at <http://schemas.opengis.net/ows/1.1.0>.
-Note that owsExceptionReport as published does not validate. For these tests,
-the xml:lang attribute has been removed.
 The schemas for wcs do not validate and are not published on
 <http://schemas.opengis.net/wcs>. Instead they can be found here:
 [wcs111.zip](wcs111.zip).
