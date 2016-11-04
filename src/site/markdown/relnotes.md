@@ -1,5 +1,8 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.10 (2016-11-04)
+* [#20](https://github.com/opengeospatial/ets-wcs11/issues/20) - wcs:GetCapabilities_AcceptVersions_0.0.0 test is faulty
+
 ## 1.9 (2016-09-01)
 * [#19](https://github.com/opengeospatial/ets-wcs11/issues/19) - xml:lang attribute not accepted in ExceptionReport element
 * [#21](https://github.com/opengeospatial/ets-wcs11/issues/21) - fails if first coverage has no Identifier
