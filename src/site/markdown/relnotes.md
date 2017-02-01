@@ -1,5 +1,9 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.11 (2017-02-01)
+* [#26](https://github.com/opengeospatial/ets-wcs11/issues/26) - Several tests fail as syntax for RangeSubset is erroneous
+* [#27](https://github.com/opengeospatial/ets-wcs11/issues/27) - Several tests fail due to a InvocationTargetException
+
 ## 1.10 (2016-11-04)
 * [#20](https://github.com/opengeospatial/ets-wcs11/issues/20) - wcs:GetCapabilities_AcceptVersions_0.0.0 test is faulty
 
