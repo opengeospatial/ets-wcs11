@@ -4125,6 +4125,7 @@
             <ctlp:XMLValidatingParser>
               <ctlp:schemas>
                 <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+                <ctlp:schema type="resource">xsd/ogc/ows/2.0.2/owsExceptionReport.xsd</ctlp:schema>
               </ctlp:schemas>
             </ctlp:XMLValidatingParser>
           </ctl:request>
