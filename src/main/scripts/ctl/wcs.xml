@@ -46,7 +46,14 @@
             <ctl:param name="request">DescribeCoverage</ctl:param>
             <ctl:param name="version">1.1.1</ctl:param>
             <ctl:param name="identifiers">
-              <xsl:value-of select="concat($identifier1, ',', $identifier2, ',', $identifier3)"/>
+              <xsl:choose>
+                <xsl:when test="$identifier3 != ''">
+                  <xsl:value-of select="concat($identifier1, ',', $identifier2, ',', $identifier3)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="concat($identifier1, ',', $identifier2)"/>
+                </xsl:otherwise>
+              </xsl:choose>
             </ctl:param>
           </xsl:when>
           <xsl:otherwise>
@@ -58,9 +65,11 @@
                 <Identifier>
                   <xsl:value-of select="$identifier2"/>
                 </Identifier>
-                <Identifier>
-                  <xsl:value-of select="$identifier3"/>
-                </Identifier>
+                <xsl:if test="$identifier3 != ''">
+                  <Identifier>
+                    <xsl:value-of select="$identifier3"/>
+                  </Identifier>
+                </xsl:if>
               </DescribeCoverage>
             </ctl:body>
           </xsl:otherwise>
