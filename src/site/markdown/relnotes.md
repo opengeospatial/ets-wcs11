@@ -1,5 +1,9 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.12 (2017-05-10)
+* [#29](https://github.com/opengeospatial/ets-wcs11/issues/29) - wcs:DescribeCoverage_Response_InterpolationMethods test is faulty
+* [#31](https://github.com/opengeospatial/ets-wcs11/issues/31) - wcs:DescribeCoverage_MissingVersion test is faulty
+
 ## 1.11 (2017-02-01)
 * [#26](https://github.com/opengeospatial/ets-wcs11/issues/26) - Several tests fail as syntax for RangeSubset is erroneous
 * [#27](https://github.com/opengeospatial/ets-wcs11/issues/27) - Several tests fail due to a InvocationTargetException
