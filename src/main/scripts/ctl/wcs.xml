@@ -4145,7 +4145,7 @@
       <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a missing version
            parameter is submitted, the response is valid XML that validates
-           against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+           against the OWS Common 1.1.0 or 2.0.2 ExceptionReport schema.</ctl:assertion>
       <ctl:comment xmlns="">Table 41. DescribeCoverage Missing Version</ctl:comment>
       <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
       <ctl:code>
@@ -4190,6 +4190,7 @@
             <ctlp:XMLValidatingParser>
               <ctlp:schemas>
                 <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+                <ctlp:schema type="resource">xsd/ogc/ows/2.0.2/owsExceptionReport.xsd</ctlp:schema>
               </ctlp:schemas>
             </ctlp:XMLValidatingParser>
           </ctl:request>
