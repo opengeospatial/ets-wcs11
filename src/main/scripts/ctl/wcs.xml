@@ -204,7 +204,7 @@
     </ctl:code>
   </ctl:test>
   <ctl:package>
-    <ctl:test xmlns="" name="wcs:GetCapabilities-main">
+    <ctl:test xmlns="" name="wcs:GetCapabilities-main" isConformanceClass="true" isBasic="true">
       <ctl:param name="url"/>
       <ctl:assertion>All assertions for "GetCapabilities" conformance are satisfied.</ctl:assertion>
       <ctl:comment>Test driver for the GetCapabilities module.</ctl:comment>
@@ -3369,7 +3369,7 @@
     </ctl:test>
   </ctl:package>
   <ctl:package>
-    <ctl:test xmlns="" name="wcs:DescribeCoverage-main">
+    <ctl:test xmlns="" name="wcs:DescribeCoverage-main" isConformanceClass="true" isBasic="true">
       <ctl:param name="url"/>
       <ctl:assertion>All assertions for "DescribeCoverage" conformance are satisfied.</ctl:assertion>
       <ctl:comment>Test driver for the DescribeCoverage module.</ctl:comment>
@@ -4752,7 +4752,7 @@
     </ctl:test>
   </ctl:package>
   <ctl:package>
-    <ctl:test xmlns="" name="wcs:GetCoverage-main">
+    <ctl:test xmlns="" name="wcs:GetCoverage-main" isConformanceClass="true" isBasic="true">
       <ctl:param name="url"/>
       <ctl:assertion>All assertions for "GetCoverage" conformance are satisfied.</ctl:assertion>
       <ctl:comment>Test driver for the GetCoverage module.</ctl:comment>
