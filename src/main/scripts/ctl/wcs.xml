@@ -83,12 +83,12 @@
       </ctl:request>
     </ctl:code>
   </ctl:function>
-  <ctl:function name="wcs:select-identifire">
+  <ctl:function name="wcs:select-identifier">
     <ctl:param name="result1"/>
-    <ctl:param name="identifire_no"/>
+    <ctl:param name="identifier_no"/>
     <ctl:code>
       <xsl:variable name="identifiers" select="$result1/*[local-name()='Capabilities']/*[local-name()='Contents']//*[local-name()='CoverageSummary']/child::*[local-name()='Identifier']" />
-      <xsl:value-of select="$identifiers[$identifire_no]" />
+      <xsl:value-of select="$identifiers[$identifier_no]" />
     </ctl:code>
   </ctl:function>
   <ctl:function name="wcs:describe-coverage-minimal-request">
@@ -278,21 +278,21 @@
           <xsl:value-of select="$result1/*[local-name()='Capabilities'] and not($result1/*[local-name()='Capabilities']/*[local-name()='ServiceProvider'])"/>
         </xsl:variable>
         <xsl:variable name="identifier1">
-          <ctl:call-function name="wcs:select-identifire">
+          <ctl:call-function name="wcs:select-identifier">
             <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifire_no" select="1"/>
+            <ctl:with-param name="identifier_no" select="1"/>
           </ctl:call-function>
         </xsl:variable>
         <xsl:variable name="identifier2">
-          <ctl:call-function name="wcs:select-identifire">
+          <ctl:call-function name="wcs:select-identifier">
             <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifire_no" select="2"/>
+            <ctl:with-param name="identifier_no" select="2"/>
           </ctl:call-function>
         </xsl:variable>
         <xsl:variable name="identifier3">
-          <ctl:call-function name="wcs:select-identifire">
+          <ctl:call-function name="wcs:select-identifier">
             <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifire_no" select="3"/>
+            <ctl:with-param name="identifier_no" select="3"/>
           </ctl:call-function>
         </xsl:variable>
         <xsl:if test="string-length($version-number) = 0 and string-length($url-get) = 0 and string-length($identifier1) = 0">
@@ -3451,21 +3451,21 @@
           <xsl:value-of select="$result1/*[local-name()='Capabilities'] and not($result1/*[local-name()='Capabilities']/*[local-name()='ServiceProvider'])"/>
         </xsl:variable>
         <xsl:variable name="identifier1">
-          <ctl:call-function name="wcs:select-identifire">
+          <ctl:call-function name="wcs:select-identifier">
             <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifire_no" select="1"/>
+            <ctl:with-param name="identifier_no" select="1"/>
           </ctl:call-function>
         </xsl:variable>
         <xsl:variable name="identifier2">
-          <ctl:call-function name="wcs:select-identifire">
+          <ctl:call-function name="wcs:select-identifier">
             <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifire_no" select="2"/>
+            <ctl:with-param name="identifier_no" select="2"/>
           </ctl:call-function>
         </xsl:variable>
         <xsl:variable name="identifier3">
-          <ctl:call-function name="wcs:select-identifire">
+          <ctl:call-function name="wcs:select-identifier">
             <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifire_no" select="3"/>
+            <ctl:with-param name="identifier_no" select="3"/>
           </ctl:call-function>
         </xsl:variable>
         <xsl:variable name="multipleIdentifiersAvailable">
@@ -4843,21 +4843,21 @@
           <xsl:value-of select="$result1/*[local-name()='Capabilities'] and not($result1/*[local-name()='Capabilities']/*[local-name()='ServiceProvider'])"/>
         </xsl:variable>
         <xsl:variable name="identifier1">
-          <ctl:call-function name="wcs:select-identifire">
+          <ctl:call-function name="wcs:select-identifier">
             <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifire_no" select="1"/>
+            <ctl:with-param name="identifier_no" select="1"/>
           </ctl:call-function>
         </xsl:variable>
         <xsl:variable name="identifier2">
-          <ctl:call-function name="wcs:select-identifire">
+          <ctl:call-function name="wcs:select-identifier">
             <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifire_no" select="2"/>
+            <ctl:with-param name="identifier_no" select="2"/>
           </ctl:call-function>
         </xsl:variable>
         <xsl:variable name="identifier3">
-          <ctl:call-function name="wcs:select-identifire">
+          <ctl:call-function name="wcs:select-identifier">
             <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifire_no" select="3"/>
+            <ctl:with-param name="identifier_no" select="3"/>
           </ctl:call-function>
         </xsl:variable>
         <xsl:if test="string-length($version-number) = 0 and string-length($url-get) = 0 and string-length($identifier1) = 0">
