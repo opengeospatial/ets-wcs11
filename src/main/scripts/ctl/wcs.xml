@@ -3516,8 +3516,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3530,8 +3528,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3555,8 +3551,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3569,8 +3563,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3593,9 +3585,6 @@
               <ctl:call-test xmlns="" name="wcs:DescribeCoverage_MissingIdentifier">
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
-                <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3607,9 +3596,6 @@
               <ctl:call-test xmlns="" name="wcs:DescribeCoverage_MissingIdentifier">
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
-                <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3671,9 +3657,6 @@
               <ctl:call-test xmlns="" name="wcs:DescribeCoverage_EmptyIdentifier">
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
-                <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3685,9 +3668,6 @@
               <ctl:call-test xmlns="" name="wcs:DescribeCoverage_EmptyIdentifier">
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
-                <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3710,9 +3690,6 @@
               <ctl:call-test xmlns="" name="wcs:DescribeCoverage_BogusIdentifier">
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
-                <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3724,9 +3701,6 @@
               <ctl:call-test xmlns="" name="wcs:DescribeCoverage_BogusIdentifier">
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
-                <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3750,8 +3724,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -3764,8 +3736,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -4102,8 +4072,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with only mandatory
            parameters is submitted, the response is valid XML that validates
            against the WCS 1.1.1 DescribeCoverage schema.</ctl:assertion>
@@ -4167,8 +4135,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a missing version
            parameter is submitted, the response is valid XML that validates
            against the OWS Common 1.1.0 or 2.0.2 ExceptionReport schema.</ctl:assertion>
@@ -4230,9 +4196,6 @@
     <ctl:test xmlns="" name="wcs:DescribeCoverage_MissingIdentifier">
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
-      <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a missing
            identifier parameter is submitted, the response is valid XML that
            validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
@@ -4356,9 +4319,6 @@
     <ctl:test xmlns="" name="wcs:DescribeCoverage_EmptyIdentifier">
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
-      <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with an empty
            identifier parameter is submitted, the response is valid XML that
            validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
@@ -4418,9 +4378,6 @@
     <ctl:test xmlns="" name="wcs:DescribeCoverage_BogusIdentifier">
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
-      <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a bogus identifier
            parameter is submitted, the response is valid XML that validates
            against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
@@ -4481,8 +4438,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a valid identifier
            and a bogus identifier parameter is submitted, the response is valid
            XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
@@ -4942,8 +4897,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -4956,8 +4909,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -4981,8 +4932,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -4995,8 +4944,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5020,8 +4967,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5034,8 +4979,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5059,8 +5002,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5073,8 +5014,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5098,8 +5037,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5112,8 +5049,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5137,8 +5072,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5151,8 +5084,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5176,8 +5107,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5190,8 +5119,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5215,8 +5142,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5229,8 +5154,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5254,8 +5177,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5268,8 +5189,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5293,8 +5212,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5307,8 +5224,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5352,8 +5267,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5366,8 +5279,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5411,8 +5322,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5425,8 +5334,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5470,8 +5377,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5484,8 +5389,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5529,8 +5432,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5543,8 +5444,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5588,8 +5487,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5602,8 +5499,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5647,8 +5542,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5661,8 +5554,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5706,8 +5597,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5720,8 +5609,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5765,8 +5652,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5779,8 +5664,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5804,8 +5687,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5818,8 +5699,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5863,8 +5742,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5877,8 +5754,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5902,8 +5777,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5916,8 +5789,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5941,8 +5812,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5955,8 +5824,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5980,8 +5847,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -5994,8 +5859,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6019,8 +5882,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6033,8 +5894,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6058,8 +5917,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6072,8 +5929,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6097,8 +5952,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6111,8 +5964,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6136,8 +5987,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6150,8 +5999,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6175,8 +6022,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6189,8 +6034,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6214,8 +6057,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6228,8 +6069,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6253,8 +6092,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6267,8 +6104,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6292,8 +6127,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6306,8 +6139,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6351,8 +6182,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6396,8 +6225,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6421,8 +6248,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6446,8 +6271,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6471,8 +6294,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6496,8 +6317,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6521,8 +6340,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6546,8 +6363,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6571,8 +6386,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6585,8 +6398,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6610,8 +6421,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6624,8 +6433,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6649,8 +6456,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6663,8 +6468,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6688,8 +6491,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6702,8 +6503,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6727,8 +6526,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6741,8 +6538,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6766,8 +6561,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6780,8 +6573,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6805,8 +6596,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6819,8 +6608,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6987,8 +6774,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing identifier parameter is submitted, the response is valid XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
       <ctl:comment xmlns="">Table 55. GetCoverage Missing Identifier</ctl:comment>
       <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 10.2.1.1 Tables 21, 22  and 23 and 10.3.2 Table 28.">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
@@ -7112,8 +6897,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with an empty identifier
            parameter is submitted, the response is valid XML that validates
            against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
@@ -7240,8 +7023,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus identifier
            parameter is submitted, the response is valid XML that validates
            against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
@@ -7368,8 +7149,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing BoundingBox
            parameter is submitted, the response is valid XML that validates
            against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
@@ -7457,8 +7236,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox parameter
            which totally surrounds the CoverageDescription BoundingBox is
            submitted, the response is not an exception.</ctl:assertion>
@@ -7613,8 +7390,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox
            parameter which is totally inside the CoverageDescription BoundingBox
            is submitted, the response is not an exception.</ctl:assertion>
@@ -7769,8 +7544,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox
            parameter which overlaps the CoverageDescription BoundingBox is
            submitted, the response is not an exception.</ctl:assertion>
@@ -7925,8 +7698,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox
            parameter with coordinate values which are out of range is submitted,
            the response is not an exception.</ctl:assertion>
@@ -8077,8 +7848,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox
            parameter which is totally outside and not overlapping the
            CoverageDescription BoundingBox is submitted, the response may or may
@@ -8218,8 +7987,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a BoundingBox
            parameter with coordinate values which span the antimeridian is
            submitted, the response is not an exception.</ctl:assertion>
@@ -8515,8 +8282,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with an early TimePosition
            parameter is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 66. GetCoverage TemporalSubset TimePosition Early</ctl:comment>
@@ -8672,8 +8437,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a late TimePosition
            parameter is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 67. GetCoverage TemporalSubset TimePosition Late</ctl:comment>
@@ -8829,8 +8592,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with TimePeriod BeginTime
            and EndTime parameters is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 68. GetCoverage TemporalSubset TimePeriod</ctl:comment>
@@ -8995,8 +8756,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod with
            resolution is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 69. GetCoverage TemporalSubset TimePeriod With Resolution</ctl:comment>
@@ -9153,8 +8912,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod with
            resolution and frame is submitted, the response
            is not an exception.</ctl:assertion>
@@ -9312,8 +9069,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod but just
            a BeginTime is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 71. GetCoverage TemporalSubset TimePeriod BeginTime Only</ctl:comment>
@@ -9447,8 +9202,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePeriod but
            just an EndTime is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 72. GetCoverage TemporalSubset TimePeriod EndTime Only</ctl:comment>
@@ -9582,8 +9335,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a RangeSubset
            Identifier is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 73. GetCoverage RangeSubset Identifier</ctl:comment>
@@ -9736,8 +9487,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with RangeSubset
            Identifiers is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 74. GetCoverage RangeSubset Multiple Identifiers</ctl:comment>
@@ -9898,8 +9647,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a repeated RangeSubset
            Identifier is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 75. GetCoverage RangeSubset Repeated Identifiers</ctl:comment>
@@ -10032,8 +9779,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus RangeSubset
            Identifier is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 76. GetCoverage RangeSubset Bogus Identifier</ctl:comment>
@@ -10160,8 +9905,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with one valid RangeSubset
            Identifier and one bogus Identifier is submitted,
            the response is an exception.</ctl:assertion>
@@ -10293,8 +10036,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with an InterpolationMethod
            is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 78. GetCoverage RangeSubset InterpolationMethod</ctl:comment>
@@ -10451,8 +10192,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a missing
            InterpolationMethod is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 79. GetCoverage RangeSubset InterpolationMethod Missing</ctl:comment>
@@ -10584,8 +10323,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus
            InterpolationMethod is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 80. GetCoverage RangeSubset InterpolationMethod Bogus</ctl:comment>
@@ -10717,8 +10454,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and
            one Axis Key is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 81. GetCoverage RangeSubset Axis Identifier One Key</ctl:comment>
@@ -10881,8 +10616,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and
            some Axis Keys is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 82. GetCoverage RangeSubset Axis Identifier Some Keys</ctl:comment>
@@ -11049,8 +10782,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and
            all its Axis Keys is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 83. GetCoverage RangeSubset Axis Identifier All Keys</ctl:comment>
@@ -11221,8 +10952,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and
            no Axis Key is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 84. GetCoverage RangeSubset Axis Identifier No Key</ctl:comment>
@@ -11359,8 +11088,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with an Axis Identifier and
            a bogus Axis Key is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 85. GetCoverage RangeSubset Axis Identifier Bogus Key</ctl:comment>
@@ -11498,8 +11225,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a colon
            between Field Identifiers is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 86. GetCoverage RangeSubset KVP Syntax Colon Between Field Identifiers</ctl:comment>
@@ -11616,8 +11341,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a comma
            between Field Identifiers is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 87. GetCoverage RangeSubset KVP Syntax Comma Between Field Identifiers</ctl:comment>
@@ -11734,8 +11457,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a semicolon
            between Field Identifier And InterpolationMethod is submitted,
            the response is an exception.</ctl:assertion>
@@ -11851,8 +11572,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a semicolon
            between Axis Identifiers is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 89. GetCoverage RangeSubset KVP Syntax Semicolon Between Axis Identifiers</ctl:comment>
@@ -11970,8 +11689,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a semicolon
            between Axis Keys is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 90. GetCoverage RangeSubset KVP Syntax Semicolon Between Axis Keys</ctl:comment>
@@ -12088,8 +11805,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a missing
            opening square bracket before the axis identifier is submitted,
            the response is an exception.</ctl:assertion>
@@ -12206,8 +11921,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a missing
            opening square bracket before the axis key is submitted,
            the response is an exception.</ctl:assertion>
@@ -12324,8 +12037,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request using KVP with a missing
            closing square bracket is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 93. GetCoverage RangeSubset KVP Syntax Missing Closing Square Bracket</ctl:comment>
@@ -12441,8 +12152,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a format
            is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 94. GetCoverage Formats</ctl:comment>
@@ -12595,8 +12304,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a bogus format
            is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 95. GetCoverage Bogus Format</ctl:comment>
@@ -12723,8 +12430,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with an empty string for
            the format is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 96. GetCoverage Empty Format</ctl:comment>
@@ -12851,8 +12556,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with the format missing
            is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 97. GetCoverage Missing Format</ctl:comment>
@@ -12981,8 +12684,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a store parameter set
            to true is submitted, the response is an exception or not depending
            on the capabilities.</ctl:assertion>
@@ -13138,8 +12839,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a store parameter
            set to false is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 99. GetCoverage Store False</ctl:comment>
@@ -13293,8 +12992,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a store parameter
            set to a bogus value is submitted, the response is an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 100. GetCoverage Store Bogus</ctl:comment>
