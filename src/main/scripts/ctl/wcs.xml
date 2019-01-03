@@ -4811,18 +4811,6 @@
             <ctl:with-param name="identifier_no" select="1"/>
           </ctl:call-function>
         </xsl:variable>
-        <xsl:variable name="identifier2">
-          <ctl:call-function name="wcs:select-identifier">
-            <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifier_no" select="2"/>
-          </ctl:call-function>
-        </xsl:variable>
-        <xsl:variable name="identifier3">
-          <ctl:call-function name="wcs:select-identifier">
-            <ctl:with-param name="result1" select="$result1"/>
-            <ctl:with-param name="identifier_no" select="3"/>
-          </ctl:call-function>
-        </xsl:variable>
         <xsl:if test="string-length($version-number) = 0 and string-length($url-get) = 0 and string-length($identifier1) = 0">
           <ctl:message>The server seems to have a problem with handling the GetCapabilities sections parameter. No tests will be performed.</ctl:message>
           <ctl:fail/>
@@ -4842,8 +4830,6 @@
         </xsl:if>
         <ctl:message select="concat('store supported is ', $store-supported = 'true', '.')"/>
         <ctl:message select="concat('Identifier1 is ', $identifier1, '.')"/>
-        <ctl:message select="concat('Identifier2 is ', $identifier2, '.')"/>
-        <ctl:message select="concat('Identifier3 is ', $identifier3, '.')"/>
         <xsl:variable name="MinimalUpdateSequenceValue">0</xsl:variable>
         <xsl:variable name="MaximalUpdateSequenceValue">0</xsl:variable>
         <xsl:variable name="BogusUpdateSequenceValue">0</xsl:variable>
@@ -4866,8 +4852,6 @@
                 <ctl:with-param name="url" select="$url-get"/>
                 <ctl:with-param name="http-method" select="$http-get"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -4880,8 +4864,6 @@
                 <ctl:with-param name="url" select="$url-xml"/>
                 <ctl:with-param name="http-method" select="$http-xml"/>
                 <ctl:with-param name="identifier1" select="$identifier1"/>
-                <ctl:with-param name="identifier2" select="$identifier2"/>
-                <ctl:with-param name="identifier3" select="$identifier3"/>
               </ctl:call-test>
             </xsl:when>
             <xsl:otherwise>
@@ -6629,8 +6611,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with only mandatory parameters is submitted, the response is not an exception.</ctl:assertion>
       <ctl:comment xmlns="">Table 54. GetCoverage Minimal Request</ctl:comment>
       <ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 10.2.1.1 Tables 21, 22 and 23.">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
@@ -8127,8 +8107,6 @@
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
-      <ctl:param name="identifier2"/>
-      <ctl:param name="identifier3"/>
       <ctl:assertion xmlns="">Verify that when a GetCoverage request with a TimePosition
            parameter from the CoverageDescription is submitted,
            the response is not an exception.</ctl:assertion>
