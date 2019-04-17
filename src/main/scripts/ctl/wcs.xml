@@ -11,7 +11,7 @@
         <ctl:method>GET</ctl:method>
         <ctl:param name="service">WCS</ctl:param>
         <ctl:param name="request">GetCapabilities</ctl:param>
-	<ctl:param name="version">1.1.1</ctl:param>
+        <ctl:param name="version">1.1.1</ctl:param>
         <ctl:param name="acceptversions">1.1.1</ctl:param>
         <ctlp:XMLValidatingParser>
           <ctlp:schemas>
@@ -135,6 +135,10 @@
     <ctl:return>Returns the response from a WCS DescribeCoverage response with interpolation methods.</ctl:return>
     <ctl:code/>
   </ctl:function>
+  <ctl:function name="wcs:encode">
+      <ctl:param name="s">String to encode</ctl:param>
+      <ctl:java class="java.net.URLEncoder" method="encode"/>
+   </ctl:function>
   <ctl:suite name="wcs:suite">
     <ctl:title>Web Coverage Service (WCS) 1.1.1</ctl:title>
     <ctl:description>Validates that a WCS server meets the requirements in the specification.</ctl:description>
@@ -4770,7 +4774,7 @@
             <ctl:method>GET</ctl:method>
             <ctl:param name="service">WCS</ctl:param>
             <ctl:param name="request">GetCapabilities</ctl:param>
-	    <ctl:param name="version">1.1.1</ctl:param>
+       <ctl:param name="version">1.1.1</ctl:param>
             <ctl:param name="sections">OperationsMetadata,Contents</ctl:param>
             <ctlp:XMLValidatingParser>
               <ctlp:schemas>
@@ -5140,7 +5144,8 @@
           </xsl:variable>
           <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
           <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
-          <xsl:choose>
+          <!-- The test removed with reference to issue #45. -->
+          <!-- <xsl:choose>
             <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
               <ctl:call-test xmlns="" name="wcs:GetCoverage_BoundingBox_OutOfRangeCoordinates">
                 <ctl:with-param name="url" select="$url-get"/>
@@ -5163,7 +5168,7 @@
             <xsl:otherwise>
               <ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'BoundingBox_OutOfRangeCoordinates', ' with POST XML encoding skipped.')"/>
             </xsl:otherwise>
-          </xsl:choose>
+          </xsl:choose> -->
           <xsl:variable name="UpdateSequenceOk">
             <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('OutsideBoundingBox', 'UpdateSequence'))"/>
           </xsl:variable>
@@ -7696,7 +7701,8 @@
         </xsl:choose>
       </ctl:code>
     </ctl:test>
-    <ctl:test xmlns="" name="wcs:GetCoverage_BoundingBox_OutOfRangeCoordinates">
+    <!-- The test removed with reference to issue #45. -->
+    <!-- <ctl:test xmlns="" name="wcs:GetCoverage_BoundingBox_OutOfRangeCoordinates">
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
@@ -7845,7 +7851,7 @@
           </xsl:otherwise>
         </xsl:choose>
       </ctl:code>
-    </ctl:test>
+    </ctl:test> -->
     <ctl:test xmlns="" name="wcs:GetCoverage_OutsideBoundingBox">
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
@@ -9419,13 +9425,15 @@
                   </xsl:choose>
                 </ctl:method>
                 <xsl:choose>
-                  <xsl:when test="$http-method = 'GET'"><ctl:param name="service">WCS</ctl:param><ctl:param name="request">GetCoverage</ctl:param><ctl:param name="version">1.1.1</ctl:param><ctl:param name="identifier">
-                      <xsl:value-of select="$identifier1"/>
-                    </ctl:param><ctl:param name="BoundingBox">
-                      <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="$FieldIdentifier"/></ctl:param><ctl:param name="Format">
-                      <xsl:value-of select="$SupportedFormat"/>
-                    </ctl:param></xsl:when>
+                  <xsl:when test="$http-method = 'GET'">
+              <ctl:param name="service">WCS</ctl:param>
+              <ctl:param name="request">GetCoverage</ctl:param>
+              <ctl:param name="version">1.1.1</ctl:param>
+              <ctl:param name="identifier"><xsl:value-of select="$identifier1"/></ctl:param>
+              <ctl:param name="BoundingBox"><xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/></ctl:param>
+              <ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode($FieldIdentifier)"/></ctl:param>
+              <ctl:param name="Format"><xsl:value-of select="$SupportedFormat"/></ctl:param>
+              </xsl:when>
                   <xsl:otherwise>
                     <ctl:body>
                       <GetCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ows11="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service="WCS" version="1.1.1"><ows11:Identifier>
@@ -9576,9 +9584,13 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:if test="string-length($FieldIdentifier2) = 0">
+                    </ctl:param>
+               <ctl:param name="RangeSubset">
+               <xsl:if test="string-length($FieldIdentifier2) = 0">
                         <ctl:message>FieldIdentifier2 is not found. Need to skip test.</ctl:message>
-                      </xsl:if><xsl:value-of select="concat($FieldIdentifier1, ',', $FieldIdentifier2)"/></ctl:param><ctl:param name="Format">
+                    </xsl:if>
+                 <xsl:value-of select="wcs:encode(concat($FieldIdentifier1, ',', $FieldIdentifier2))"/></ctl:param>
+                 <ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -9735,7 +9747,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier, ',', $FieldIdentifier)"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier, ',', $FieldIdentifier))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -9994,7 +10006,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier, ',Bogus')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier, ',Bogus'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -10125,7 +10137,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier,':',$InterpolationMethod)"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier,':',$InterpolationMethod))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -10281,7 +10293,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier, ':')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier, ':'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -10412,7 +10424,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier, ':Bogus')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier, ':Bogus'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -10544,7 +10556,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier, '[', $AxisIdentifier, '[', $AxisKey, ']]')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier, '[', $AxisIdentifier, '[', $AxisKey, ']]'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -10707,7 +10719,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier, '[', $AxisIdentifier, '[', $AxisKey1, ',', $AxisKey2, ']]')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier, '[', $AxisIdentifier, '[', $AxisKey1, ',', $AxisKey2, ']]'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -10874,7 +10886,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier, '[', $AxisIdentifier, '[', $AxisKey1, ',', $AxisKey2, ',', $AxisKey3, ']]')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier, '[', $AxisIdentifier, '[', $AxisKey1, ',', $AxisKey2, ',', $AxisKey3, ']]'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -11042,7 +11054,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier, '[', $AxisIdentifier, ']')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier, '[', $AxisIdentifier, ']'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -11178,7 +11190,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier, '[', $AxisIdentifier, '[Bogus]]')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier, '[', $AxisIdentifier, '[Bogus]]'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise>
@@ -11316,7 +11328,7 @@
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
                     </ctl:param><ctl:param name="RangeSubset"><xsl:if test="string-length($FieldIdentifier2) = 0">
                         <ctl:message>FieldIdentifier2 is not found. Need to skip test.</ctl:message>
-                      </xsl:if><xsl:value-of select="concat($FieldIdentifier1,':',$FieldIdentifier2)"/></ctl:param><ctl:param name="Format">
+                      </xsl:if><xsl:value-of select="wcs:encode(concat($FieldIdentifier1,':',$FieldIdentifier2))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise/>
@@ -11432,7 +11444,7 @@
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
                     </ctl:param><ctl:param name="RangeSubset"><xsl:if test="string-length($FieldIdentifier2) = 0">
                         <ctl:message>FieldIdentifier2 is not found. Need to skip test.</ctl:message>
-                      </xsl:if><xsl:value-of select="concat($FieldIdentifier1,',',$FieldIdentifier2)"/></ctl:param><ctl:param name="Format">
+                      </xsl:if><xsl:value-of select="wcs:encode(concat($FieldIdentifier1,',',$FieldIdentifier2))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise/>
@@ -11547,7 +11559,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier1,';',$InterpolationMethod)"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier1,';',$InterpolationMethod))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise/>
@@ -11664,7 +11676,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier,'[',$AxisIdentifier1,'[',$AxisKey1,']',';',$AxisIdentifier2,'[',$AxisKey2,']',']')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier,'[',$AxisIdentifier1,'[',$AxisKey1,']',';',$AxisIdentifier2,'[',$AxisKey2,']',']'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise/>
@@ -11780,7 +11792,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier,'[',$AxisIdentifier,'[',$AxisKey1,';',$AxisKey2,']',']')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier,'[',$AxisIdentifier,'[',$AxisKey1,';',$AxisKey2,']',']'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise/>
@@ -11896,7 +11908,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier,$AxisIdentifier,'[',$AxisKey,']',']')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier,$AxisIdentifier,'[',$AxisKey,']',']'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise/>
@@ -12012,7 +12024,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier,'[',$AxisIdentifier,$AxisKey,']',']')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier,'[',$AxisIdentifier,$AxisKey,']',']'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise/>
@@ -12127,7 +12139,7 @@
                       <xsl:value-of select="$identifier1"/>
                     </ctl:param><ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
-                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="concat($FieldIdentifier,'[',$AxisIdentifier,'[',$AxisKey,']')"/></ctl:param><ctl:param name="Format">
+                    </ctl:param><ctl:param name="RangeSubset"><xsl:value-of select="wcs:encode(concat($FieldIdentifier,'[',$AxisIdentifier,'[',$AxisKey,']'))"/></ctl:param><ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param></xsl:when>
                   <xsl:otherwise/>
