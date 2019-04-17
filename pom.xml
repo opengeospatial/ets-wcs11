@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ets-wcs11</artifactId>
   <groupId>org.opengis.cite</groupId>
   <version>1.13-SNAPSHOT</version>
 
   <name>OGC Web Coverage Service 1.1.1 - Executable Test Suite</name>
-  <description>
-  Verifies conformance of implementations to OGC Web Coverage Service 1.1.1
-  </description>
+  <description>Verifies conformance of implementations to OGC Web Coverage Service 1.1.1</description>
   <url>https://github.com/opengeospatial/ets-wcs11</url>
   <licenses>
     <license>
@@ -24,8 +22,8 @@
     <url>http://www.opengeospatial.org</url>
   </organization>
   <scm>
-    <url>https://github.com/opengeospatial/ets-wcs11</url>    
-    <connection>scm:git:https://github.com/opengeospatial/ets-wcs11.git</connection>    
+    <url>https://github.com/opengeospatial/ets-wcs11</url>
+    <connection>scm:git:https://github.com/opengeospatial/ets-wcs11.git</connection>
     <developerConnection>scm:git:git@github.com:opengeospatial/ets-wcs11.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
@@ -33,20 +31,20 @@
     <system>GitHub Issue Tracker</system>
     <url>https://github.com/opengeospatial/ets-wcs11/issues</url>
   </issueManagement>
-  
-  
+
+
   <properties>
     <ets-code>wcs</ets-code>
     <spec-version>1.1.1</spec-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <docker.teamengine.version>5.3</docker.teamengine.version>
-  </properties>  
+  </properties>
   <reporting>
     <plugins>
       <plugin>
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <version>2.7</version>
-         <reportSets>
+        <reportSets>
           <reportSet>
             <reports>
               <report>license</report>
@@ -55,18 +53,19 @@
             </reports>
           </reportSet>
         </reportSets>
-      </plugin>  
+      </plugin>
     </plugins>
-  </reporting> 
-  
- <build>
-    <plugins>  
-    
-    <plugin>
+  </reporting>
+
+  <build>
+    <plugins>
+      <plugin>
         <artifactId>maven-jar-plugin</artifactId>
-    </plugin>
-    <plugin>
+        <version>3.0.2</version>
+      </plugin>
+      <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19.1</version>
       </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -75,7 +74,7 @@
             <descriptor>src/assembly/ctl.xml</descriptor>
           </descriptors>
         </configuration>
-         <executions>
+        <executions>
           <execution>
             <phase>package</phase>
             <goals>
@@ -85,14 +84,13 @@
         </executions>
       </plugin>
       <plugin>
-          <artifactId>maven-release-plugin</artifactId>
-          
-         </plugin>
-      <plugin>     
-         <artifactId>maven-site-plugin</artifactId>
-         <version>3.4</version>
-         <configuration>
-            <relativizeDecorationLinks>false</relativizeDecorationLinks>      
+        <artifactId>maven-release-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.4</version>
+        <configuration>
+          <relativizeDecorationLinks>false</relativizeDecorationLinks>
         </configuration>
         <executions>
           <execution>
@@ -114,7 +112,7 @@
     </plugins>
     <pluginManagement>
       <plugins>
-         <plugin>
+        <plugin>
           <groupId>io.fabric8</groupId>
           <artifactId>docker-maven-plugin</artifactId>
           <version>0.28.0</version>
@@ -187,11 +185,11 @@
           </configuration>
         </plugin>
       </plugins>
-    </pluginManagement>   
+    </pluginManagement>
   </build>
-  
+
   <profiles>
-   <profile>
+    <profile>
       <id>docker</id>
       <build>
         <plugins>
@@ -225,6 +223,6 @@
           </plugin>
         </plugins>
       </build>
-    </profile>  
+    </profile>
   </profiles>
 </project>
