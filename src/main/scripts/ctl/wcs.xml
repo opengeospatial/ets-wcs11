@@ -5213,7 +5213,8 @@
           </xsl:variable>
           <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
           <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
-          <xsl:choose>
+          <!-- The test removed with reference to issue #45. -->
+          <!-- <xsl:choose>
             <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
               <ctl:call-test xmlns="" name="wcs:GetCoverage_BoundingBox_OutOfRangeCoordinates">
                 <ctl:with-param name="url" select="$url-get"/>
@@ -5240,7 +5241,7 @@
             <xsl:otherwise>
               <ctl:message xmlns="" select="concat('Test wcs:', 'GetCoverage', '_', 'BoundingBox_OutOfRangeCoordinates', ' with POST XML encoding skipped.')"/>
             </xsl:otherwise>
-          </xsl:choose>
+          </xsl:choose> -->
           <xsl:variable name="UpdateSequenceOk">
             <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('OutsideBoundingBox', 'UpdateSequence'))"/>
           </xsl:variable>
@@ -7925,7 +7926,8 @@
         </xsl:choose>
       </ctl:code>
     </ctl:test>
-    <ctl:test xmlns="" name="wcs:GetCoverage_BoundingBox_OutOfRangeCoordinates">
+    <!-- The test removed with reference to issue #45. -->
+    <!-- <ctl:test xmlns="" name="wcs:GetCoverage_BoundingBox_OutOfRangeCoordinates">
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
       <ctl:param name="identifier1"/>
@@ -8076,7 +8078,7 @@
           </xsl:otherwise>
         </xsl:choose>
       </ctl:code>
-    </ctl:test>
+    </ctl:test> -->
     <ctl:test xmlns="" name="wcs:GetCoverage_OutsideBoundingBox">
       <ctl:param name="url"/>
       <ctl:param name="http-method"/>
