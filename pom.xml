@@ -64,11 +64,9 @@
     
     <plugin>
         <artifactId>maven-jar-plugin</artifactId>
-        
     </plugin>
     <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-       
       </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -125,7 +123,7 @@
               <image>
                 <name>ogccite/${project.artifactId}</name>
                 <build>
-                  <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
+                  <dockerFileDir>${project.basedir}/src/docker</dockerFileDir>
                   <tags>
                     <tag>${project.version}-teamengine-${docker.teamengine.version}</tag>
                   </tags>
