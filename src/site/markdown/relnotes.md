@@ -1,5 +1,14 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.13 (2019-05-29)
+
+* [#47](https://github.com/opengeospatial/ets-wcs11/issues/47) - Enable Docker support
+* [#45](https://github.com/opengeospatial/ets-wcs11/issues/45) - Test wcs:GetCoverage_BoundingBox_OutOfRangeCoordinates is not covered by specification
+* [#43](https://github.com/opengeospatial/ets-wcs11/issues/43) - Invalid KVP encoding of "rangesubset" parameter
+* [#39](https://github.com/opengeospatial/ets-wcs11/issues/39) - Improve tests with multiple identifiers
+* [#35](https://github.com/opengeospatial/ets-wcs11/issues/35) - Invalid KVP parameter "Identifier" in wcs:DescribeCoverage_Response_InterpolationMethods test
+* [#34](https://github.com/opengeospatial/ets-wcs11/issues/34) - Update CTL with better information about conformance classes
+
 ## 1.12 (2017-05-10)
 * [#29](https://github.com/opengeospatial/ets-wcs11/issues/29) - wcs:DescribeCoverage_Response_InterpolationMethods test is faulty
 * [#31](https://github.com/opengeospatial/ets-wcs11/issues/31) - wcs:DescribeCoverage_MissingVersion test is faulty
