@@ -31,6 +31,20 @@
     <url>https://github.com/opengeospatial/ets-wcs11/issues</url>
   </issueManagement>
 
+  <developers>
+    <developer>
+      <name>L. Bermudez</name>
+      <url>https://github.com/bermud</url>
+    </developer>
+    <developer>
+      <name>D. Stenger</name>
+      <url>https://github.com/dstenger</url>
+    </developer>
+    <developer>
+      <name>L. Goltz</name>
+      <url>https://github.com/lgoltz</url>
+    </developer>
+  </developers>
 
   <properties>
     <ets-code>wcs</ets-code>
