@@ -8,12 +8,15 @@
    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    
     <ctl:test xmlns="" name="wcs:GetCapabilities-main" isConformanceClass="true" isBasic="true">
-      <ctl:param name="url"/>
+      <ctl:param name="Capabilities"/>
       <ctl:assertion>All assertions for "GetCapabilities" conformance are satisfied.</ctl:assertion>
       <ctl:comment>Test driver for the GetCapabilities module.</ctl:comment>
       <ctl:link xmlns="" title="1. WCS-GetCapabilities">http://www.opengeospatial.org/standards/wcs#GetCapabilities</ctl:link>
       <ctl:code>
         <ctl:comment>From the GetCapabilities, which http methods are supported and what are their URLs</ctl:comment>
+        <xsl:variable name="url">
+             <xsl:value-of select="$Capabilities//ows:OperationsMetadata/ows:Operation[@name='GetCapabilities']/ows:DCP/ows:HTTP/ows:Get/@xlink:href"/>
+               </xsl:variable>
         <xsl:variable name="result1">
           <ctl:request>
             <ctl:url>
@@ -22,7 +25,7 @@
             <ctl:method>GET</ctl:method>
             <ctl:param name="service">WCS</ctl:param>
             <ctl:param name="request">GetCapabilities</ctl:param>
-       <ctl:param name="version">1.1.1</ctl:param>
+            <ctl:param name="version">1.1.1</ctl:param>
             <ctl:param name="sections">OperationsMetadata,Contents</ctl:param>
             <ctl:param name="acceptversions">1.1.1</ctl:param>
             <ctlp:XMLValidatingParser>

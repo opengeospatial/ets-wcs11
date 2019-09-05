@@ -8,12 +8,15 @@
    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
    <ctl:test xmlns="" name="wcs:DescribeCoverage-main" isConformanceClass="true" isBasic="true">
-      <ctl:param name="url"/>
+      <ctl:param name="Capabilities"/>
       <ctl:assertion>All assertions for "DescribeCoverage" conformance are satisfied.</ctl:assertion>
       <ctl:comment>Test driver for the DescribeCoverage module.</ctl:comment>
       <ctl:link xmlns="" title="2. WCS-DescribeCoverage">http://www.opengeospatial.org/standards/wcs#DescribeCoverage</ctl:link>
       <ctl:code>
         <ctl:comment>From the GetCapabilities, which http methods are supported and what are their URLs</ctl:comment>
+        <xsl:variable name="url">
+             <xsl:value-of select="$Capabilities//ows:OperationsMetadata/ows:Operation[@name='GetCapabilities']/ows:DCP/ows:HTTP/ows:Get/@xlink:href"/>
+        </xsl:variable>
         <xsl:variable name="result1">
           <ctl:request>
             <ctl:url>

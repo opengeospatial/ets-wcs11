@@ -53,31 +53,43 @@
       <xsl:variable name="url">
         <xsl:value-of select="$form-values/values/value[@key='url']"/>
       </xsl:variable>
-      <xsl:variable name="result">
+      <xsl:variable name="Capabilities">
         <ctl:request>
-          <ctl:url>
-            <xsl:value-of select="$url"/>
-          </ctl:url>
-          <ctl:method>GET</ctl:method>
-          <ctl:param name="service">WCS</ctl:param>
-          <ctl:param name="request">GetCapabilities</ctl:param>
-	  <ctl:param name="version">1.1.1</ctl:param>
+          <xsl:choose>
+            <xsl:when test="contains($url, '?')">
+               <xsl:if test="not(empty(substring-after($url, '?')))">
+                  <ctl:url>
+                    <xsl:value-of select="$url"/>
+                  </ctl:url>
+                  <ctl:method>GET</ctl:method>
+               </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+               <ctl:url>
+                  <xsl:value-of select="$url"/>
+               </ctl:url>
+               <ctl:method>GET</ctl:method>
+               <ctl:param name="service">WCS</ctl:param>
+               <ctl:param name="request">GetCapabilities</ctl:param>
+               <ctl:param name="version">1.1.1</ctl:param>
+            </xsl:otherwise>
+          </xsl:choose>
         </ctl:request>
       </xsl:variable>
-      <xsl:if test="string-length($result)=0">
+      <xsl:if test="string-length($Capabilities)=0">
         <ctl:message select="concat('No response from URL: ', $url, '. Perhaps this is not the correct address or the server is down. No tests will be performed.')"/>
         <ctl:fail/>
       </xsl:if>
-      <xsl:if test="string-length($result) &gt; 0">
+      <xsl:if test="string-length($Capabilities) &gt; 0">
         <ctl:message select="concat('WCS 1.1.1 URL is ', $url, '.')"/>
         <ctl:call-test xmlns="" name="wcs:GetCapabilities-main">
-          <ctl:with-param name="url" select="$url"/>
+          <ctl:with-param name="Capabilities" select="$Capabilities"/>
         </ctl:call-test>
         <ctl:call-test xmlns="" name="wcs:DescribeCoverage-main">
-          <ctl:with-param name="url" select="$url"/>
+          <ctl:with-param name="Capabilities" select="$Capabilities"/>
         </ctl:call-test>
         <ctl:call-test xmlns="" name="wcs:GetCoverage-main">
-          <ctl:with-param name="url" select="$url"/>
+          <ctl:with-param name="Capabilities" select="$Capabilities"/>
         </ctl:call-test>
       </xsl:if>
     </ctl:code>
