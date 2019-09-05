@@ -1,0 +1,1377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ctl:package xmlns:ctl="http://www.occamlab.com/ctl"
+   xmlns:ctlp="http://www.occamlab.com/te/parsers" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+   xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:html="http://www.w3.org/1999/xhtml"
+   xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:saxon="http://saxon.sf.net/"
+   xmlns:tep="http://teamengine.sourceforge.net/parsers" xmlns:wcs="http://schemas.opengis.net/wcs/1.1.1"
+   xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <ctl:test xmlns="" name="wcs:DescribeCoverage-main" isConformanceClass="true" isBasic="true">
+      <ctl:param name="url"/>
+      <ctl:assertion>All assertions for "DescribeCoverage" conformance are satisfied.</ctl:assertion>
+      <ctl:comment>Test driver for the DescribeCoverage module.</ctl:comment>
+      <ctl:link xmlns="" title="2. WCS-DescribeCoverage">http://www.opengeospatial.org/standards/wcs#DescribeCoverage</ctl:link>
+      <ctl:code>
+        <ctl:comment>From the GetCapabilities, which http methods are supported and what are their URLs</ctl:comment>
+        <xsl:variable name="result1">
+          <ctl:request>
+            <ctl:url>
+              <xsl:value-of select="$url"/>
+            </ctl:url>
+            <ctl:method>GET</ctl:method>
+            <ctl:param name="service">WCS</ctl:param>
+            <ctl:param name="request">GetCapabilities</ctl:param>
+       <ctl:param name="version">1.1.1</ctl:param>
+            <ctl:param name="sections">OperationsMetadata,Contents</ctl:param>
+            <ctlp:XMLValidatingParser>
+              <ctlp:schemas>
+                <ctlp:schema type="resource">xsd/ogc/wcs/1.1.1/wcsGetCapabilities.xsd</ctlp:schema>
+                <ctlp:schema type="resource">xsd/ogc/wcs/1.1.3/wcsGetCapabilities.xsd</ctlp:schema>
+              </ctlp:schemas>
+            </ctlp:XMLValidatingParser>
+          </ctl:request>
+        </xsl:variable>
+        <xsl:variable name="version-number" select="$result1/*[local-name()='Capabilities'][@version]/@version"/>
+        <xsl:choose>
+          <xsl:when test="$version-number = '1.1.1'">
+            <ctl:message select="concat('The service metadata document version number is ', $version-number, '.')"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <ctl:message select="concat('&#xA;', ' ')"/>
+            <ctl:message select="concat('The service metadata document has version ', $version-number, ' but expected to find 1.1.1 as the highest protocol supported. See OGC 06-121r3 subclause 7.3.2.')"/>
+            <ctl:message select="concat('&#xA;', ' ')"/>
+            <ctl:fail/>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:variable name="EqualUpdateSequenceValue">
+          <xsl:value-of select="$result1/*[local-name()='Capabilities'][@updateSequence]/@updateSequence"/>
+        </xsl:variable>
+        <xsl:variable name="http-get">GET</xsl:variable>
+        <xsl:variable name="http-xml">XML</xsl:variable>
+        <xsl:variable name="http-soap">SOAP</xsl:variable>
+        <xsl:variable name="url-get">
+          <xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='DescribeCoverage']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Get']/@xlink:href"/>
+        </xsl:variable>
+        <xsl:variable name="url-xml">
+          <xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='DescribeCoverage']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/@xlink:href"/>
+        </xsl:variable>
+        <xsl:variable name="xml-supported">
+          <xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='DescribeCoverage']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/>
+        </xsl:variable>
+        <xsl:variable name="xml-supported-alternate">
+          <xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='XML'"/>
+        </xsl:variable>
+        <xsl:variable name="soap-supported">
+          <xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='DescribeCoverage']/*[local-name()='DCP']/*[local-name()='HTTP']/*[local-name()='Post']/*[local-name()='Constraint'][@name='PostEncoding']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='SOAP'"/>
+        </xsl:variable>
+        <xsl:variable name="store-supported">
+          <xsl:value-of select="$result1/*[local-name()='Capabilities']/*[local-name()='OperationsMetadata']/*[@name='GetCoverage']/*[local-name()='Parameter'][@name='store']/*[local-name()='AllowedValues']/*[local-name()='Value']/text()='True'"/>
+        </xsl:variable>
+        <xsl:variable name="sections-supported">
+          <xsl:value-of select="$result1/*[local-name()='Capabilities'] and not($result1/*[local-name()='Capabilities']/*[local-name()='ServiceProvider'])"/>
+        </xsl:variable>
+        <xsl:variable name="identifier1">
+          <ctl:call-function name="wcs:select-identifier">
+            <ctl:with-param name="result1" select="$result1"/>
+            <ctl:with-param name="identifier_no" select="1"/>
+          </ctl:call-function>
+        </xsl:variable>
+        <xsl:variable name="identifier2">
+          <ctl:call-function name="wcs:select-identifier">
+            <ctl:with-param name="result1" select="$result1"/>
+            <ctl:with-param name="identifier_no" select="2"/>
+          </ctl:call-function>
+        </xsl:variable>
+        <xsl:variable name="identifier3">
+          <ctl:call-function name="wcs:select-identifier">
+            <ctl:with-param name="result1" select="$result1"/>
+            <ctl:with-param name="identifier_no" select="3"/>
+          </ctl:call-function>
+        </xsl:variable>
+        <xsl:variable name="multipleIdentifiersAvailable">
+          <xsl:choose>
+            <xsl:when test="$identifier2 != ''">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <xsl:if test="string-length($version-number) = 0 and string-length($url-get) = 0 and string-length($identifier1) = 0">
+          <ctl:message>The server seems to have a problem with handling the GetCapabilities sections parameter. No tests will be performed.</ctl:message>
+          <ctl:fail/>
+        </xsl:if>
+        <ctl:message select="concat('The URL for KVP encoding is ', $url-get, '.')"/>
+        <ctl:message select="concat('The URL for XML encoding is ', $url-xml, '.')"/>
+        <xsl:choose>
+          <xsl:when test="$xml-supported = 'true' or $xml-supported-alternate = 'true'">
+            <ctl:message>XML encoding is supported.</ctl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <ctl:message>XML encoding is not supported.</ctl:message>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="$soap-supported = 'true'">
+          <ctl:message>No tests using SOAP encoding will be performed. The tests for SOAP encoding are not implemented.</ctl:message>
+        </xsl:if>
+        <ctl:message select="concat('Identifier1 is ', $identifier1, '.')"/>
+        <ctl:message select="concat('Identifier2 is ', $identifier2, '.')"/>
+        <ctl:message select="concat('Identifier3 is ', $identifier3, '.')"/>
+        <xsl:variable name="MinimalUpdateSequenceValue">0</xsl:variable>
+        <xsl:variable name="MaximalUpdateSequenceValue">0</xsl:variable>
+        <xsl:variable name="BogusUpdateSequenceValue">0</xsl:variable>
+        <ctl:comment>Call the test for each applicable http method with its appropriate URL</ctl:comment>
+        <xsl:if test="string-length($version-number) != 0 or string-length($url-get) != 0 or string-length($identifier1) != 0">
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MinimalRequest', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('MinimalRequest', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('MinimalRequest', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_MinimalRequest">
+                <ctl:with-param name="url" select="$url-get"/>
+                <ctl:with-param name="http-method" select="$http-get"/>
+                <ctl:with-param name="identifier1" select="$identifier1"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MinimalRequest', ' with KVP encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_MinimalRequest">
+                <ctl:with-param name="url" select="$url-xml"/>
+                <ctl:with-param name="http-method" select="$http-xml"/>
+                <ctl:with-param name="identifier1" select="$identifier1"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MinimalRequest', ' with POST XML encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MissingVersion', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('MissingVersion', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('MissingVersion', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_MissingVersion">
+                <ctl:with-param name="url" select="$url-get"/>
+                <ctl:with-param name="http-method" select="$http-get"/>
+                <ctl:with-param name="identifier1" select="$identifier1"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MissingVersion', ' with KVP encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_MissingVersion">
+                <ctl:with-param name="url" select="$url-xml"/>
+                <ctl:with-param name="http-method" select="$http-xml"/>
+                <ctl:with-param name="identifier1" select="$identifier1"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MissingVersion', ' with POST XML encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MissingIdentifier', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('MissingIdentifier', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('MissingIdentifier', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_MissingIdentifier">
+                <ctl:with-param name="url" select="$url-get"/>
+                <ctl:with-param name="http-method" select="$http-get"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MissingIdentifier', ' with KVP encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_MissingIdentifier">
+                <ctl:with-param name="url" select="$url-xml"/>
+                <ctl:with-param name="http-method" select="$http-xml"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MissingIdentifier', ' with POST XML encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('MultipleIdentifiers', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('MultipleIdentifiers', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('MultipleIdentifiers', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$multipleIdentifiersAvailable != true">
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MultipleIdentifiers', ' skipped. Requires at least two CoverageSummary elements with Identifier.')"/>
+            </xsl:when>
+            <xsl:otherwise>
+             <xsl:choose>
+               <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                 <ctl:call-test xmlns="" name="wcs:DescribeCoverage_MultipleIdentifiers">
+                   <ctl:with-param name="url" select="$url-get"/>
+                   <ctl:with-param name="http-method" select="$http-get"/>
+                   <ctl:with-param name="identifier1" select="$identifier1"/>
+                   <ctl:with-param name="identifier2" select="$identifier2"/>
+                   <ctl:with-param name="identifier3" select="$identifier3"/>
+                 </ctl:call-test>
+               </xsl:when>
+               <xsl:otherwise>
+                 <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MultipleIdentifiers', ' with KVP encoding skipped.')"/>
+               </xsl:otherwise>
+             </xsl:choose>
+             <xsl:choose>
+               <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                 <ctl:call-test xmlns="" name="wcs:DescribeCoverage_MultipleIdentifiers">
+                   <ctl:with-param name="url" select="$url-xml"/>
+                   <ctl:with-param name="http-method" select="$http-xml"/>
+                   <ctl:with-param name="identifier1" select="$identifier1"/>
+                   <ctl:with-param name="identifier2" select="$identifier2"/>
+                   <ctl:with-param name="identifier3" select="$identifier3"/>
+                 </ctl:call-test>
+               </xsl:when>
+               <xsl:otherwise>
+                 <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'MultipleIdentifiers', ' with POST XML encoding skipped.')"/>
+               </xsl:otherwise>
+             </xsl:choose>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('EmptyIdentifier', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('EmptyIdentifier', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('EmptyIdentifier', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_EmptyIdentifier">
+                <ctl:with-param name="url" select="$url-get"/>
+                <ctl:with-param name="http-method" select="$http-get"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'EmptyIdentifier', ' with KVP encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_EmptyIdentifier">
+                <ctl:with-param name="url" select="$url-xml"/>
+                <ctl:with-param name="http-method" select="$http-xml"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'EmptyIdentifier', ' with POST XML encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('BogusIdentifier', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('BogusIdentifier', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('BogusIdentifier', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_BogusIdentifier">
+                <ctl:with-param name="url" select="$url-get"/>
+                <ctl:with-param name="http-method" select="$http-get"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'BogusIdentifier', ' with KVP encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_BogusIdentifier">
+                <ctl:with-param name="url" select="$url-xml"/>
+                <ctl:with-param name="http-method" select="$http-xml"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'BogusIdentifier', ' with POST XML encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('ValidWithBogusIdentifiers', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('ValidWithBogusIdentifiers', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('ValidWithBogusIdentifiers', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_ValidWithBogusIdentifiers">
+                <ctl:with-param name="url" select="$url-get"/>
+                <ctl:with-param name="http-method" select="$http-get"/>
+                <ctl:with-param name="identifier1" select="$identifier1"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'ValidWithBogusIdentifiers', ' with KVP encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:choose>
+            <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+              <ctl:call-test xmlns="" name="wcs:DescribeCoverage_ValidWithBogusIdentifiers">
+                <ctl:with-param name="url" select="$url-xml"/>
+                <ctl:with-param name="http-method" select="$http-xml"/>
+                <ctl:with-param name="identifier1" select="$identifier1"/>
+              </ctl:call-test>
+            </xsl:when>
+            <xsl:otherwise>
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'ValidWithBogusIdentifiers', ' with POST XML encoding skipped.')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_InterpolationMethods', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('Response_InterpolationMethods', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('Response_InterpolationMethods', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$multipleIdentifiersAvailable != true">
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_InterpolationMethods', ' skipped. Requires at least two CoverageSummary elements with Identifier.')"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:choose>
+                <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_InterpolationMethods">
+                    <ctl:with-param name="url" select="$url-get"/>
+                    <ctl:with-param name="http-method" select="$http-get"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_InterpolationMethods', ' with KVP encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+              <xsl:choose>
+                <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_InterpolationMethods">
+                    <ctl:with-param name="url" select="$url-xml"/>
+                    <ctl:with-param name="http-method" select="$http-xml"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_InterpolationMethods', ' with POST XML encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:otherwise>
+          </xsl:choose>
+
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_Identifier_XML', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('Response_Identifier_XML', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('Response_Identifier_XML', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$multipleIdentifiersAvailable != true">
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_Identifier_XML', ' skipped. Requires at least two CoverageSummary elements with Identifier.')"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:choose>
+                <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_Identifier_XML">
+                    <ctl:with-param name="url" select="$url-get"/>
+                    <ctl:with-param name="http-method" select="$http-get"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_Identifier_XML', ' with KVP encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+              <xsl:choose>
+                <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_Identifier_XML">
+                    <ctl:with-param name="url" select="$url-xml"/>
+                    <ctl:with-param name="http-method" select="$http-xml"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_Identifier_XML', ' with POST XML encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_SupportedFormat_XML', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('Response_SupportedFormat_XML', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('Response_SupportedFormat_XML', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$multipleIdentifiersAvailable != true">
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_SupportedFormat_XML', ' skipped. Requires at least two CoverageSummary elements with Identifier.')"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:choose>
+                <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_SupportedFormat_XML">
+                    <ctl:with-param name="url" select="$url-get"/>
+                    <ctl:with-param name="http-method" select="$http-get"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_SupportedFormat_XML', ' with KVP encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+              <xsl:choose>
+                <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_SupportedFormat_XML">
+                    <ctl:with-param name="url" select="$url-xml"/>
+                    <ctl:with-param name="http-method" select="$http-xml"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_SupportedFormat_XML', ' with POST XML encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_FieldIdentifier_XML', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('Response_FieldIdentifier_XML', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('Response_FieldIdentifier_XML', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$multipleIdentifiersAvailable != true">
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_FieldIdentifier_XML', ' skipped. Requires at least two CoverageSummary elements with Identifier.')"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:choose>
+                <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_FieldIdentifier_XML">
+                    <ctl:with-param name="url" select="$url-get"/>
+                    <ctl:with-param name="http-method" select="$http-get"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_FieldIdentifier_XML', ' with KVP encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+              <xsl:choose>
+                <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_FieldIdentifier_XML">
+                    <ctl:with-param name="url" select="$url-xml"/>
+                    <ctl:with-param name="http-method" select="$http-xml"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_FieldIdentifier_XML', ' with POST XML encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_InterpolationMethod_XML', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('Response_InterpolationMethod_XML', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('Response_InterpolationMethod_XML', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$multipleIdentifiersAvailable != true">
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_InterpolationMethod_XML', ' skipped. Requires at least two CoverageSummary elements with Identifier.')"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:choose>
+                <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_InterpolationMethod_XML">
+                    <ctl:with-param name="url" select="$url-get"/>
+                    <ctl:with-param name="http-method" select="$http-get"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_InterpolationMethod_XML', ' with KVP encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+              <xsl:choose>
+                <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_InterpolationMethod_XML">
+                    <ctl:with-param name="url" select="$url-xml"/>
+                    <ctl:with-param name="http-method" select="$http-xml"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_InterpolationMethod_XML', ' with POST XML encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_AxisIdentifier_XML', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('Response_AxisIdentifier_XML', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('Response_AxisIdentifier_XML', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$multipleIdentifiersAvailable != true">
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_AxisIdentifier_XML', ' skipped. Requires at least two CoverageSummary elements with Identifier.')"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:choose>
+                <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_AxisIdentifier_XML">
+                    <ctl:with-param name="url" select="$url-get"/>
+                    <ctl:with-param name="http-method" select="$http-get"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_AxisIdentifier_XML', ' with KVP encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+              <xsl:choose>
+                <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_AxisIdentifier_XML">
+                    <ctl:with-param name="url" select="$url-xml"/>
+                    <ctl:with-param name="http-method" select="$http-xml"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_AxisIdentifier_XML', ' with POST XML encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:variable name="UpdateSequenceOk">
+            <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_AxisKey_XML', 'UpdateSequence'))"/>
+          </xsl:variable>
+          <xsl:variable name="BogusSectionsOk">
+            <xsl:value-of select="$sections-supported = 'true' or not(contains('Response_AxisKey_XML', 'Sections_Bogus'))"/>
+          </xsl:variable>
+          <xsl:variable name="StoreOk">
+            <xsl:value-of select="$store-supported = 'true' or not(contains('Response_AxisKey_XML', 'Store_True'))"/>
+          </xsl:variable>
+          <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
+          <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
+          <xsl:choose>
+            <xsl:when test="$multipleIdentifiersAvailable != true">
+              <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_AxisKey_XML', ' skipped. Requires at least two CoverageSummary elements with Identifier.')"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:choose>
+                <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_AxisKey_XML">
+                    <ctl:with-param name="url" select="$url-get"/>
+                    <ctl:with-param name="http-method" select="$http-get"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_AxisKey_XML', ' with KVP encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+              <xsl:choose>
+                <xsl:when test="($xml-supported = 'true' or $xml-supported-alternate = 'true') and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
+                  <ctl:call-test xmlns="" name="wcs:DescribeCoverage_Response_AxisKey_XML">
+                    <ctl:with-param name="url" select="$url-xml"/>
+                    <ctl:with-param name="http-method" select="$http-xml"/>
+                    <ctl:with-param name="identifier1" select="$identifier1"/>
+                    <ctl:with-param name="identifier2" select="$identifier2"/>
+                    <ctl:with-param name="identifier3" select="$identifier3"/>
+                  </ctl:call-test>
+                </xsl:when>
+                <xsl:otherwise>
+                  <ctl:message xmlns="" select="concat('Test wcs:', 'DescribeCoverage', '_', 'Response_AxisKey_XML', ' with POST XML encoding skipped.')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:if>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_MinimalRequest">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with only mandatory
+           parameters is submitted, the response is valid XML that validates
+           against the WCS 1.1.1 DescribeCoverage schema.</ctl:assertion>
+      <ctl:comment xmlns="">Table 40. DescribeCoverage Minimal Request</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 9.2.1">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:code>
+        <xsl:choose>
+          <xsl:when test="$http-method = 'GET'">
+            <ctl:message>Using KVP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'XML'">
+            <ctl:message>Using XML encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'SOAP'">
+            <ctl:message>Using SOAP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <ctl:message select="concat('Using ', $http-method, ' encoding.')"/>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:variable name="result">
+          <ctl:request>
+            <ctl:url>
+              <xsl:value-of select="$url"/>
+            </ctl:url>
+            <ctl:method>
+              <xsl:choose>
+                <xsl:when test="$http-method = 'GET'">GET</xsl:when>
+                <xsl:otherwise>POST</xsl:otherwise>
+              </xsl:choose>
+            </ctl:method>
+            <xsl:if test="$http-method = 'GET'">
+              <ctl:param name="service">WCS</ctl:param>
+              <ctl:param name="request">DescribeCoverage</ctl:param>
+              <ctl:param name="version">1.1.1</ctl:param>
+              <ctl:param name="identifiers">
+                <xsl:value-of select="$identifier1"/>
+              </ctl:param>
+            </xsl:if>
+            <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
+              <ctl:body>
+                <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier><xsl:value-of select="$identifier1"/></Identifier>
+                </DescribeCoverage>
+              </ctl:body>
+            </xsl:if>
+            <ctlp:XMLValidatingParser>
+              <ctlp:schemas>
+                <ctlp:schema type="resource">xsd/ogc/wcs/1.1.1/wcsDescribeCoverage.xsd</ctlp:schema>
+                <ctlp:schema type="resource">xsd/ogc/wcs/1.1.3/wcsDescribeCoverage.xsd</ctlp:schema>
+              </ctlp:schemas>
+            </ctlp:XMLValidatingParser>
+          </ctl:request>
+        </xsl:variable>
+        <xsl:if test="string-length($result)=0">
+          <ctl:message>Parse error in test. Perhaps the response conforms to the wrong schema.</ctl:message>
+          <ctl:fail/>
+        </xsl:if>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_MissingVersion">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a missing version
+           parameter is submitted, the response is valid XML that validates
+           against the OWS Common 1.1.0 or 2.0.2 ExceptionReport schema.</ctl:assertion>
+      <ctl:comment xmlns="">Table 41. DescribeCoverage Missing Version</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:code>
+        <xsl:choose>
+          <xsl:when test="$http-method = 'GET'">
+            <ctl:message>Using KVP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'XML'">
+            <ctl:message>Using XML encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'SOAP'">
+            <ctl:message>Using SOAP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <ctl:message select="concat('Using ', $http-method, ' encoding.')"/>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:variable name="result">
+          <ctl:request>
+            <ctl:url>
+              <xsl:value-of select="$url"/>
+            </ctl:url>
+            <ctl:method>
+              <xsl:choose>
+                <xsl:when test="$http-method = 'GET'">GET</xsl:when>
+                <xsl:otherwise>POST</xsl:otherwise>
+              </xsl:choose>
+            </ctl:method>
+            <xsl:if test="$http-method = 'GET'">
+              <ctl:param name="service">WCS</ctl:param>
+              <ctl:param name="request">DescribeCoverage</ctl:param>
+              <ctl:param name="identifiers">
+                <xsl:value-of select="$identifier1"/>
+              </ctl:param>
+            </xsl:if>
+            <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
+              <ctl:body>
+                <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS"><Identifier><xsl:value-of select="$identifier1"/></Identifier>
+                </DescribeCoverage>
+              </ctl:body>
+            </xsl:if>
+            <ctlp:XMLValidatingParser>
+              <ctlp:schemas>
+                <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+                <ctlp:schema type="resource">xsd/ogc/ows/2.0.2/owsExceptionReport.xsd</ctlp:schema>
+              </ctlp:schemas>
+            </ctlp:XMLValidatingParser>
+          </ctl:request>
+        </xsl:variable>
+        <xsl:if test="string-length($result)=0">
+          <ctl:message>Parse error in test. Perhaps the response conforms to the wrong schema.</ctl:message>
+          <ctl:fail/>
+        </xsl:if>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_MissingIdentifier">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a missing
+           identifier parameter is submitted, the response is valid XML that
+           validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+      <ctl:comment xmlns="">Table 42. DescribeCoverage Missing Identifer</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:code>
+        <xsl:choose>
+          <xsl:when test="$http-method = 'GET'">
+            <ctl:message>Using KVP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'XML'">
+            <ctl:message>Using XML encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'SOAP'">
+            <ctl:message>Using SOAP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <ctl:message select="concat('Using ', $http-method, ' encoding.')"/>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:variable name="result">
+          <ctl:request>
+            <ctl:url>
+              <xsl:value-of select="$url"/>
+            </ctl:url>
+            <ctl:method>
+              <xsl:choose>
+                <xsl:when test="$http-method = 'GET'">GET</xsl:when>
+                <xsl:otherwise>POST</xsl:otherwise>
+              </xsl:choose>
+            </ctl:method>
+            <xsl:if test="$http-method = 'GET'">
+              <ctl:param name="service">WCS</ctl:param>
+              <ctl:param name="request">DescribeCoverage</ctl:param>
+              <ctl:param name="version">1.1.1</ctl:param>
+            </xsl:if>
+            <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
+              <ctl:body>
+                <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1">
+                </DescribeCoverage>
+              </ctl:body>
+            </xsl:if>
+            <ctlp:XMLValidatingParser>
+              <ctlp:schemas>
+                <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+              </ctlp:schemas>
+            </ctlp:XMLValidatingParser>
+          </ctl:request>
+        </xsl:variable>
+        <xsl:if test="string-length($result)=0">
+          <ctl:message>Parse error in test. Perhaps the response conforms to the wrong schema.</ctl:message>
+          <ctl:fail/>
+        </xsl:if>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_MultipleIdentifiers">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:param name="identifier2"/>
+      <ctl:param name="identifier3"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with multiple
+           identifier parameters is submitted, the response is valid XML that
+           validates against the WCS 1.1.1 DescribeCoverage schema.</ctl:assertion>
+      <ctl:comment xmlns="">Table 43. DescribeCoverage Multiple Identifiers</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 9.2.1">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:code>
+        <xsl:choose>
+          <xsl:when test="$http-method = 'GET'">
+            <ctl:message>Using KVP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'XML'">
+            <ctl:message>Using XML encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'SOAP'">
+            <ctl:message>Using SOAP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <ctl:message select="concat('Using ', $http-method, ' encoding.')"/>
+          </xsl:otherwise>
+        </xsl:choose>
+        
+        <xsl:variable name="result">
+          <ctl:request>
+            <ctl:url>
+              <xsl:value-of select="$url"/>
+            </ctl:url>
+            <ctl:method>
+              <xsl:choose>
+                <xsl:when test="$http-method = 'GET'">GET</xsl:when>
+                <xsl:otherwise>POST</xsl:otherwise>
+              </xsl:choose>
+            </ctl:method>
+            <xsl:if test="$http-method = 'GET'">
+              <ctl:param name="service">WCS</ctl:param>
+              <ctl:param name="request">DescribeCoverage</ctl:param>
+              <ctl:param name="version">1.1.1</ctl:param>
+              <ctl:param name="identifiers">
+            <xsl:choose>
+               <xsl:when test="$identifier3 != ''">
+                  <xsl:value-of select="concat($identifier1, ',', $identifier2, ',', $identifier3)" />
+               </xsl:when>
+               <xsl:otherwise>
+                  <xsl:value-of select="concat($identifier1, ',', $identifier2)" />
+               </xsl:otherwise>
+            </xsl:choose>
+              </ctl:param>
+            </xsl:if>
+            <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
+              <ctl:body>
+                <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1">
+                <Identifier><xsl:value-of select="$identifier1"/></Identifier>
+                <Identifier><xsl:value-of select="$identifier2"/></Identifier>
+                <xsl:if test="$identifier3 != ''">
+                  <Identifier>
+                    <xsl:value-of select="$identifier3"/>
+                  </Identifier>
+                </xsl:if>
+                </DescribeCoverage>
+              </ctl:body>
+            </xsl:if>
+            <ctlp:XMLValidatingParser>
+              <ctlp:schemas>
+                <ctlp:schema type="resource">xsd/ogc/wcs/1.1.1/wcsDescribeCoverage.xsd</ctlp:schema>
+                <ctlp:schema type="resource">xsd/ogc/wcs/1.1.3/wcsDescribeCoverage.xsd</ctlp:schema>
+              </ctlp:schemas>
+            </ctlp:XMLValidatingParser>
+          </ctl:request>
+        </xsl:variable>
+        <xsl:if test="string-length($result)=0">
+          <ctl:message>Parse error in test. Perhaps the response conforms to the wrong schema.</ctl:message>
+          <ctl:fail/>
+        </xsl:if>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_EmptyIdentifier">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with an empty
+           identifier parameter is submitted, the response is valid XML that
+           validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+      <ctl:comment xmlns="">Table 44. DescribeCoverage Empty Identifier</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:code>
+        <xsl:choose>
+          <xsl:when test="$http-method = 'GET'">
+            <ctl:message>Using KVP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'XML'">
+            <ctl:message>Using XML encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'SOAP'">
+            <ctl:message>Using SOAP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <ctl:message select="concat('Using ', $http-method, ' encoding.')"/>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:variable name="result">
+          <ctl:request>
+            <ctl:url>
+              <xsl:value-of select="$url"/>
+            </ctl:url>
+            <ctl:method>
+              <xsl:choose>
+                <xsl:when test="$http-method = 'GET'">GET</xsl:when>
+                <xsl:otherwise>POST</xsl:otherwise>
+              </xsl:choose>
+            </ctl:method>
+            <xsl:if test="$http-method = 'GET'">
+              <ctl:param name="service">WCS</ctl:param>
+              <ctl:param name="request">DescribeCoverage</ctl:param>
+              <ctl:param name="version">1.1.1</ctl:param>
+              <ctl:param name="identifiers"/>
+            </xsl:if>
+            <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
+              <ctl:body>
+                <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier></Identifier>
+                </DescribeCoverage>
+              </ctl:body>
+            </xsl:if>
+            <ctlp:XMLValidatingParser>
+              <ctlp:schemas>
+                <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+              </ctlp:schemas>
+            </ctlp:XMLValidatingParser>
+          </ctl:request>
+        </xsl:variable>
+        <xsl:if test="string-length($result)=0">
+          <ctl:message>Parse error in test. Perhaps the response conforms to the wrong schema.</ctl:message>
+          <ctl:fail/>
+        </xsl:if>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_BogusIdentifier">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a bogus identifier
+           parameter is submitted, the response is valid XML that validates
+           against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+      <ctl:comment xmlns="">Table 45. DescribeCoverage Bogus Identifier</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:code>
+        <xsl:choose>
+          <xsl:when test="$http-method = 'GET'">
+            <ctl:message>Using KVP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'XML'">
+            <ctl:message>Using XML encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'SOAP'">
+            <ctl:message>Using SOAP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <ctl:message select="concat('Using ', $http-method, ' encoding.')"/>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:variable name="result">
+          <ctl:request>
+            <ctl:url>
+              <xsl:value-of select="$url"/>
+            </ctl:url>
+            <ctl:method>
+              <xsl:choose>
+                <xsl:when test="$http-method = 'GET'">GET</xsl:when>
+                <xsl:otherwise>POST</xsl:otherwise>
+              </xsl:choose>
+            </ctl:method>
+            <xsl:if test="$http-method = 'GET'">
+              <ctl:param name="service">WCS</ctl:param>
+              <ctl:param name="request">DescribeCoverage</ctl:param>
+              <ctl:param name="version">1.1.1</ctl:param>
+              <ctl:param name="identifiers">Bogus</ctl:param>
+            </xsl:if>
+            <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
+              <ctl:body>
+                <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>Bogus</Identifier>
+                </DescribeCoverage>
+              </ctl:body>
+            </xsl:if>
+            <ctlp:XMLValidatingParser>
+              <ctlp:schemas>
+                <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+              </ctlp:schemas>
+            </ctlp:XMLValidatingParser>
+          </ctl:request>
+        </xsl:variable>
+        <xsl:if test="string-length($result)=0">
+          <ctl:message>Parse error in test. Perhaps the response conforms to the wrong schema.</ctl:message>
+          <ctl:fail/>
+        </xsl:if>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_ValidWithBogusIdentifiers">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with a valid identifier
+           and a bogus identifier parameter is submitted, the response is valid
+           XML that validates against the OWS Common 1.1.0 ExceptionReport schema.</ctl:assertion>
+      <ctl:comment xmlns="">Table 46. DescribeCoverage Bogus With Valid Identifiers</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.2.1 and 9.4 Table 20">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:code>
+        <xsl:choose>
+          <xsl:when test="$http-method = 'GET'">
+            <ctl:message>Using KVP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'XML'">
+            <ctl:message>Using XML encoding.</ctl:message>
+          </xsl:when>
+          <xsl:when test="$http-method = 'SOAP'">
+            <ctl:message>Using SOAP encoding.</ctl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <ctl:message select="concat('Using ', $http-method, ' encoding.')"/>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:variable name="result">
+          <ctl:request>
+            <ctl:url>
+              <xsl:value-of select="$url"/>
+            </ctl:url>
+            <ctl:method>
+              <xsl:choose>
+                <xsl:when test="$http-method = 'GET'">GET</xsl:when>
+                <xsl:otherwise>POST</xsl:otherwise>
+              </xsl:choose>
+            </ctl:method>
+            <xsl:if test="$http-method = 'GET'">
+              <ctl:param name="service">WCS</ctl:param>
+              <ctl:param name="request">DescribeCoverage</ctl:param>
+              <ctl:param name="version">1.1.1</ctl:param>
+              <ctl:param name="identifiers">
+                <xsl:value-of select="concat('Bogus,', $identifier1)"/>
+              </ctl:param>
+            </xsl:if>
+            <xsl:if test="$http-method = 'XML' or $http-method = 'SOAP'">
+              <ctl:body>
+                <DescribeCoverage xmlns="http://www.opengis.net/wcs/1.1.1" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wcs/1.1.1 http://schemas.opengis.net/wcs/1.1.1/wcsAll.xsd" service = "WCS" version ="1.1.1"><Identifier>Bogus</Identifier><Identifier><xsl:value-of select="$identifier1"/></Identifier>
+                </DescribeCoverage>
+              </ctl:body>
+            </xsl:if>
+            <ctlp:XMLValidatingParser>
+              <ctlp:schemas>
+                <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+              </ctlp:schemas>
+            </ctlp:XMLValidatingParser>
+          </ctl:request>
+        </xsl:variable>
+        <xsl:if test="string-length($result)=0">
+          <ctl:message>Parse error in test. Perhaps the response conforms to the wrong schema.</ctl:message>
+          <ctl:fail/>
+        </xsl:if>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_Response_InterpolationMethods">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:param name="identifier2"/>
+      <ctl:param name="identifier3"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers
+           is submitted, the response is valid XML that validates against the
+           WCS 1.1.1 DescribeCoverage schema. The methods listed in the
+           InterpolationMethods must be entries in the InterpolationMethods
+           dictionary.</ctl:assertion>
+      <ctl:comment xmlns="">Table 47. DescribeCoverage Response InterpolationMethods</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.1.3 Table 17 and H.3.1">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:code>
+        <xsl:variable name="describe-result">
+          <ctl:call-function name="wcs:describe-coverage-multiple-identifiers">
+            <ctl:with-param name="url" select="$url"/>
+            <ctl:with-param name="http-method" select="$http-method"/>
+            <ctl:with-param name="identifier1" select="$identifier1"/>
+            <ctl:with-param name="identifier2" select="$identifier2"/>
+            <ctl:with-param name="identifier3" select="$identifier3"/>
+          </ctl:call-function>
+        </xsl:variable>
+        <xsl:if test="$describe-result/*[local-name()='ExceptionReport']">
+          <ctl:message select="concat('A DescribeCoverage MultipleIdentifiers initial test case failed. The error is ', $describe-result/*[local-name()='ExceptionReport']/*[local-name()='Exception']/*[local-name()='ExceptionText'])"/>
+          <ctl:fail/>
+        </xsl:if>
+        <xsl:for-each select="$describe-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Range']/*[local-name()='Field']/*[local-name()='InterpolationMethods']/*[local-name()='InterpolationMethod']">
+          <xsl:variable name="value" select="."/>
+          <xsl:if test="not(contains('nearest, linear, quadratic, cubic, name', $value)) and not(./*[@codespace])">
+            <ctl:message><xsl:value-of select="$value"/> should be one of nearest, linear, quadratic, cubic, none.</ctl:message>
+            <ctl:fail/>
+          </xsl:if>
+        </xsl:for-each>
+        <xsl:if test="not(contains('nearest, linear, quadratic, cubic, name', /*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Range']/*[local-name()='Field']/*[local-name()='InterpolationMethods']/*[local-name()='Default']))">
+          <ctl:message>$describe-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Range']/*[local-name()='Field']/*[local-name()='InterpolationMethods']/*[local-name()='Default'] should be one of nearest, linear, quadratic, cubic, none.</ctl:message>
+          <ctl:fail/>
+        </xsl:if>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_Response_Identifier_XML">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:param name="identifier2"/>
+      <ctl:param name="identifier3"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers
+           is submitted, the response is valid XML that validates against the WCS
+           1.1.1 DescribeCoverage schema. The identifier in the
+           CoverageDescription must be usable literally as-is.</ctl:assertion>
+      <ctl:comment xmlns="">Table 48. DescribeCoverage Response Identifier XML</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 a) and 7.4">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">http://www.opengeospatial.org/standards/wcs#OGC-06-121r3</ctl:link>
+      <ctl:code>
+        <xsl:variable name="describe-result">
+          <ctl:call-function name="wcs:describe-coverage-multiple-identifiers">
+            <ctl:with-param name="url" select="$url"/>
+            <ctl:with-param name="http-method" select="$http-method"/>
+            <ctl:with-param name="identifier1" select="$identifier1"/>
+            <ctl:with-param name="identifier2" select="$identifier2"/>
+            <ctl:with-param name="identifier3" select="$identifier3"/>
+          </ctl:call-function>
+        </xsl:variable>
+        <xsl:if test="$describe-result/*[local-name()='ExceptionReport']">
+          <ctl:message select="concat('A DescribeCoverage MultipleIdentifiers initial test case failed. The error is ', $describe-result/*[local-name()='ExceptionReport']/*[local-name()='Exception']/*[local-name()='ExceptionText'])"/>
+          <ctl:fail/>
+        </xsl:if>
+        <xsl:for-each select="$describe-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Identifier']">
+          <xsl:variable name="value" select="."/>
+        </xsl:for-each>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_Response_SupportedFormat_XML">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:param name="identifier2"/>
+      <ctl:param name="identifier3"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers
+           is submitted, the response is valid XML that validates against the
+           WCS 1.1.1 DescribeCoverage schema. The supportedFormat in the
+           CoverageDescription must be usable literally as-is.</ctl:assertion>
+      <ctl:comment xmlns="">Table 49. DescribeCoverage Response SupportedFormat XML</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 b) and 7.4">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">http://www.opengeospatial.org/standards/wcs#OGC-06-121r3</ctl:link>
+      <ctl:code>
+        <xsl:variable name="describe-result">
+          <ctl:call-function name="wcs:describe-coverage-multiple-identifiers">
+            <ctl:with-param name="url" select="$url"/>
+            <ctl:with-param name="http-method" select="$http-method"/>
+            <ctl:with-param name="identifier1" select="$identifier1"/>
+            <ctl:with-param name="identifier2" select="$identifier2"/>
+            <ctl:with-param name="identifier3" select="$identifier3"/>
+          </ctl:call-function>
+        </xsl:variable>
+        <xsl:if test="$describe-result/*[local-name()='ExceptionReport']">
+          <ctl:message select="concat('A DescribeCoverage MultipleIdentifiers initial test case failed. The error is ', $describe-result/*[local-name()='ExceptionReport']/*[local-name()='Exception']/*[local-name()='ExceptionText'])"/>
+          <ctl:fail/>
+        </xsl:if>
+        <xsl:for-each select="$describe-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat']">
+          <xsl:variable name="value" select="."/>
+        </xsl:for-each>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_Response_FieldIdentifier_XML">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:param name="identifier2"/>
+      <ctl:param name="identifier3"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers
+           is submitted, the response is valid XML that validates against the WCS
+           1.1.1 DescribeCoverage schema. The identifier in the Field section of
+           the Range section in the CoverageDescription
+           must be usable literally as-is.</ctl:assertion>
+      <ctl:comment xmlns="">Table 50. DescribeCoverage Response FieldIdentifier XML</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 c) and 7.4">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">http://www.opengeospatial.org/standards/wcs#OGC-06-121r3</ctl:link>
+      <ctl:code>
+        <xsl:variable name="describe-result">
+          <ctl:call-function name="wcs:describe-coverage-multiple-identifiers">
+            <ctl:with-param name="url" select="$url"/>
+            <ctl:with-param name="http-method" select="$http-method"/>
+            <ctl:with-param name="identifier1" select="$identifier1"/>
+            <ctl:with-param name="identifier2" select="$identifier2"/>
+            <ctl:with-param name="identifier3" select="$identifier3"/>
+          </ctl:call-function>
+        </xsl:variable>
+        <xsl:if test="$describe-result/*[local-name()='ExceptionReport']">
+          <ctl:message select="concat('A DescribeCoverage MultipleIdentifiers initial test case failed. The error is ', $describe-result/*[local-name()='ExceptionReport']/*[local-name()='Exception']/*[local-name()='ExceptionText'])"/>
+          <ctl:fail/>
+        </xsl:if>
+        <xsl:for-each select="$describe-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Range']/*[local-name()='Field']/*[local-name()='Identifier']">
+          <xsl:variable name="value" select="."/>
+        </xsl:for-each>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_Response_InterpolationMethod_XML">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:param name="identifier2"/>
+      <ctl:param name="identifier3"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers
+           is submitted, the response is valid XML that validates against the WCS
+           1.1.1 DescribeCoverage schema. The interpolationMethod in the
+           InterpolationMethods section of the Field section of the Range section
+           in the CoverageDescription must be usable literally as-is.</ctl:assertion>
+      <ctl:comment xmlns="">Table 51. DescribeCoverage Response InterpolationMethod XML</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 d) and 7.4">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">http://www.opengeospatial.org/standards/wcs#OGC-06-121r3</ctl:link>
+      <ctl:code>
+        <xsl:variable name="describe-result">
+          <ctl:call-function name="wcs:describe-coverage-multiple-identifiers">
+            <ctl:with-param name="url" select="$url"/>
+            <ctl:with-param name="http-method" select="$http-method"/>
+            <ctl:with-param name="identifier1" select="$identifier1"/>
+            <ctl:with-param name="identifier2" select="$identifier2"/>
+            <ctl:with-param name="identifier3" select="$identifier3"/>
+          </ctl:call-function>
+        </xsl:variable>
+        <xsl:if test="$describe-result/*[local-name()='ExceptionReport']">
+          <ctl:message select="concat('A DescribeCoverage MultipleIdentifiers initial test case failed. The error is ', $describe-result/*[local-name()='ExceptionReport']/*[local-name()='Exception']/*[local-name()='ExceptionText'])"/>
+          <ctl:fail/>
+        </xsl:if>
+        <xsl:for-each select="$describe-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Range']/*[local-name()='Field']/*[local-name()='InterpolationMethods']/*[local-name()='InterpolationMethod']">
+          <xsl:variable name="value" select="."/>
+        </xsl:for-each>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_Response_AxisIdentifier_XML">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:param name="identifier2"/>
+      <ctl:param name="identifier3"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers
+           is submitted, the response is valid XML that validates against the WCS
+           1.1.1 DescribeCoverage schema. The identifier in the Axis section of
+           the Range section in the CoverageDescription
+           must be usable literally as-is.</ctl:assertion>
+      <ctl:comment xmlns="">Table 52. DescribeCoverage Response AxisIdentifier XML</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 e) and 7.4">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">http://www.opengeospatial.org/standards/wcs#OGC-06-121r3</ctl:link>
+      <ctl:code>
+        <xsl:variable name="describe-result">
+          <ctl:call-function name="wcs:describe-coverage-multiple-identifiers">
+            <ctl:with-param name="url" select="$url"/>
+            <ctl:with-param name="http-method" select="$http-method"/>
+            <ctl:with-param name="identifier1" select="$identifier1"/>
+            <ctl:with-param name="identifier2" select="$identifier2"/>
+            <ctl:with-param name="identifier3" select="$identifier3"/>
+          </ctl:call-function>
+        </xsl:variable>
+        <xsl:if test="$describe-result/*[local-name()='ExceptionReport']">
+          <ctl:message select="concat('A DescribeCoverage MultipleIdentifiers initial test case failed. The error is ', $describe-result/*[local-name()='ExceptionReport']/*[local-name()='Exception']/*[local-name()='ExceptionText'])"/>
+          <ctl:fail/>
+        </xsl:if>
+        <xsl:for-each select="$describe-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Range']/*[local-name()='Field']/*[local-name()='Axis'][@name = 'identifier']">
+          <xsl:variable name="value" select="."/>
+        </xsl:for-each>
+      </ctl:code>
+    </ctl:test>
+    <ctl:test xmlns="" name="wcs:DescribeCoverage_Response_AxisKey_XML">
+      <ctl:param name="url"/>
+      <ctl:param name="http-method"/>
+      <ctl:param name="identifier1"/>
+      <ctl:param name="identifier2"/>
+      <ctl:param name="identifier3"/>
+      <ctl:assertion xmlns="">Verify that when a DescribeCoverage request with some identifiers
+           is submitted, the response is valid XML that validates against the WCS
+           1.1.1 DescribeCoverage schema. The key in the Axis section of the Range
+           section in the CoverageDescription must be usable literally as-is.</ctl:assertion>
+      <ctl:comment xmlns="">Table 53. DescribeCoverage Response AxisKey XML</ctl:comment>
+      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclauses 9.3.2.3 f) and 7.4">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
+      <ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 11.3.">http://www.opengeospatial.org/standards/wcs#OGC-06-121r3</ctl:link>
+      <ctl:code>
+        <xsl:variable name="describe-result">
+          <ctl:call-function name="wcs:describe-coverage-multiple-identifiers">
+            <ctl:with-param name="url" select="$url"/>
+            <ctl:with-param name="http-method" select="$http-method"/>
+            <ctl:with-param name="identifier1" select="$identifier1"/>
+            <ctl:with-param name="identifier2" select="$identifier2"/>
+            <ctl:with-param name="identifier3" select="$identifier3"/>
+          </ctl:call-function>
+        </xsl:variable>
+        <xsl:if test="$describe-result/*[local-name()='ExceptionReport']">
+          <ctl:message select="concat('A DescribeCoverage MultipleIdentifiers initial test case failed. The error is ', $describe-result/*[local-name()='ExceptionReport']/*[local-name()='Exception']/*[local-name()='ExceptionText'])"/>
+          <ctl:fail/>
+        </xsl:if>
+        <xsl:for-each select="$describe-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Range']/*[local-name()='Field']/*[local-name()='Axis']/*[local-name()='AvailableKeys']/*[local-name()='Key']">
+          <xsl:variable name="value" select="."/>
+        </xsl:for-each>
+      </ctl:code>
+    </ctl:test>
+</ctl:package>
