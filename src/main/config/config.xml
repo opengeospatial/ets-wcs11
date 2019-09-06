@@ -16,10 +16,10 @@
       <revision>
         <name>${project.version}</name>
         <sources>
-          <source>wcs/${spec-version}/ctl</source>
+          <source>wcs11/${spec-version}/ctl</source>
         </sources>
-        <resources>wcs/${spec-version}/resources</resources>
-        <webdir>wcs/${spec-version}/site</webdir>
+        <resources>wcs11/${spec-version}/resources</resources>
+        <webdir>wcs11/${spec-version}/site</webdir>
       </revision>
     </version>
   </standard>

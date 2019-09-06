@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ctl:package xmlns:ctl="http://www.occamlab.com/ctl" xmlns:ctlp="http://www.occamlab.com/te/parsers" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fn="http://www.w3.org/2005/02/xpath-functions" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:saxon="http://saxon.sf.net/" xmlns:tep="http://teamengine.sourceforge.net/parsers" xmlns:wcs="http://schemas.opengis.net/wcs/1.1.1" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   
+   <xi:include href="functions.xml"/>
+   <xi:include href="GetCapabilities.xml"/>
+   <xi:include href="DescribeCoverage.xml"/>
+   <xi:include href="GetCoverage.xml"/>
+   
+  <ctl:suite name="wcs:suite-auto">
+    <ctl:title>Web Coverage Service (WCS) 1.1.1</ctl:title>
+    <ctl:description>Validates that a WCS server meets the requirements in the specification.</ctl:description>
+    <ctl:link>docs/wcs/1.1.1/</ctl:link>
+    <ctl:starting-test>wcs:Main-auto</ctl:starting-test>
+  </ctl:suite>
+  <ctl:test name="wcs:Main-auto">
+    <ctl:param name="url"/>
+    <ctl:assertion>The Implementation Under Test (IUT) satisfies all applicable
+                  assertions. There are 177 tests in total. Depending on the capabilities
+                       of the server, some tests are skipped. These are recorded in the
+                      detailed results for each type of request.</ctl:assertion>
+    <ctl:code>
+      <xsl:variable name="Capabilities">
+        <ctl:request>
+          <xsl:choose>
+            <xsl:when test="contains($url, '?')">
+               <xsl:if test="not(empty(substring-after($url, '?')))">
+                  <ctl:url>
+                    <xsl:value-of select="$url"/>
+                  </ctl:url>
+                  <ctl:method>GET</ctl:method>
+               </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+               <ctl:url>
+                  <xsl:value-of select="$url"/>
+               </ctl:url>
+               <ctl:method>GET</ctl:method>
+               <ctl:param name="service">WCS</ctl:param>
+               <ctl:param name="request">GetCapabilities</ctl:param>
+               <ctl:param name="version">1.1.1</ctl:param>
+            </xsl:otherwise>
+          </xsl:choose>
+        </ctl:request>
+      </xsl:variable>
+      <xsl:if test="string-length($Capabilities)=0">
+        <ctl:message select="concat('No response from URL: ', $url, '. Perhaps this is not the correct address or the server is down. No tests will be performed.')"/>
+        <ctl:fail/>
+      </xsl:if>
+      <xsl:if test="string-length($Capabilities) &gt; 0">
+        <ctl:message select="concat('WCS 1.1.1 URL is ', $url, '.')"/>
+        <ctl:call-test xmlns="" name="wcs:GetCapabilities-main">
+          <ctl:with-param name="Capabilities" select="$Capabilities"/>
+        </ctl:call-test>
+        <ctl:call-test xmlns="" name="wcs:DescribeCoverage-main">
+          <ctl:with-param name="Capabilities" select="$Capabilities"/>
+        </ctl:call-test>
+        <ctl:call-test xmlns="" name="wcs:GetCoverage-main">
+          <ctl:with-param name="Capabilities" select="$Capabilities"/>
+        </ctl:call-test>
+      </xsl:if>
+    </ctl:code>
+  </ctl:test>
+</ctl:package>
