@@ -1,10 +1,10 @@
 package org.opengis.cite.wcs11;
 
 /**
- * Contains various constants defined in the WMS 1.3 specification, such as test
+ * Contains various constants defined in the WCS 1.1.1 specification, such as test
  * run parameters.
  * 
- * @see "OGC 06-042: OpenGIS Web Map Server Implementation Specification, Version 1.3.0"
+ * @see "OGC 07-067r2: OGC Web Coverage Service (WCS) Implementation Specification"
  */
 public class WCS11 {
 
