@@ -71,7 +71,7 @@
                <ctl:method>GET</ctl:method>
                <ctl:param name="service">WCS</ctl:param>
                <ctl:param name="request">GetCapabilities</ctl:param>
-               <ctl:param name="version">1.1.1</ctl:param>
+               <ctl:param name="AcceptVersions">1.1.1</ctl:param>
             </xsl:otherwise>
           </xsl:choose>
         </ctl:request>
