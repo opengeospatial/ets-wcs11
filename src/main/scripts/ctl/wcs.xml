@@ -1382,17 +1382,6 @@
           </xsl:variable>
           <xsl:variable name="FieldIdentifier2Ok">true</xsl:variable>
           <xsl:variable name="TemporalSubsetOk">true</xsl:variable>
-          <xsl:choose>
-            <xsl:when test="$url-get and $UpdateSequenceOk = 'true' and $BogusSectionsOk = 'true' and $TemporalSubsetOk = 'true' and $StoreOk = 'true' and $FieldIdentifier2Ok = 'true'">
-              <ctl:call-test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Abstract">
-                <ctl:with-param name="url" select="$url-get"/>
-                <ctl:with-param name="http-method" select="$http-get"/>
-              </ctl:call-test>
-            </xsl:when>
-            <xsl:otherwise>
-              <ctl:message xmlns="" select="concat('Test wcs:', 'GetCapabilities', '_', 'Response_OperationsMetadata_Contents_CoverageSummary_Abstract', ' with KVP encoding skipped.')"/>
-            </xsl:otherwise>
-          </xsl:choose>
           <xsl:variable name="UpdateSequenceOk">
             <xsl:value-of select="string-length($EqualUpdateSequenceValue) &gt; 0 or not(contains('Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat', 'UpdateSequence'))"/>
           </xsl:variable>
@@ -3149,41 +3138,6 @@
           <ctl:message>Test failed because an element is missing from the response.</ctl:message>
           <ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[1][local-name()!='Title']</ctl:message>
           <ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[1][local-name()!='Title']"/></ctl:message>
-          <ctl:fail/>
-        </xsl:if>
-      </ctl:code>
-    </ctl:test>
-    <ctl:test xmlns="" name="wcs:GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Abstract">
-      <ctl:param name="url"/>
-      <ctl:param name="http-method"/>
-      <ctl:assertion xmlns="">Verify that the service metadata document is valid XML that
-           contains an OperationsMetadata section that contains a Contents
-           section. If there are CoverageSummaries then each one has an abstract.</ctl:assertion>
-      <ctl:comment xmlns="">Table 33. GetCapabilities Response OperationsMetadata Contents CoverageSummary Abstract</ctl:comment>
-      <ctl:link xmlns="" title="1: OGC 07-067r2 Subclause 8.3.3.2.">http://www.opengeospatial.org/standards/wcs#OGC-07-067r2</ctl:link>
-      <ctl:link xmlns="" title="2: OGC 06-121r3 Subclause 10.6.1 Figure 12.">http://www.opengeospatial.org/standards/wcs#OGC-06-121r3</ctl:link>
-      <ctl:code>
-        <xsl:variable name="get-result">
-          <ctl:call-function name="wcs:get-capabilities-accept-versions">
-            <ctl:with-param name="url" select="$url"/>
-          </ctl:call-function>
-        </xsl:variable>
-        <xsl:if test="$get-result/*[local-name()='ExceptionReport']">
-          <ctl:message select="concat('A GetCapabilities AcceptVersions initial test case failed. The error is ', $get-result/*[local-name()='ExceptionReport']/*[local-name()='Exception']/*[local-name()='ExceptionText'])"/>
-          <ctl:fail/>
-        </xsl:if>
-        <xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary'])">
-          <ctl:message/>
-          <ctl:message>Test failed because an element is missing from the response.</ctl:message>
-          <ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']</ctl:message>
-          <ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']"/></ctl:message>
-          <ctl:fail/>
-        </xsl:if>
-        <xsl:if test="not($get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Abstract'])">
-          <ctl:message/>
-          <ctl:message>Test failed because an element is missing from the response.</ctl:message>
-          <ctl:message>extraction is $get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Abstract']</ctl:message>
-          <ctl:message>response-extract is <xsl:value-of select="$get-result/*[local-name()='Capabilities']/*[local-name()='Contents']/*[local-name()='CoverageSummary']/*[local-name()='Abstract']"/></ctl:message>
           <ctl:fail/>
         </xsl:if>
       </ctl:code>
