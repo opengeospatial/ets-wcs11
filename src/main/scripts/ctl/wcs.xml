@@ -80,10 +80,13 @@
         <ctl:message select="concat('No response from URL: ', $url, '. Perhaps this is not the correct address or the server is down. No tests will be performed.')"/>
         <ctl:fail/>
       </xsl:if>
+      <!-- Pass null value to enable interactive form -->
+      <xsl:variable name="update-values-auto" select="''"/>
       <xsl:if test="string-length($Capabilities) &gt; 0">
         <ctl:message select="concat('WCS 1.1.1 URL is ', $url, '.')"/>
         <ctl:call-test xmlns="" name="wcs:GetCapabilities-main">
           <ctl:with-param name="Capabilities" select="$Capabilities"/>
+          <ctl:with-param name="update-values-auto" select="$update-values-auto"/>
         </ctl:call-test>
         <ctl:call-test xmlns="" name="wcs:DescribeCoverage-main">
           <ctl:with-param name="Capabilities" select="$Capabilities"/>

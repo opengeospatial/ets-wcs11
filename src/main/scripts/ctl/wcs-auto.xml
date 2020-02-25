@@ -14,6 +14,9 @@
   </ctl:suite>
   <ctl:test name="wcs:Main-auto">
     <ctl:param name="url"/>
+    <ctl:param name="MaximalValue"/>
+    <ctl:param name="MinimalValue"/>
+    <ctl:param name="BogusValue"/>
     <ctl:assertion>The Implementation Under Test (IUT) satisfies all applicable
                   assertions. There are 177 tests in total. Depending on the capabilities
                        of the server, some tests are skipped. These are recorded in the
@@ -46,10 +49,49 @@
         <ctl:message select="concat('No response from URL: ', $url, '. Perhaps this is not the correct address or the server is down. No tests will be performed.')"/>
         <ctl:fail/>
       </xsl:if>
+      <!-- Pass value to disable interactive form while invoking via REST API-->
+      <xsl:variable name="GetMaximalValue">
+        <xsl:choose>
+          <xsl:when test="not(empty($MaximalValue))">
+            <xsl:value-of select="$MaximalValue" />
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="1399999999999" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="GetMinimalValue">
+        <xsl:choose>
+          <xsl:when test="not(empty($MinimalValue))">
+            <xsl:value-of select="$MinimalValue" />
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="0" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="GetBogusValue">
+        <xsl:choose>
+          <xsl:when test="not(empty($BogusValue))">
+            <xsl:value-of select="$BogusValue" />
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="'bogus'" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+	  <xsl:variable name="update-values-auto">
+	    <values>
+		  <value key="MaximalValue"><xsl:value-of select="$GetMaximalValue" /></value>
+		  <value key="MinimalValue"><xsl:value-of select="$GetMinimalValue" /></value>
+		  <value key="BogusValue"><xsl:value-of select="$GetBogusValue" /></value>
+		</values>
+	  </xsl:variable>
       <xsl:if test="string-length($Capabilities) &gt; 0">
         <ctl:message select="concat('WCS 1.1.1 URL is ', $url, '.')"/>
         <ctl:call-test xmlns="" name="wcs:GetCapabilities-main">
           <ctl:with-param name="Capabilities" select="$Capabilities"/>
+          <ctl:with-param name="update-values-auto" select="$update-values-auto"/>
         </ctl:call-test>
         <ctl:call-test xmlns="" name="wcs:DescribeCoverage-main">
           <ctl:with-param name="Capabilities" select="$Capabilities"/>
