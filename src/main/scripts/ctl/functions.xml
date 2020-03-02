@@ -56,8 +56,11 @@
                 <xsl:when test="$identifier3 != ''">
                   <xsl:value-of select="concat($identifier1, ',', $identifier2, ',', $identifier3)"/>
                 </xsl:when>
-                <xsl:otherwise>
+                <xsl:when test="$identifier2 != ''">
                   <xsl:value-of select="concat($identifier1, ',', $identifier2)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="$identifier1"/>
                 </xsl:otherwise>
               </xsl:choose>
             </ctl:param>
