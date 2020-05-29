@@ -6,53 +6,22 @@
    <xi:include href="DescribeCoverage.xml"/>
    <xi:include href="GetCoverage.xml"/>
    
-  <ctl:suite name="wcs:suite">
+  <ctl:suite name="wcs:suite-auto">
     <ctl:title>Web Coverage Service (WCS) 1.1.1</ctl:title>
     <ctl:description>Validates that a WCS server meets the requirements in the specification.</ctl:description>
     <ctl:link>docs/wcs/1.1.1/</ctl:link>
-    <ctl:starting-test>wcs:Main</ctl:starting-test>
+    <ctl:starting-test>wcs:Main-auto</ctl:starting-test>
   </ctl:suite>
-  <ctl:test name="wcs:Main">
+  <ctl:test name="wcs:Main-auto">
+    <ctl:param name="url"/>
+    <ctl:param name="MaximalValue"/>
+    <ctl:param name="MinimalValue"/>
+    <ctl:param name="BogusValue"/>
     <ctl:assertion>The Implementation Under Test (IUT) satisfies all applicable
                   assertions. There are 177 tests in total. Depending on the capabilities
                        of the server, some tests are skipped. These are recorded in the
                       detailed results for each type of request.</ctl:assertion>
     <ctl:code>
-      <xsl:variable name="form-values">
-        <ctl:form>
-          <h3>Web Coverage Service 1.1.1</h3>
-          <p>This executable test suite tests the conformance of a WCS 1.1.1 server to the specification  OGC 07-067r2 which includes corrigendum 1.</p>
-         <p>
-              More information about this test suite can be found <a href="index.html" target="_blank">here</a>.
-              </p>
-         
-         <p>To start the test, provide the URL of the WCS GetCapabilities document.</p>
-          <blockquote>
-            <table border="0" cellpadding="5">
-              <tr>
-                <td align="center">URL</td>
-                <td align="center">
-                  <input id="url" type="text" name="url" size="100" value=""/>
-                </td>
-              </tr>
-            </table>
-            
-          </blockquote>
-          <blockquote>
-            <table border="0" cellpadding="5">
-              <tr>
-                <td align="center">
-                  <input type="submit" value="Start Testing"/>
-                </td>
-              </tr>
-            </table>
-          </blockquote>
-          
-        </ctl:form>
-      </xsl:variable>
-      <xsl:variable name="url">
-        <xsl:value-of select="$form-values/values/value[@key='url']"/>
-      </xsl:variable>
       <xsl:variable name="Capabilities">
         <ctl:request>
           <xsl:choose>
@@ -71,7 +40,7 @@
                <ctl:method>GET</ctl:method>
                <ctl:param name="service">WCS</ctl:param>
                <ctl:param name="request">GetCapabilities</ctl:param>
-               <ctl:param name="AcceptVersions">1.1.1</ctl:param>
+               <ctl:param name="version">1.1.1</ctl:param>
             </xsl:otherwise>
           </xsl:choose>
         </ctl:request>
@@ -80,8 +49,44 @@
         <ctl:message select="concat('No response from URL: ', $url, '. Perhaps this is not the correct address or the server is down. No tests will be performed.')"/>
         <ctl:fail/>
       </xsl:if>
-      <!-- Pass null value to enable interactive form -->
-      <xsl:variable name="update-values-auto" select="''"/>
+      <!-- Pass value to disable interactive form while invoking via REST API-->
+      <xsl:variable name="GetMaximalValue">
+        <xsl:choose>
+          <xsl:when test="not(empty($MaximalValue))">
+            <xsl:value-of select="$MaximalValue" />
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="1399999999999" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="GetMinimalValue">
+        <xsl:choose>
+          <xsl:when test="not(empty($MinimalValue))">
+            <xsl:value-of select="$MinimalValue" />
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="0" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="GetBogusValue">
+        <xsl:choose>
+          <xsl:when test="not(empty($BogusValue))">
+            <xsl:value-of select="$BogusValue" />
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="'bogus'" />
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+	  <xsl:variable name="update-values-auto">
+	    <values>
+		  <value key="MaximalValue"><xsl:value-of select="$GetMaximalValue" /></value>
+		  <value key="MinimalValue"><xsl:value-of select="$GetMinimalValue" /></value>
+		  <value key="BogusValue"><xsl:value-of select="$GetBogusValue" /></value>
+		</values>
+	  </xsl:variable>
       <xsl:if test="string-length($Capabilities) &gt; 0">
         <ctl:message select="concat('WCS 1.1.1 URL is ', $url, '.')"/>
         <ctl:call-test xmlns="" name="wcs:GetCapabilities-main">

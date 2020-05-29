@@ -47,11 +47,21 @@
   </developers>
 
   <properties>
-    <ets-code>wcs</ets-code>
+    <ets-code>wcs11</ets-code>
     <spec-version>1.1.1</spec-version>
+    <teamengine.version>5.4</teamengine.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <docker.teamengine.version>5.3</docker.teamengine.version>
+    <docker.teamengine.version>5.4</docker.teamengine.version>
   </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.opengis.cite.teamengine</groupId>
+      <artifactId>teamengine-spi-ctl</artifactId>
+      <version>${teamengine.version}</version>
+    </dependency>
+  </dependencies>
+  
   <reporting>
     <plugins>
       <plugin>
@@ -73,6 +83,16 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <debug>false</debug>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.0.2</version>
       </plugin>
@@ -82,9 +102,17 @@
       </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.6</version>
         <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.opengis.cite.wcs11.CtlController</mainClass>
+            </manifest>
+          </archive>
           <descriptors>
-            <descriptor>src/assembly/ctl.xml</descriptor>
+            <descriptor>${basedir}/src/assembly/ctl.xml</descriptor>
+            <descriptor>${basedir}/src/assembly/aio.xml</descriptor>
+            <descriptor>${basedir}/src/assembly/deps.xml</descriptor>
           </descriptors>
         </configuration>
         <executions>
@@ -213,6 +241,21 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>${basedir}/src/main/scripts</directory>
+        <targetPath>${ets-code}/${spec-version}</targetPath>
+      </resource>
+      <resource>
+        <directory>src/main/javadoc</directory>
+        <filtering>true</filtering>
+        <targetPath>doc/${ets-code}/${project.version}</targetPath>
+      </resource>
+    </resources>
   </build>
 
   <profiles>

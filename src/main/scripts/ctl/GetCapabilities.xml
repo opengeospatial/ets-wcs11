@@ -9,6 +9,7 @@
    
     <ctl:test xmlns="" name="wcs:GetCapabilities-main" isConformanceClass="true" isBasic="true">
       <ctl:param name="Capabilities"/>
+      <ctl:param name="update-values-auto"/>
       <ctl:assertion>All assertions for "GetCapabilities" conformance are satisfied.</ctl:assertion>
       <ctl:comment>Test driver for the GetCapabilities module.</ctl:comment>
       <ctl:link xmlns="" title="1. WCS-GetCapabilities">http://www.opengeospatial.org/standards/wcs#GetCapabilities</ctl:link>
@@ -111,46 +112,52 @@
           <ctl:message>No tests using SOAP encoding will be performed. The tests for SOAP encoding are not implemented.</ctl:message>
         </xsl:if>
         <ctl:message select="concat('sections-supported: ', $sections-supported, '.')"/>
-        <xsl:variable name="update-values">
-          <xsl:if test="string-length($EqualUpdateSequenceValue) &gt; 0">
-            <ctl:form>
-              <h3>Update Sequence Values for WCS 1.1.1</h3>
-              <p>This WCS service
+	    <xsl:variable name="update-values">
+		 <!-- Enable HTML form if test executed via web-app else disable (via REST) -->
+		  <xsl:choose>
+            <xsl:when test="((string-length($EqualUpdateSequenceValue) &gt; 0) and (empty($update-values-auto)))">
+              <ctl:form>
+                <h3>Update Sequence Values for WCS 1.1.1</h3>
+                <p>This WCS service
                                <xsl:if test="string-length($EqualUpdateSequenceValue) &gt; 0">supports</xsl:if><xsl:if test="string-length($EqualUpdateSequenceValue) = 0">does NOT support</xsl:if>
                                  updateSequence in GetCapabilities requests. Please enter values for the minimal value,
                                       the maximal value and a bogus, well-formed but non-existant, value for the updateSequence.</p>
-              <blockquote>
-                <table border="0" cellpadding="5">
-                  <tr>
-                    <td align="left">Minimal Value</td>
-                    <td align="left">
-                      <input type="text" name="MinimalValue" size="15" value="0"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">Maximal Value</td>
-                    <td align="left">
-                      <input type="text" name="MaximalValue" size="15" value="1399999999999"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left">Bogus Value</td>
-                    <td align="left">
-                      <input type="text" name="BogusValue" size="15" value="bogus"/>
-                    </td>
-                  </tr>
-                </table>
-                <table border="0" cellpadding="5">
-                  <tr>
-                    <td align="center">
-                      <input type="submit" value="Submit"/>
-                    </td>
-                  </tr>
-                </table>
-              </blockquote>
-            </ctl:form>
-          </xsl:if>
-        </xsl:variable>
+                <blockquote>
+                  <table border="0" cellpadding="5">
+                    <tr>
+                      <td align="left">Minimal Value</td>
+                      <td align="left">
+                        <input type="text" name="MinimalValue" size="15" value="0"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left">Maximal Value</td>
+                      <td align="left">
+                        <input type="text" name="MaximalValue" size="15" value="1399999999999"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left">Bogus Value</td>
+                      <td align="left">
+                        <input type="text" name="BogusValue" size="15" value="bogus"/>
+                      </td>
+                    </tr>
+                  </table>
+                  <table border="0" cellpadding="5">
+                    <tr>
+                      <td align="center">
+                        <input type="submit" value="Submit"/>
+                      </td>
+                    </tr>
+                  </table>
+                </blockquote>
+              </ctl:form>
+            </xsl:when>
+		    <xsl:otherwise>
+			  <xsl:value-of select="$update-values-auto" />
+		    </xsl:otherwise>
+		  </xsl:choose>
+	    </xsl:variable>
         <xsl:variable name="MinimalUpdateSequenceValue">
           <xsl:value-of select="$update-values/values/value[@key='MinimalValue']"/>
         </xsl:variable>
