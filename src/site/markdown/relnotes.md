@@ -1,5 +1,12 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.14 (2020-07-01)
+
+* [#50](https://github.com/opengeospatial/ets-wcs11/issues/50) - Enable REST API
+* [#55](https://github.com/opengeospatial/ets-wcs11/issues/55) - illegal DescribeCoverage requests sent
+* [#56](https://github.com/opengeospatial/ets-wcs11/issues/56) - erroneous requirement that each CoverageSummary has an abstract
+* [#57](https://github.com/opengeospatial/ets-wcs11/issues/57) - wcs 1.1.1 compliance test getcapabilities issue
+
 ## 1.13 (2019-05-29)
 
 * [#47](https://github.com/opengeospatial/ets-wcs11/issues/47) - Enable Docker support
