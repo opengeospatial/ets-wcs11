@@ -25,7 +25,7 @@ public class TestRunArguments {
      * <code>IllegalArgumentException</code> is thrown if a required argument is
      * missing or invalid. The recognized arguments are listed below.
      * <ul>
-     * <li>{@value org.opengis.cite.WCS11.WCS11#URL}
+     * <li>{@value org.opengis.cite.wcs11.WCS11#URL}
      * (required)</li>
      * </ul>
      * 
