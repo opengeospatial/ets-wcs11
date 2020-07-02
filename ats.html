@@ -1617,8 +1617,6 @@
     Response OperationsMetadata Contents SupportedFormat</a></dt></dl>
     <dl><dt>32. <a href="#GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Title">
     Response OperationsMetadata Contents CoverageSummary Title</a></dt></dl>
-    <dl><dt>33. <a href="#GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Abstract">
-    Response OperationsMetadata Contents CoverageSummary Abstract</a></dt></dl>
     <dl><dt>34. <a href="#GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_SupportedFormat">
     Response OperationsMetadata Contents CoverageSummary SupportedFormat</a></dt></dl>
     <dl><dt>35. <a href="#GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_SupportedCRS">
@@ -2213,56 +2211,6 @@
            <a class="response-extract" title="Capabilities/Contents/CoverageSummary/">CoverageSummaries</a>
            then each one must have a
            <a class="response-extract" title="Capabilities/Contents/CoverageSummary/*[1][local-name()!='Title']/" type="negative">Title</a>
-           to pass.
-          </td>
-        </tr>
-        <tr class="reference">
-          <th>Reference</th>
-          <td>
-            <ol>
-              <li><a class="xref" href="#OGC-07-067r2">OGC 07-067r2</a> Subclause 8.3.3.2.</li>
-              <li><a class="xref" href="#OGC-06-121r3">OGC 06-121r3</a> Subclause 10.6.1 Figure 12.</li>
-            </ol>
-          </td>
-        </tr>
-        <tr class="type">
-          <th>Test type</th>
-          <td>Capability.</td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <table summary="GetCapabilities Response OperationsMetadata Contents CoverageSummary Abstract" 
-               id="GetCapabilities_Response_OperationsMetadata_Contents_CoverageSummary_Abstract" frame="border">
-      <caption>Table 33. GetCapabilities Response OperationsMetadata Contents CoverageSummary Abstract</caption>
-      <tbody>
-        <tr class="identifier">
-          <th>Test case identifier</th>
-          <td>urn:ogc:cite:ats:wcs:1.1.1:07-067r2:getcapabilities:response:operationsmetadata:contents:coveragesummaryabstract</td>
-        </tr>
-        <tr class="purpose">
-          <th>Test purpose (assertion)</th>
-          <td>Verify that the service metadata document is valid XML that
-           contains an OperationsMetadata section that contains a Contents
-           section. If there are CoverageSummaries then each one has an abstract.</td>
-        </tr>
-        <tr class="method">
-          <th>Test method</th>
-          <td>
-          Submit a request to the server with the following parameters and values:
-          <table frame="border">
-			      <tbody>
-			            <tr class="initialrequestcase">
-					       <th>initial request case</th>
-						   <td> <a href="#GetCapabilities_AcceptVersions_1.1.1">urn:ogc:cite:ats:wcs:1.1.1:07-067r2:getcapabilities:acceptversions:1.1.1</a></td>
-					    </tr>
-					</tbody>
-			    </table>
-           Pass if the service metadata document is a valid XML capabilities document that has an OperationsMetadata section 
-           with a Contents section. If there are
-           <a class="response-extract" title="Capabilities/Contents/CoverageSummary/">CoverageSummaries</a>
-           then each one must have an
-           <a class="response-extract" title="Capabilities/Contents/CoverageSummary/Abstract/">Abstract</a>
            to pass.
           </td>
         </tr>
