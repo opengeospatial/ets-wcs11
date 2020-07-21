@@ -5022,16 +5022,25 @@
                     </ctl:body>
                   </xsl:otherwise>
                 </xsl:choose>
-                <ctlp:XMLValidatingParser ignoreErrors="false" ignoreWarnings="false">
-                  <ctlp:schemas>
-                    <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
-                  </ctlp:schemas>
-                </ctlp:XMLValidatingParser>
+                <ctlp:HTTPParser>
+                  <ctlp:parse part="1" mime="text/xml">
+                    <ctlp:XMLValidatingParser>
+                      <ctlp:schemas>
+                        <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+                      </ctlp:schemas>
+                    </ctlp:XMLValidatingParser>
+                  </ctlp:parse>
+                  <ctlp:parse part="2">
+                    <ctlp:NullParser />
+                  </ctlp:parse>
+                </ctlp:HTTPParser>
               </ctl:request>
             </xsl:variable>
-            <xsl:if test="not(contains(' FieldSubset / Identifier',$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator))">
-              <ctl:message>Error: Expected an exception with locator  FieldSubset / Identifier but found
-                                    <xsl:value-of select="$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator"/></ctl:message>
+            <xsl:variable name="locator">
+              <xsl:value-of select="lower-case($get-coverage-result//*[local-name()='ExceptionReport']/*[local-name()='Exception']/@locator)" />
+            </xsl:variable>
+            <xsl:if test="$locator != 'fieldsubset' and $locator != 'identifier'">
+              <ctl:message>Error: Expected an exception with locator FieldSubset / Identifier.</ctl:message>
               <ctl:fail/>
             </xsl:if>
           </xsl:otherwise>
@@ -5148,16 +5157,25 @@
                     </ctl:body>
                   </xsl:otherwise>
                 </xsl:choose>
-                <ctlp:XMLValidatingParser ignoreErrors="false" ignoreWarnings="false">
-                  <ctlp:schemas>
-                    <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
-                  </ctlp:schemas>
-                </ctlp:XMLValidatingParser>
+                <ctlp:HTTPParser>
+                  <ctlp:parse part="1" mime="text/xml">
+                    <ctlp:XMLValidatingParser>
+                      <ctlp:schemas>
+                        <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+                      </ctlp:schemas>
+                    </ctlp:XMLValidatingParser>
+                  </ctlp:parse>
+                  <ctlp:parse part="2">
+                    <ctlp:NullParser />
+                  </ctlp:parse>
+                </ctlp:HTTPParser>
               </ctl:request>
             </xsl:variable>
-            <xsl:if test="not(contains(' FieldSubset / Identifier',$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator))">
-              <ctl:message>Error: Expected an exception with locator  FieldSubset / Identifier but found
-                                    <xsl:value-of select="$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator"/></ctl:message>
+            <xsl:variable name="locator">
+              <xsl:value-of select="lower-case($get-coverage-result//*[local-name()='ExceptionReport']/*[local-name()='Exception']/@locator)" />
+            </xsl:variable>
+            <xsl:if test="$locator != 'fieldsubset' and $locator != 'identifier'">
+              <ctl:message>Error: Expected an exception with locator FieldSubset / Identifier.</ctl:message>
               <ctl:fail/>
             </xsl:if>
           </xsl:otherwise>
@@ -5279,16 +5297,25 @@
                     </ctl:body>
                   </xsl:otherwise>
                 </xsl:choose>
-                <ctlp:XMLValidatingParser ignoreErrors="false" ignoreWarnings="false">
-                  <ctlp:schemas>
-                    <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
-                  </ctlp:schemas>
-                </ctlp:XMLValidatingParser>
+                <ctlp:HTTPParser>
+                  <ctlp:parse part="1" mime="text/xml">
+                    <ctlp:XMLValidatingParser>
+                      <ctlp:schemas>
+                        <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+                      </ctlp:schemas>
+                    </ctlp:XMLValidatingParser>
+                  </ctlp:parse>
+                  <ctlp:parse part="2">
+                    <ctlp:NullParser />
+                  </ctlp:parse>
+                </ctlp:HTTPParser>
               </ctl:request>
             </xsl:variable>
-            <xsl:if test="not(contains(' FieldSubset / Identifier',$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator))">
-              <ctl:message>Error: Expected an exception with locator  FieldSubset / Identifier but found
-                                    <xsl:value-of select="$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator"/></ctl:message>
+            <xsl:variable name="locator">
+              <xsl:value-of select="lower-case($get-coverage-result//*[local-name()='ExceptionReport']/*[local-name()='Exception']/@locator)" />
+            </xsl:variable>
+            <xsl:if test="$locator != 'fieldsubset' and $locator != 'identifier'">
+              <ctl:message>Error: Expected an exception with locator FieldSubset / Identifier.</ctl:message>
               <ctl:fail/>
             </xsl:if>
           </xsl:otherwise>
@@ -5566,16 +5593,25 @@
                     </ctl:body>
                   </xsl:otherwise>
                 </xsl:choose>
-                <ctlp:XMLValidatingParser ignoreErrors="false" ignoreWarnings="false">
-                  <ctlp:schemas>
-                    <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
-                  </ctlp:schemas>
-                </ctlp:XMLValidatingParser>
+                <ctlp:HTTPParser>
+                  <ctlp:parse part="1" mime="text/xml">
+                    <ctlp:XMLValidatingParser>
+                      <ctlp:schemas>
+                        <ctlp:schema type="resource">xsd/ogc/ows/1.1.0/owsExceptionReport.xsd</ctlp:schema>
+                      </ctlp:schemas>
+                    </ctlp:XMLValidatingParser>
+                  </ctlp:parse>
+                  <ctlp:parse part="2">
+                    <ctlp:NullParser />
+                  </ctlp:parse>
+                </ctlp:HTTPParser>
               </ctl:request>
             </xsl:variable>
-            <xsl:if test="not(contains(' FieldSubset / InterpolationMethod',$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator))">
-              <ctl:message>Error: Expected an exception with locator  FieldSubset / InterpolationMethod but found
-                                   <xsl:value-of select="$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator"/></ctl:message>
+            <xsl:variable name="locator">
+              <xsl:value-of select="lower-case($get-coverage-result//*[local-name()='ExceptionReport']/*[local-name()='Exception']/@locator)" />
+            </xsl:variable>
+            <xsl:if test="$locator != 'fieldsubset' and $locator != 'interpolationmethod'">
+              <ctl:message>Error: Expected an exception with locator FieldSubset / InterpolationMethod.</ctl:message>
               <ctl:fail/>
             </xsl:if>
           </xsl:otherwise>
