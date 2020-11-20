@@ -25,7 +25,7 @@
             <ctl:method>GET</ctl:method>
             <ctl:param name="service">WCS</ctl:param>
             <ctl:param name="request">GetCapabilities</ctl:param>
-       <ctl:param name="version">1.1.1</ctl:param>
+            <ctl:param name="AcceptVersions">1.1.1</ctl:param>
             <ctl:param name="sections">OperationsMetadata,Contents</ctl:param>
             <ctlp:XMLValidatingParser>
               <ctlp:schemas>
@@ -3448,7 +3448,7 @@
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat'][1]"/></xsl:variable>
-            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePositionOrInterval']/*[local-name()='TimePosition']"/></xsl:variable>
+            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePeriod']/*[local-name()='BeginPosition']"/></xsl:variable>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
             <xsl:variable name="GridOffsets" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridOffsets']"/>
             <xsl:variable name="get-coverage-result">
@@ -3608,6 +3608,7 @@
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat'][1]"/></xsl:variable>
+            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePeriod']/*[local-name()='BeginPosition']"/></xsl:variable>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
             <xsl:variable name="GridOffsets" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridOffsets']"/>
             <xsl:variable name="get-coverage-result">
@@ -3632,7 +3633,9 @@
                     <ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
                     </ctl:param>
-                    <ctl:param name="TimeSequence">-4000000000-01-01</ctl:param>
+                    <ctl:param name="TimeSequence">
+                      <xsl:value-of select="$TimePosition" />
+                    </ctl:param>
                     <ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param>
@@ -3646,7 +3649,9 @@
                             </ows11:LowerCorner><ows11:UpperCorner>
                               <xsl:value-of select="$BoundingBoxUpperCorner"/>
                             </ows11:UpperCorner></ows11:BoundingBox><TemporalSubset>
-                            <gml:timePosition>-4000000000-01-01</gml:timePosition>
+                            <gml:timePosition>
+                              <xsl:value-of select="$TimePosition"/>
+                            </gml:timePosition>
                           </TemporalSubset></DomainSubset><Output format="{$SupportedFormat}"/></GetCoverage>
                     </ctl:body>
                   </xsl:otherwise>
@@ -3763,6 +3768,7 @@
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat'][1]"/></xsl:variable>
+            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePeriod']/*[local-name()='BeginPosition']"/></xsl:variable>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
             <xsl:variable name="GridOffsets" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridOffsets']"/>
             <xsl:variable name="get-coverage-result">
@@ -3787,7 +3793,9 @@
                     <ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
                     </ctl:param>
-                    <ctl:param name="TimeSequence">3000-07-01T23:00:10.456Z</ctl:param>
+                    <ctl:param name="TimeSequence">
+                      <xsl:value-of select="$TimePosition"/>
+                    </ctl:param>
                     <ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param>
@@ -3801,7 +3809,9 @@
                             </ows11:LowerCorner><ows11:UpperCorner>
                               <xsl:value-of select="$BoundingBoxUpperCorner"/>
                             </ows11:UpperCorner></ows11:BoundingBox><TemporalSubset>
-                            <gml:timePosition>3000-07-01T23:00:10.456Z</gml:timePosition>
+                            <gml:timePosition>
+                              <xsl:value-of select="$TimePosition"/>
+                            </gml:timePosition>
                           </TemporalSubset></DomainSubset><Output format="{$SupportedFormat}"/></GetCoverage>
                     </ctl:body>
                   </xsl:otherwise>
@@ -3918,7 +3928,7 @@
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat'][1]"/></xsl:variable>
-            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePositionOrInterval']/*[local-name()='TimePosition']"/></xsl:variable>
+            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePeriod']/*[local-name()='BeginPosition']"/></xsl:variable>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
             <xsl:variable name="GridOffsets" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridOffsets']"/>
             <xsl:variable name="get-coverage-result">
@@ -4082,7 +4092,7 @@
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat'][1]"/></xsl:variable>
-            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePositionOrInterval']/*[local-name()='TimePosition']"/></xsl:variable>
+            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePeriod']/*[local-name()='BeginPosition']"/></xsl:variable>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
             <xsl:variable name="GridOffsets" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridOffsets']"/>
             <xsl:variable name="get-coverage-result">
@@ -4239,7 +4249,7 @@
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat'][1]"/></xsl:variable>
-            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePositionOrInterval']/*[local-name()='TimePosition']"/></xsl:variable>
+            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePeriod']/*[local-name()='BeginPosition']"/></xsl:variable>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
             <xsl:variable name="GridOffsets" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridOffsets']"/>
             <xsl:variable name="get-coverage-result">
@@ -4395,7 +4405,7 @@
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat'][1]"/></xsl:variable>
-            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePositionOrInterval']/*[local-name()='TimePosition']"/></xsl:variable>
+            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePeriod']/*[local-name()='BeginPosition']"/></xsl:variable>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
             <xsl:variable name="GridOffsets" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridOffsets']"/>
             <xsl:variable name="get-coverage-result">
@@ -4528,7 +4538,7 @@
             <xsl:variable name="DeltaX" select="$LengthX * 0.025"/>
             <xsl:variable name="DeltaY" select="$LengthY * 0.025"/>
             <xsl:variable name="SupportedFormat"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='SupportedFormat'][1]"/></xsl:variable>
-            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePositionOrInterval']/*[local-name()='TimePosition']"/></xsl:variable>
+            <xsl:variable name="TimePosition"><xsl:value-of select = "$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='TemporalDomain']/*[local-name()='TimePeriod']/*[local-name()='BeginPosition']"/></xsl:variable>
             <xsl:variable name="GridBaseCRS" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridBaseCRS']"/>
             <xsl:variable name="GridOffsets" select="$describe-min-result/*[local-name()='CoverageDescriptions']/*[local-name()='CoverageDescription']/*[local-name()='Domain']/*[local-name()='SpatialDomain']/*[local-name()='GridCRS']/*[local-name()='GridOffsets']"/>
             <xsl:variable name="get-coverage-result">
