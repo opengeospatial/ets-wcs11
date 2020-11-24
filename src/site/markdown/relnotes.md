@@ -1,5 +1,10 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.15 (2020-11-24)
+
+* [#64](https://github.com/opengeospatial/ets-wcs11/issues/64) - wcs 111 compliance test cannot correctly parse the time from a describecoverage call
+* [#65](https://github.com/opengeospatial/ets-wcs11/issues/65) - Regression: Several tests fail as syntax for RangeSubset is erroneous
+
 ## 1.14 (2020-07-01)
 
 * [#50](https://github.com/opengeospatial/ets-wcs11/issues/50) - Enable REST API
