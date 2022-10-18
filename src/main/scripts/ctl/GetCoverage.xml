@@ -4117,7 +4117,7 @@
                     <ctl:param name="BoundingBox">
                       <xsl:value-of select="concat($LowerCornerX, ',', $LowerCornerY, ',', $UpperCornerX, ',', $UpperCornerY,  ',', $BoundingBoxCRS)"/>
                     </ctl:param>
-                    <ctl:param name="TimeSequence"><xsl:value-of select="concat(substring($TimePosition, 1, 5), max((number(substring($TimePosition, 6, 2)) - 2, 1)), substring($TimePosition, 8))"/><xsl:value-of select="'/'"/><xsl:value-of select="concat(substring($TimePosition, 1, 5), min((number(substring($TimePosition, 6, 2)) + 2, 12)), substring($TimePosition, 8))"/>/P1D</ctl:param>
+                    <ctl:param name="TimeSequence"><xsl:value-of select="concat(substring($TimePosition, 1, 5), format-number(max((number(substring($TimePosition, 6, 2)) - 2, 1)), '00'), substring($TimePosition, 8))"/><xsl:value-of select="'/'"/><xsl:value-of select="concat(substring($TimePosition, 1, 5), format-number(min((number(substring($TimePosition, 6, 2)) + 2, 12)), '00'), substring($TimePosition, 8))"/>/P1D</ctl:param>
                     <ctl:param name="Format">
                       <xsl:value-of select="$SupportedFormat"/>
                     </ctl:param>
@@ -4131,7 +4131,7 @@
                             </ows11:LowerCorner><ows11:UpperCorner>
                               <xsl:value-of select="$BoundingBoxUpperCorner"/>
                             </ows11:UpperCorner></ows11:BoundingBox><TemporalSubset>
-                            <gml:timePosition><xsl:value-of select="concat(substring($TimePosition, 1, 5), max((number(substring($TimePosition, 6, 2)) - 2, 1)), substring($TimePosition, 8))"/><xsl:value-of select="'/'"/><xsl:value-of select="concat(substring($TimePosition, 1, 5), min((number(substring($TimePosition, 6, 2)) + 2, 12)), substring($TimePosition, 8))"/>/P1D</gml:timePosition>
+                            <gml:timePosition><xsl:value-of select="concat(substring($TimePosition, 1, 5), format-number(max((number(substring($TimePosition, 6, 2)) - 2, 1)), '00'), substring($TimePosition, 8))"/><xsl:value-of select="'/'"/><xsl:value-of select="concat(substring($TimePosition, 1, 5), format-number(min((number(substring($TimePosition, 6, 2)) + 2, 12)), '00'), substring($TimePosition, 8))"/>/P1D</gml:timePosition>
                           </TemporalSubset></DomainSubset><Output format="{$SupportedFormat}"/></GetCoverage>
                     </ctl:body>
                   </xsl:otherwise>
