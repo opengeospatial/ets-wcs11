@@ -1089,7 +1089,7 @@ NOTE:Tthe transformation of the ATS to the ETS using this xsl document works wit
 		                                  <ctlxsl:value-of select="concat(number(substring($TimePosition, 1, 4)) - 1, substring($TimePosition, 5))"/>
 		                                </xsl:when>
 		                                <xsl:when test="contains($method-beginTime, '- 2M')">
-		                                  <ctlxsl:value-of select="concat(substring($TimePosition, 1, 5), max((number(substring($TimePosition, 6, 2)) - 2, 1)), substring($TimePosition, 8))"/>
+		                                  <ctlxsl:value-of select="concat(substring($TimePosition, 1, 5), format-number(max((number(substring($TimePosition, 6, 2)) - 2, 1)), '00'), substring($TimePosition, 8))"/>
 		                                </xsl:when>
 		                                <xsl:when test="contains($method-beginTime, '- 10D')">
 		                                  <ctlxsl:value-of select="concat(substring($TimePosition, 1, 8), max((number(substring($TimePosition, 9, 2)) - 10, 1)), substring($TimePosition, 11))"/>
@@ -1104,7 +1104,7 @@ NOTE:Tthe transformation of the ATS to the ETS using this xsl document works wit
 		                                  <ctlxsl:value-of select="concat(number(substring($TimePosition, 1, 4)) + 1, substring($TimePosition, 5))"/>
 		                                </xsl:when>
 		                                <xsl:when test="contains($method-endTime, '+ 2M')">
-		                                  <ctlxsl:value-of select="concat(substring($TimePosition, 1, 5), min((number(substring($TimePosition, 6, 2)) + 2, 12)), substring($TimePosition, 8))"/>
+		                                  <ctlxsl:value-of select="concat(substring($TimePosition, 1, 5), format-number(min((number(substring($TimePosition, 6, 2)) + 2, 12)), '00'), substring($TimePosition, 8))"/>
 		                                </xsl:when>
 		                                <xsl:when test="contains($method-endTime, '+ 10D')">
 		                                  <ctlxsl:value-of select="concat(substring($TimePosition, 1, 8), min((number(substring($TimePosition, 9, 2)) + 10, 28)), substring($TimePosition, 11))"/>
@@ -1299,7 +1299,7 @@ NOTE:Tthe transformation of the ATS to the ETS using this xsl document works wit
 		                                          <ctlxsl:value-of select="concat(number(substring($TimePosition, 1, 4)) - 1, substring($TimePosition, 5))"/>
 		                                        </xsl:when>
 		                                        <xsl:when test="contains($method-beginTime, '- 2M')">
-		                                          <ctlxsl:value-of select="concat(substring($TimePosition, 1, 5), max((number(substring($TimePosition, 6, 2)) - 2, 1)), substring($TimePosition, 8))"/>
+		                                          <ctlxsl:value-of select="concat(substring($TimePosition, 1, 5), format-number(max((number(substring($TimePosition, 6, 2)) - 2, 1)), '00'), substring($TimePosition, 8))"/>
 		                                        </xsl:when>
 		                                        <xsl:when test="contains($method-beginTime, '- 10D')">
 		                                          <ctlxsl:value-of select="concat(substring($TimePosition, 1, 8), max((number(substring($TimePosition, 9, 2)) - 10, 1)), substring($TimePosition, 11))"/>
@@ -1314,7 +1314,7 @@ NOTE:Tthe transformation of the ATS to the ETS using this xsl document works wit
 		                                          <ctlxsl:value-of select="concat(number(substring($TimePosition, 1, 4)) + 1, substring($TimePosition, 5))"/>
 		                                        </xsl:when>
 		                                        <xsl:when test="contains($method-endTime, '+ 2M')">
-		                                          <ctlxsl:value-of select="concat(substring($TimePosition, 1, 5), min((number(substring($TimePosition, 6, 2)) + 2, 12)), substring($TimePosition, 8))"/>
+		                                          <ctlxsl:value-of select="concat(substring($TimePosition, 1, 5), format-number(min((number(substring($TimePosition, 6, 2)) + 2, 12)), '00'), substring($TimePosition, 8))"/>
 		                                        </xsl:when>
 		                                        <xsl:when test="contains($method-endTime, '+ 10D')">
 		                                          <ctlxsl:value-of select="concat(substring($TimePosition, 1, 8), min((number(substring($TimePosition, 9, 2)) + 10, 28)), substring($TimePosition, 11))"/>
