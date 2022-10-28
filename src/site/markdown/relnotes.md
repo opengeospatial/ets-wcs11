@@ -1,5 +1,12 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.16 (2022-10-28)
+
+* [#74](https://github.com/opengeospatial/ets-wcs11/pull/74) - Set TEAM Engine version to 5.5.2
+* [#72](https://github.com/opengeospatial/ets-wcs11/issues/72) - GetCoverage_TemporalSubset_TimePeriod_With_Resolution has problem
+* [#68](https://github.com/opengeospatial/ets-wcs11/issues/68) - Add template to get an XML/JSON response via rest endpoint
+* [#71](https://github.com/opengeospatial/ets-wcs11/pull/71) - Set Docker TEAM Engine version to 5.4.1
+
 ## 1.15 (2020-11-24)
 
 * [#64](https://github.com/opengeospatial/ets-wcs11/issues/64) - wcs 111 compliance test cannot correctly parse the time from a describecoverage call
