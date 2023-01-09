@@ -5583,9 +5583,8 @@
                 </ctlp:XMLValidatingParser>
               </ctl:request>
             </xsl:variable>
-            <xsl:if test="not(contains(' FieldSubset / InterpolationMethod',$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator))">
-              <ctl:message>Error: Expected an exception with locator  FieldSubset / InterpolationMethod but found
-                                   <xsl:value-of select="$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator"/></ctl:message>
+            <xsl:if test="boolean($get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'])">
+              <ctl:message>Error: Expected an exception</ctl:message>
               <ctl:fail/>
             </xsl:if>
           </xsl:otherwise>
@@ -5714,9 +5713,8 @@
                 </ctlp:XMLValidatingParser>
               </ctl:request>
             </xsl:variable>
-            <xsl:if test="not(contains(' FieldSubset / InterpolationMethod',$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator))">
-              <ctl:message>Error: Expected an exception with locator  FieldSubset / InterpolationMethod but found
-                                   <xsl:value-of select="$get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'][@name='locator']/@locator"/></ctl:message>
+            <xsl:if test="boolean($get-coverage-result/response/content/*[local-name()='ExceptionReport']/*[local-name()='Exception'])">
+              <ctl:message>Error: Expected an exception</ctl:message>
               <ctl:fail/>
             </xsl:if>
           </xsl:otherwise>
