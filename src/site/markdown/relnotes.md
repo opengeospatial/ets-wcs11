@@ -1,5 +1,9 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.17 (2023-01-26)
+
+* [#76](https://github.com/opengeospatial/ets-wcs11/issues/76) - FieldSubset / InterpolationMethod locator tests
+
 ## 1.16 (2022-10-28)
 
 * [#74](https://github.com/opengeospatial/ets-wcs11/pull/74) - Set TEAM Engine version to 5.5.2
