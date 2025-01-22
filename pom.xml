@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+  <parent>
+    <groupId>org.opengis.cite</groupId>
+    <artifactId>ets-common</artifactId>
+    <version>15-SNAPSHOT</version>
+  </parent>
+
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ets-wcs11</artifactId>
-  <groupId>org.opengis.cite</groupId>
   <version>1.18-SNAPSHOT</version>
 
   <name>OGC Web Coverage Service 1.1.1 - Executable Test Suite</name>
@@ -49,60 +54,20 @@
   <properties>
     <ets-code>wcs11</ets-code>
     <spec-version>1.1.1</spec-version>
-    <teamengine.version>5.5.2</teamengine.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <docker.teamengine.version>5.5.2</docker.teamengine.version>
   </properties>
   
   <dependencies>
     <dependency>
       <groupId>org.opengis.cite.teamengine</groupId>
       <artifactId>teamengine-spi-ctl</artifactId>
-      <version>${teamengine.version}</version>
     </dependency>
   </dependencies>
-  
-  <reporting>
-    <plugins>
-      <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.7</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>license</report>
-              <report>issue-tracking</report>
-              <report>scm</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-    </plugins>
-  </reporting>
 
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.0</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <debug>false</debug>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.0.2</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.19.1</version>
-      </plugin>
-      <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.6</version>
         <configuration>
           <archive>
             <manifest>
@@ -125,19 +90,8 @@
         </executions>
       </plugin>
       <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.3</version>
-        <configuration>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <tagNameFormat>@{project.version}</tagNameFormat>
-          <releaseProfiles>release</releaseProfiles>
-        </configuration>
-      </plugin>
-      <plugin>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.4</version>
         <configuration>
-          <relativizeDecorationLinks>false</relativizeDecorationLinks>
           <skipDeploy>true</skipDeploy>
         </configuration>
         <executions>
@@ -149,20 +103,6 @@
             </goals>
           </execution>
         </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.maven.doxia</groupId>
-            <artifactId>doxia-module-markdown</artifactId>
-            <version>1.6</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-      <plugin>
-        <artifactId>maven-scm-publish-plugin</artifactId>
-        <version>1.1</version>
-        <configuration>
-          <scmBranch>gh-pages</scmBranch>
-        </configuration>
       </plugin>
     </plugins>
     <pluginManagement>
@@ -170,15 +110,15 @@
         <plugin>
           <groupId>io.fabric8</groupId>
           <artifactId>docker-maven-plugin</artifactId>
-          <version>0.28.0</version>
           <configuration>
+            <dockerHost>http://localhost:2375</dockerHost>
             <images>
               <image>
                 <name>ogccite/${project.artifactId}</name>
                 <build>
                   <dockerFileDir>${project.basedir}/src/docker</dockerFileDir>
                   <tags>
-                    <tag>${project.version}-teamengine-${docker.teamengine.version}</tag>
+                    <tag>${project.version}-teamengine-${teamengine.version}</tag>
                   </tags>
                   <assembly>
                     <inline>
@@ -211,40 +151,15 @@
             </images>
           </configuration>
         </plugin>
-        <plugin>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.0.0</version>
-          <configuration>
-            <artifactItems>
-              <artifactItem>
-                <groupId>org.opengis.cite.teamengine</groupId>
-                <artifactId>teamengine-web</artifactId>
-                <version>${docker.teamengine.version}</version>
-                <type>war</type>
-              </artifactItem>
-              <artifactItem>
-                <groupId>org.opengis.cite.teamengine</groupId>
-                <artifactId>teamengine-web</artifactId>
-                <version>${docker.teamengine.version}</version>
-                <classifier>common-libs</classifier>
-                <type>zip</type>
-              </artifactItem>
-              <artifactItem>
-                <groupId>org.opengis.cite.teamengine</groupId>
-                <artifactId>teamengine-console</artifactId>
-                <version>${docker.teamengine.version}</version>
-                <classifier>base</classifier>
-                <type>zip</type>
-              </artifactItem>
-            </artifactItems>
-          </configuration>
-        </plugin>
       </plugins>
     </pluginManagement>
     <resources>
       <resource>
         <directory>${basedir}/src/main/resources</directory>
         <filtering>true</filtering>
+        <excludes>
+          <exclude>**/*.txt</exclude>
+        </excludes>
       </resource>
       <resource>
         <directory>${basedir}/src/main/scripts</directory>
@@ -288,32 +203,6 @@
                 <goals>
                   <goal>copy</goal>
                 </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>release</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-                <configuration>
-                  <gpgArguments>
-                    <arg>--pinentry-mode</arg>
-                    <arg>loopback</arg>
-                  </gpgArguments>
-                </configuration>
               </execution>
             </executions>
           </plugin>
