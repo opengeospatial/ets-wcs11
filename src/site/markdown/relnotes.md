@@ -1,5 +1,11 @@
 # WCS 1.1.1 Test Suite Release Notes
 
+## 1.18 (2025-03-05)
+
+Attention: Java 17 and Tomcat 10.1 are required.
+
+* [#80](https://github.com/opengeospatial/ets-wcs11/issues/80) - Migrate test suite to TEAM Engine 6 (Java 17)
+
 ## 1.17 (2023-01-26)
 
 * [#76](https://github.com/opengeospatial/ets-wcs11/issues/76) - FieldSubset / InterpolationMethod locator tests
